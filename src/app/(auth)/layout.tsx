@@ -64,7 +64,7 @@ export default function AuthLayout({
 			{/* Desktop Layout */}
 			<div className="hidden lg:flex min-h-screen">
 				{/* Left Panel - Carousel */}
-				<div className="flex justify-center items-stretch w-full bg-gradient-to-br from-primary/10 to-accent/10 relative overflow-hidden">
+				<div className="flex flex-1 justify-center items-stretch w-full bg-gradient-to-br from-primary/10 to-accent/10 relative overflow-hidden">
 					<div className="w-full flex flex-col justify-center items-center p-12">
 						<div className="w-full max-w-md mb-8 relative">
 							<div className="relative h-96 rounded-2xl shadow-2xl overflow-hidden">
@@ -165,7 +165,7 @@ export default function AuthLayout({
 				</div>
 
 				{/* Right Panel - Content Area */}
-				<div className="max-w-96 bg-background flex flex-col w-full">
+				<div className="max-w-[440px] bg-background flex flex-col w-full">
 					<div className="p-6 border-b">
 						<div className="flex items-center justify-between">
 							<div className="flex items-center space-x-3">
