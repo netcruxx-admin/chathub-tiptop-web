@@ -4,8 +4,11 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Shield } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function WelcomePage() {
+	const router = useRouter();
+
 	return (
 		<div className="flex flex-col justify-center items-center p-8 w-full h-full flex-1">
 			<div className="w-full flex flex-col items-center text-center">
@@ -16,7 +19,12 @@ export default function WelcomePage() {
 					<p className="text-muted-foreground">Browse and apply for jobs</p>
 				</div>
 				<div className="flex flex-col sm:flex-row gap-4 mb-12 w-full justify-center items-center">
-					<Button className="h-12 px-8 text-base bg-[#10B981] hover:bg-[#059669] text-white font-semibold rounded-xl shadow-lg">
+					<Button
+						className="h-12 px-8 text-base bg-[#10B981] hover:bg-[#059669] text-white font-semibold rounded-xl shadow-lg"
+						onClick={() => {
+							router.push("/numberInput");
+						}}
+					>
 						Looking for work
 					</Button>
 					<Button

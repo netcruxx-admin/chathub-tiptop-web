@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Globe, GraduationCap } from "lucide-react";
 import { cn } from "@/lib/cn";
+import Link from "next/link";
 
 const carouselImages = [
 	{
@@ -165,25 +166,23 @@ export default function AuthLayout({
 				</div>
 
 				{/* Right Panel - Content Area */}
-				<div className="max-w-[440px] bg-background flex flex-col w-full">
+				<div className="max-w-96 bg-background flex flex-col w-full">
 					<div className="p-6 border-b">
 						<div className="flex items-center justify-between">
-							<div className="flex items-center space-x-3">
+							<Link
+								href={"/"}
+								className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
+							>
 								<div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center shadow-md">
 									<span className="text-primary-foreground font-bold">₹</span>
 								</div>
-								<a
-									href="https://ahalts.com"
-									target="_blank"
-									rel="noopener noreferrer"
-									className="flex flex-col hover:opacity-80 transition-opacity"
-								>
+								<div className="flex flex-col">
 									<span className="font-bold text-xl text-primary leading-none">
 										Rozgari
 									</span>
 									<span className="text-xs text-muted-foreground">by AHALTS</span>
-								</a>
-							</div>
+								</div>
+							</Link>
 							<Button
 								variant="outline"
 								size="sm"
