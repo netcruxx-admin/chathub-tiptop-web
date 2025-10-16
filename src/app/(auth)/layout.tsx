@@ -166,7 +166,7 @@ export default function AuthLayout({
 				</div>
 
 				{/* Right Panel - Content Area */}
-				<div className="max-w-96 bg-background flex flex-col w-full">
+				<div className="max-w-[440px] bg-background flex flex-col w-full">
 					<div className="p-6 border-b">
 						<div className="flex items-center justify-between">
 							<Link
