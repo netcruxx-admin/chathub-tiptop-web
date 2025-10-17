@@ -29,7 +29,13 @@ export default function OTPInput() {
 					<h2 className="text-2xl font-bold mb-2">Verification code enter karein</h2>
 					<p className="text-muted-foreground">OTP bheja gaya hai {phoneNumber}</p>
 				</div>
-				<form className="space-y-6">
+				<form
+					className="space-y-6"
+					onSubmit={(e) => {
+						e.preventDefault();
+						router.push("/confirmLanguage");
+					}}
+				>
 					<div className="w-full">
 						<OtpInput
 							value={otp}
