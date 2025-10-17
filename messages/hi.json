@@ -1,0 +1,134 @@
+{
+	"common": {
+		"continue": "जारी रखें",
+		"back": "वापस",
+		"skip": "अभी छोड़ें",
+		"next": "अगला",
+		"submit": "जमा करें",
+		"cancel": "रद्द करें",
+		"save": "सहेजें",
+		"edit": "संपादित करें",
+		"delete": "हटाएं",
+		"search": "खोजें",
+		"filter": "फ़िल्टर",
+		"apply": "लागू करें",
+		"reset": "रीसेट करें",
+		"loading": "लोड हो रहा है...",
+		"error": "त्रुटि",
+		"success": "सफलता",
+		"required": "आवश्यक",
+		"optional": "वैकल्पिक",
+		"yes": "हाँ",
+		"no": "नहीं"
+	},
+	"splash": {
+		"title": "TipTop",
+		"subtitle": "काम खोजें। पैसे कमाएं। कौशल बढ़ाएं।",
+		"selectLanguage": "अपनी भाषा चुनें",
+		"getStarted": "शुरू करें"
+	},
+	"userType": {
+		"title": "आप कौन हैं?",
+		"subtitle": "अपनी भूमिका चुनें",
+		"worker": "काम चाहिए",
+		"workerDesc": "नौकरियां ब्राउज़ करें और आवेदन करें",
+		"employer": "भर्ती करें",
+		"employerDesc": "नौकरियां पोस्ट करें और उम्मीदवार खोजें"
+	},
+	"phone": {
+		"title": "अपना फोन नंबर दर्ज करें",
+		"subtitle": "हम आपको OTP भेजेंगे",
+		"placeholder": "फोन नंबर",
+		"sendOTP": "OTP भेजें",
+		"enterOTP": "OTP दर्ज करें",
+		"otpSent": "OTP भेज दिया गया है",
+		"resendOTP": "OTP फिर से भेजें",
+		"verifying": "सत्यापित हो रहा है..."
+	},
+	"otp": {
+		"title": "सत्यापन कोड दर्ज करें",
+		"subtitle": "OTP भेज दिया गया है",
+		"verify": "सत्यापित करें और जारी रखें",
+		"resend": "OTP फिर से भेजें"
+	},
+	"nameCollection": {
+		"title": "अपना नाम बताएं",
+		"subtitle": "हम आपकी प्रोफाइल बना रहे हैं",
+		"firstName": "पहला नाम",
+		"firstNamePlaceholder": "पहला नाम",
+		"middleName": "मध्य नाम",
+		"middleNamePlaceholder": "मध्य नाम",
+		"lastName": "अंतिम नाम",
+		"lastNamePlaceholder": "अंतिम नाम",
+		"username": "उपयोगकर्ता नाम",
+		"usernamePlaceholder": "अद्वितीय उपयोगकर्ता नाम",
+		"email": "ईमेल",
+		"emailPlaceholder": "aapka@email.com",
+		"checking": "जांच हो रही है...",
+		"available": "उपलब्ध है",
+		"taken": "पहले से लिया हुआ है",
+		"showMore": "अधिक विवरण दिखाएं",
+		"hideDetails": "विवरण छुपाएं",
+		"autoGenerate": "स्वचालित रूप से बनाए गए खाता विवरण",
+		"showAdvanced": "उपयोगकर्ता नाम और ईमेल संपादित करें",
+		"hideAdvanced": "उन्नत विकल्प छुपाएं",
+		"usernameHint": "यह आपका अद्वितीय पहचानकर्ता होगा"
+	},
+	"introduction": {
+		"poweredBy": "AHALTS Academy के साथ",
+		"tagline": "अपने सपनों की नौकरी पाने का सबसे आसान तरीका",
+		"whyDifferent": "हम कैसे अलग हैं",
+		"earning": {
+			"title": "इज़्ज़त से कमाओ",
+			"description": "Verified companies se guaranteed payment wali jobs",
+			"point1": "Verified employers - payment guaranteed",
+			"point2": "Multiple payment options - aapki convenience ke liye",
+			"point3": "Transparent salary - koi hidden charges nahi"
+		},
+		"learning": {
+			"title": "सीखो",
+			"description": "Industry-recognized certifications ke saath apne skills ko next level par le jao",
+			"point1": "NSDC certified courses - kai free bhi hain",
+			"point2": "CSR-funded programs - companies aapke training sponsor karti hain",
+			"point3": "Experts se practical skills - Learn on the job"
+		},
+		"growing": {
+			"title": "आगे बढ़ो",
+			"description": "Har job se better opportunities unlock karo aur apni earning potential badhao",
+			"point1": "Skills verify karke premium jobs unlock karo",
+			"point2": "Certifications se 30-50% zyada kamao",
+			"point3": "Career roadmap aur mentorship support"
+		},
+		"smartFeatures": {
+			"title": "Smart Technology",
+			"description": "AI-powered platform jo samajhta hai aapki zaroorat aur deta hai best opportunities",
+			"point1": "AI matching - aapke liye perfect jobs automatically",
+			"point2": "Live tracking - application status real-time mein dekho",
+			"point3": "Interview prep - video tips aur practice sessions"
+		},
+		"about": {
+			"title": "AHALTS Academy के बारे में",
+			"description": "AHALTS Academy ek leading skill development organization hai jo gig workers ko empower karta hai quality training aur job opportunities ke saath.",
+			"mission": "Humara mission hai har Indian gig worker ko skills, jobs aur growth opportunities provide karna taaki wo apne aur apne family ke liye better future bana sakein."
+		},
+		"partnerships": {
+			"nsdc": {
+				"title": "NSDC Partnership",
+				"description": "National Skill Development Corporation ke saath partnership ke through, hum government-recognized certifications provide karte hain jo aapki employability ko significantly badhate hain."
+			},
+			"csr": {
+				"title": "CSR-Funded Training",
+				"description": "Corporate Social Responsibility funds ke through, hum free training programs offer karte hain. Aapko koi paisa nahi dena padta - companies aapki training sponsor karti hain."
+			},
+			"verification": {
+				"title": "Skill Verification System",
+				"description": "Jobs complete karke aur good ratings leke, aap apne skills ko verify kar sakte ho. Verified skills se aapko better jobs aur higher pay milti hai."
+			}
+		},
+		"features": {
+			"nsdc": "NSDC certified training - bilkul free",
+			"csr": "CSR-funded courses - koi cost nahi",
+			"verified": "Verified jobs aur fair payment"
+		}
+	}
+}

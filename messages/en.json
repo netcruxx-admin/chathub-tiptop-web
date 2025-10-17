@@ -1,0 +1,320 @@
+{
+	"common": {
+		"continue": "Continue",
+		"back": "Back",
+		"skip": "Skip for now",
+		"next": "Next",
+		"submit": "Submit",
+		"cancel": "Cancel",
+		"save": "Save",
+		"edit": "Edit",
+		"delete": "Delete",
+		"search": "Search",
+		"filter": "Filter",
+		"apply": "Apply",
+		"reset": "Reset",
+		"loading": "Loading...",
+		"error": "Error",
+		"success": "Success",
+		"required": "Required",
+		"optional": "Optional",
+		"yes": "Yes",
+		"no": "No"
+	},
+	"splash": {
+		"title": "TipTop",
+		"subtitle": "Find Work. Get Paid. Grow Skills.",
+		"selectLanguage": "Select your language",
+		"getStarted": "Get Started"
+	},
+	"userType": {
+		"title": "Who are you?",
+		"subtitle": "Select your role",
+		"worker": "Looking for work",
+		"workerDesc": "Browse and apply for jobs",
+		"employer": "Want to hire",
+		"employerDesc": "Post jobs and find candidates"
+	},
+	"phone": {
+		"title": "Enter your phone number",
+		"subtitle": "We'll send you an OTP",
+		"placeholder": "Phone number",
+		"sendOTP": "Send OTP",
+		"enterOTP": "Enter OTP",
+		"otpSent": "OTP has been sent",
+		"resendOTP": "Resend OTP",
+		"verifying": "Verifying..."
+	},
+	"otp": {
+		"title": "Enter verification code",
+		"subtitle": "OTP has been sent",
+		"verify": "Verify & Continue",
+		"resend": "Resend OTP"
+	},
+	"nameCollection": {
+		"title": "Tell us your name",
+		"subtitle": "We're creating your profile",
+		"firstName": "First Name",
+		"firstNamePlaceholder": "First name",
+		"middleName": "Middle Name",
+		"middleNamePlaceholder": "Middle name",
+		"lastName": "Last Name",
+		"lastNamePlaceholder": "Last name",
+		"username": "Username",
+		"usernamePlaceholder": "Unique username",
+		"email": "Email",
+		"emailPlaceholder": "your@email.com",
+		"checking": "Checking...",
+		"available": "Available",
+		"taken": "Already taken",
+		"showMore": "Show more details",
+		"hideDetails": "Hide details",
+		"autoGenerate": "Auto-generated account details",
+		"showAdvanced": "Edit username & email",
+		"hideAdvanced": "Hide advanced options",
+		"usernameHint": "This will be your unique identifier"
+	},
+	"flowSelection": {
+		"title": "How would you like to proceed?",
+		"subtitle": "Choose your preferred method",
+		"whyChoose": "Choose how to complete your profile",
+		"whyChooseDesc": "Each method will create your complete profile. Pick what's easiest for you. You can always edit details later.",
+		"recommended": "Recommended",
+		"nextSteps": "What happens next:",
+		"voice": "Voice Assistant",
+		"voiceDesc": "Talk to complete your profile",
+		"voiceNext": "You'll talk to our voice assistant who will ask questions and record your answers",
+		"form": "Fill Form",
+		"formDesc": "Fill a simple form",
+		"formNext": "You'll fill a simple form with your skills, experience, and preferences",
+		"resume": "Upload Resume",
+		"resumeDesc": "Upload your resume",
+		"resumeNext": "Upload your resume and we'll automatically extract your details"
+	},
+	"voiceBotIntro": {
+		"title": "TipTop Voice Assistant",
+		"greeting": "Hello! I'll help you complete your profile.",
+		"description": "I'll ask you some questions and create your profile based on your answers.",
+		"features": [
+			"Speak in your language",
+			"Pause anytime",
+			"We respect your privacy"
+		],
+		"ready": "Let's get started"
+	},
+	"aadhaar": {
+		"scanOfferTitle": "Scan Aadhaar?",
+		"scanOfferDesc": "Scan your Aadhaar card to quickly fill in details",
+		"benefits": [
+			"Name and DOB will be filled automatically",
+			"Address details will be saved",
+			"Takes only 30 seconds"
+		],
+		"scanNow": "Scan Now",
+		"skipManual": "Fill Manually",
+		"scanningTitle": "Scanning Aadhaar",
+		"scanningDesc": "Hold your Aadhaar card in front of the camera",
+		"reviewTitle": "Review Details",
+		"reviewDesc": "Are the scanned details correct?",
+		"name": "Name",
+		"dob": "Date of Birth",
+		"address": "Address",
+		"aadhaarNumber": "Aadhaar Number",
+		"looksGood": "Looks Good",
+		"rescan": "Rescan"
+	},
+	"manualData": {
+		"title": "Enter your details",
+		"subtitle": "We're creating your profile",
+		"dob": "Date of Birth",
+		"dobPlaceholder": "DD/MM/YYYY",
+		"dobHelper": "Enter your date of birth"
+	},
+	"skills": {
+		"title": "Select Your Skills",
+		"subtitle": "Choose skills",
+		"selected": "selected",
+		"openToAnyWork": "I'm new and open to any work",
+		"openToAnyWorkDesc": "Entry-level jobs",
+		"autoSelected": "Auto-selected",
+		"searchPlaceholder": "Search skills...",
+		"allSkills": "Skills",
+		"mostPopular": "Most Popular Skills",
+		"showMore": "Show more",
+		"addCustom": "Add custom skill",
+		"customPlaceholder": "Skill name...",
+		"infoMessage": "Select all skills that apply to you. You can always add more skills later from your profile.",
+		"jobs": "jobs",
+		"voiceGuidance": "Here are the skills. If you're open to any work, select the top option. Or choose specific skills. You can always change later.",
+		"verificationInfo": {
+			"title": "Skill Verification",
+			"description": "Your skills are currently unverified. They will be verified as you complete jobs:",
+			"unverified": "Unverified",
+			"verified": "Verified",
+			"certified": "Certified",
+			"profileTitle": "Verify skills",
+			"profileDescription": "Your skills will be verified when you complete jobs and your supervisor rates you on those tasks. Once verified, you'll get certified.",
+			"howToProgress": "How to improve your skills:",
+			"progressStep1": "Complete jobs",
+			"progressStep2": "Complete training courses"
+		},
+		"categories": {
+			"all": "All",
+			"delivery": "Delivery",
+			"housekeeping": "Housekeeping",
+			"construction": "Construction",
+			"food": "Food",
+			"warehouse": "Warehouse",
+			"maintenance": "Maintenance",
+			"office": "Office",
+			"security": "Security",
+			"retail": "Retail",
+			"personal": "Personal",
+			"care": "Care",
+			"outdoor": "Outdoor"
+		}
+	},
+	"profile": {
+		"title": "Your Profile",
+		"completion": "Profile Completion",
+		"editProfile": "Edit Profile",
+		"settings": "Settings",
+		"viewJobs": "View Jobs",
+		"academy": "Academy",
+		"logout": "Logout",
+		"basicInfo": "Basic Info",
+		"skills": "Skills",
+		"experience": "Experience",
+		"documents": "Documents"
+	},
+	"settings": {
+		"title": "Settings",
+		"language": "Language",
+		"languageDesc": "Choose your preferred language",
+		"notifications": "Notifications",
+		"notificationsDesc": "Job alerts and updates",
+		"privacy": "Privacy",
+		"privacyDesc": "Data and privacy settings",
+		"about": "About TipTop",
+		"version": "Version"
+	},
+	"jobs": {
+		"title": "Jobs",
+		"filters": "Filters",
+		"sortBy": "Sort by",
+		"location": "Location",
+		"salary": "Salary",
+		"jobType": "Job Type",
+		"apply": "Apply",
+		"applied": "Applied",
+		"details": "Details",
+		"requirements": "Requirements",
+		"description": "Description",
+		"company": "Company",
+		"postedOn": "Posted on",
+		"noJobs": "No jobs found",
+		"completeProfile": "Complete your profile",
+		"unlockMoreJobs": "Unlock more jobs",
+		"completeNow": "Complete now",
+		"completeProfileToApply": "Complete profile to apply",
+		"profileCompletionRequired": "Profile completion required",
+		"needMoreCompletion": "Need more completion",
+		"missingInformation": "Some information is missing"
+	},
+	"location": {
+		"title": "Where do you live?",
+		"subtitle": "We need your location to show jobs near you",
+		"detectAuto": "Detect my location",
+		"detecting": "Detecting location...",
+		"enterManually": "Enter manually",
+		"or": "or",
+		"detected": "Your location:",
+		"confirm": "Confirm",
+		"cityLabel": "City",
+		"cityPlaceholder": "Enter your city",
+		"addressLine1": "Address Line 1",
+		"addressLine1Placeholder": "Street address",
+		"addressLine2": "Address Line 2",
+		"addressLine2Placeholder": "Apartment, suite, etc.",
+		"areaLabel": "Area",
+		"areaPlaceholder": "Area",
+		"pincodeLabel": "Pincode",
+		"pincodePlaceholder": "Pincode",
+		"stateLabel": "State",
+		"statePlaceholder": "State",
+		"enterAreaCity": "Enter Area or City",
+		"continue": "Continue",
+		"tryAutoAgain": "Try auto-detect again",
+		"notSupported": "Location detection not supported",
+		"detectionFailed": "Could not detect location",
+		"permissionDenied": "Location permission denied",
+		"enterCity": "Please enter city",
+		"selectOnMap": "Select on map",
+		"dragPinToAdjust": "Drag pin to adjust"
+	},
+	"distance": {
+		"title": "How far can you travel?",
+		"subtitle": "Set your job search radius",
+		"radiusLabel": "Search radius from your location",
+		"infoTitle": "You can change this anytime",
+		"infoDesc": "We'll show you jobs within this radius. You can adjust it later from your profile settings.",
+		"browseJobs": "Browse Jobs"
+	},
+	"introduction": {
+		"poweredBy": "Powered by AHALTS Academy",
+		"tagline": "The easiest way to find your dream job",
+		"whyDifferent": "What makes us different",
+		"earning": {
+			"title": "Earn with Dignity",
+			"description": "Guaranteed payment from verified and trusted companies",
+			"point1": "Verified employers - payment guaranteed",
+			"point2": "Multiple payment options - for your convenience",
+			"point3": "Transparent salary - no hidden charges"
+		},
+		"learning": {
+			"title": "Learn",
+			"description": "Take your skills to the next level with industry-recognized certifications",
+			"point1": "NSDC certified courses - many are free",
+			"point2": "CSR-funded programs - companies sponsor your training",
+			"point3": "Practical skills from experts - Learn on the job"
+		},
+		"growing": {
+			"title": "Move Forward",
+			"description": "Unlock better opportunities with every job and increase your earning potential",
+			"point1": "Verify skills to unlock premium jobs",
+			"point2": "Earn 30-50% more with certifications",
+			"point3": "Career roadmap and mentorship support"
+		},
+		"smartFeatures": {
+			"title": "Smart Technology",
+			"description": "AI-powered platform that understands your needs and delivers the best opportunities",
+			"point1": "AI matching - perfect jobs automatically for you",
+			"point2": "Live tracking - see application status in real-time",
+			"point3": "Interview prep - video tips and practice sessions"
+		},
+		"about": {
+			"title": "About AHALTS Academy",
+			"description": "AHALTS Academy is a leading skill development organization that empowers gig workers with quality training and job opportunities.",
+			"mission": "Our mission is to provide every Indian gig worker with skills, jobs, and growth opportunities so they can build a better future for themselves and their families."
+		},
+		"partnerships": {
+			"nsdc": {
+				"title": "NSDC Partnership",
+				"description": "Through our partnership with the National Skill Development Corporation, we provide government-recognized certifications that significantly enhance your employability."
+			},
+			"csr": {
+				"title": "CSR-Funded Training",
+				"description": "Through Corporate Social Responsibility funds, we offer free training programs. You don't have to pay anything - companies sponsor your training."
+			},
+			"verification": {
+				"title": "Skill Verification System",
+				"description": "By completing jobs and getting good ratings, you can verify your skills. Verified skills help you get better jobs and higher pay."
+			}
+		},
+		"features": {
+			"nsdc": "NSDC certified training - completely free",
+			"csr": "CSR-funded courses - no cost",
+			"verified": "Verified jobs and fair payment"
+		}
+	}
+}

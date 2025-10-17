@@ -1,0 +1,134 @@
+{
+	"common": {
+		"continue": "Continue",
+		"back": "Back",
+		"skip": "Skip for now",
+		"next": "Next",
+		"submit": "Submit",
+		"cancel": "Cancel",
+		"save": "Save",
+		"edit": "Edit",
+		"delete": "Delete",
+		"search": "Search",
+		"filter": "Filter",
+		"apply": "Apply",
+		"reset": "Reset",
+		"loading": "Loading...",
+		"error": "Error",
+		"success": "Success",
+		"required": "Required",
+		"optional": "Optional",
+		"yes": "Haan",
+		"no": "Nahi"
+	},
+	"splash": {
+		"title": "TipTop",
+		"subtitle": "Kaam dhundo. Paise kamao. Skills badhao.",
+		"selectLanguage": "Apni language choose karein",
+		"getStarted": "Shuru karein"
+	},
+	"userType": {
+		"title": "Aap kaun hain?",
+		"subtitle": "Apna role select karein",
+		"worker": "Kaam chahiye",
+		"workerDesc": "Jobs browse karein aur apply karein",
+		"employer": "Hire karein",
+		"employerDesc": "Jobs post karein aur candidates dhundein"
+	},
+	"phone": {
+		"title": "Apna phone number enter karein",
+		"subtitle": "Hum aapko OTP bhejenge",
+		"placeholder": "Phone number",
+		"sendOTP": "OTP bhejein",
+		"enterOTP": "OTP enter karein",
+		"otpSent": "OTP bhej diya gaya hai",
+		"resendOTP": "OTP dobara bhejein",
+		"verifying": "Verify ho raha hai..."
+	},
+	"otp": {
+		"title": "Verification code enter karein",
+		"subtitle": "OTP bheja gaya hai",
+		"verify": "Verify & Continue",
+		"resend": "OTP dobara bhejein"
+	},
+	"nameCollection": {
+		"title": "Apna naam batayein",
+		"subtitle": "Hum aapka profile bana rahe hain",
+		"firstName": "First Name",
+		"firstNamePlaceholder": "Pehla naam",
+		"middleName": "Middle Name",
+		"middleNamePlaceholder": "Beech ka naam",
+		"lastName": "Last Name",
+		"lastNamePlaceholder": "Last naam",
+		"username": "Username",
+		"usernamePlaceholder": "Unique username",
+		"email": "Email",
+		"emailPlaceholder": "aapka@email.com",
+		"checking": "Check ho raha hai...",
+		"available": "Available hai",
+		"taken": "Pehle se liya hua hai",
+		"showMore": "Aur details dikhayein",
+		"hideDetails": "Details chhupayein",
+		"autoGenerate": "Auto-generated account details",
+		"showAdvanced": "Edit username & email",
+		"hideAdvanced": "Hide advanced options",
+		"usernameHint": "Yeh aapka unique identifier hoga"
+	},
+	"introduction": {
+		"poweredBy": "AHALTS Academy ke saath",
+		"tagline": "Apne sapno ki naukri paane ka sabse aasan tarika",
+		"whyDifferent": "Hum kaise alag hain",
+		"earning": {
+			"title": "Izzat se Kamao",
+			"description": "Verified companies se guaranteed payment wali jobs",
+			"point1": "Verified employers - payment guaranteed",
+			"point2": "Multiple payment options - aapki convenience ke liye",
+			"point3": "Transparent salary - koi hidden charges nahi"
+		},
+		"learning": {
+			"title": "Seekho",
+			"description": "Industry-recognized certifications ke saath apne skills ko next level par le jao",
+			"point1": "NSDC certified courses - kai free bhi hain",
+			"point2": "CSR-funded programs - companies aapke training sponsor karti hain",
+			"point3": "Experts se practical skills - Learn on the job"
+		},
+		"growing": {
+			"title": "Aage Badho",
+			"description": "Har job se better opportunities unlock karo aur apni earning potential badhao",
+			"point1": "Skills verify karke premium jobs unlock karo",
+			"point2": "Certifications se 30-50% zyada kamao",
+			"point3": "Career roadmap aur mentorship support"
+		},
+		"smartFeatures": {
+			"title": "Smart Technology",
+			"description": "AI-powered platform jo samajhta hai aapki zaroorat aur deta hai best opportunities",
+			"point1": "AI matching - aapke liye perfect jobs automatically",
+			"point2": "Live tracking - application status real-time mein dekho",
+			"point3": "Interview prep - video tips aur practice sessions"
+		},
+		"about": {
+			"title": "AHALTS Academy ke baare mein",
+			"description": "AHALTS Academy ek leading skill development organization hai jo gig workers ko empower karta hai quality training aur job opportunities ke saath.",
+			"mission": "Humara mission hai har Indian gig worker ko skills, jobs aur growth opportunities provide karna taaki wo apne aur apne family ke liye better future bana sakein."
+		},
+		"partnerships": {
+			"nsdc": {
+				"title": "NSDC Partnership",
+				"description": "National Skill Development Corporation ke saath partnership ke through, hum government-recognized certifications provide karte hain jo aapki employability ko significantly badhate hain."
+			},
+			"csr": {
+				"title": "CSR-Funded Training",
+				"description": "Corporate Social Responsibility funds ke through, hum free training programs offer karte hain. Aapko koi paisa nahi dena padta - companies aapki training sponsor karti hain."
+			},
+			"verification": {
+				"title": "Skill Verification System",
+				"description": "Jobs complete karke aur good ratings leke, aap apne skills ko verify kar sakte ho. Verified skills se aapko better jobs aur higher pay milti hai."
+			}
+		},
+		"features": {
+			"nsdc": "NSDC certified training - bilkul free",
+			"csr": "CSR-funded courses - koi cost nahi",
+			"verified": "Verified jobs aur fair payment"
+		}
+	}
+}
