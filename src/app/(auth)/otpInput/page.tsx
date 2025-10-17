@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, Check } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -9,13 +10,14 @@ import OtpInput from 'react-otp-input'
 
 export default function OTPInput() {
 	const router = useRouter()
+	const t = useTranslations()
 	const [otp, setOtp] = useState('')
 	const searchParams = useSearchParams()
 	const phoneNumber = searchParams.get('number')
 
 	return (
 		<div className='flex flex-col justify-center items-center p-8 w-full h-full flex-1'>
-			<div>
+			<div className='w-full'>
 				<div className='mb-6'>
 					<Button
 						variant='ghost'
@@ -26,11 +28,9 @@ export default function OTPInput() {
 						<ArrowLeft className='w-4 h-4 mr-2' />
 						Back
 					</Button>
-					<h2 className='text-2xl font-bold mb-2'>
-						Verification code enter karein
-					</h2>
+					<h2 className='text-2xl font-bold mb-2'>{t('otp.title')}</h2>
 					<p className='text-muted-foreground'>
-						OTP bheja gaya hai {phoneNumber}
+						{t('otp.subtitle')} {phoneNumber}
 					</p>
 				</div>
 				<form
@@ -60,11 +60,11 @@ export default function OTPInput() {
 						className='w-full h-12 bg-[#10B981] hover:bg-[#059669] text-white font-semibold rounded-xl'
 					>
 						<Check className='w-5 h-5 mr-2' />
-						Verify & Continue
+						{t('otp.verify')}
 					</Button>
 
 					<button className='w-full text-sm text-primary hover:underline'>
-						OTP dobara bhejein
+						{t('otp.resend')}
 					</button>
 				</form>
 			</div>
