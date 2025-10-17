@@ -59,7 +59,14 @@ export default function ConfirmLanguage() {
 					))}
 				</div>
 
-				<Button className="w-full h-12 text-base font-semibold">Continue</Button>
+				<Button
+					className="w-full h-12 text-base font-semibold"
+					onClick={() => {
+						router.push("/onboarding");
+					}}
+				>
+					Continue
+				</Button>
 			</div>
 		</div>
 	);
