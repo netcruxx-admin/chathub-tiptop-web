@@ -106,7 +106,7 @@ export default function AuthLayout({
 											'w-2 h-2 rounded-full transition-all p-0',
 											index === currentImageIndex
 												? 'bg-primary w-6'
-												: 'bg-primary/30',
+												: 'bg-primary/30'
 										)}
 									/>
 								))}
@@ -191,16 +191,16 @@ export default function AuthLayout({
 									</span>
 								</div>
 							</Link>
-							<Button
-								variant='outline'
-								size='sm'
-								// onClick={onLanguageChange}
-								className='h-9 px-3 text-sm gap-1.5'
-							>
-								<Globe className='w-3.5 h-3.5' />
-								{/* <span className="font-medium">{languageCode}</span> */}
-								<span className='font-medium'>HE</span>
-							</Button>
+							<Link href='/select-language'>
+								<Button
+									variant='outline'
+									size='sm'
+									className='h-9 px-3 text-sm gap-1.5'
+								>
+									<Globe className='w-3.5 h-3.5' />
+									<span className='font-medium'>HE</span>
+								</Button>
+							</Link>
 						</div>
 					</div>
 					{children}

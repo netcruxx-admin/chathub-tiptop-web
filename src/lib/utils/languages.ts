@@ -1,0 +1,5 @@
+export const languages = [
+    { code: "hi", name: "हिंदी", displayCode: 'HI' },
+    { code: "en", name: "English", displayCode: 'EN' },
+    { code: "hi-Latn", name: "Hinglish", displayCode: 'HE' },
+]
