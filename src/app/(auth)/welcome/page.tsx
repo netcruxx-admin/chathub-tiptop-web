@@ -22,12 +22,14 @@ export default function WelcomePage() {
 							{t('userType.worker')}
 						</Button>
 					</Link>
-					<Button
-						variant='outline'
-						className='h-12 px-8 text-base border-2 border-[#10B981] text-[#10B981] hover:bg-[#10B981]/10 font-semibold rounded-xl'
-					>
-						{t('userType.employer')}
-					</Button>
+					<Link href='/login'>
+						<Button
+							variant='outline'
+							className='h-12 px-8 text-base border-2 border-[#10B981] text-[#10B981] hover:bg-[#10B981]/10 font-semibold rounded-xl'
+						>
+							{t('userType.employer')}
+						</Button>
+					</Link>
 				</div>
 				<div className='mt-8 text-center'>
 					<div className='flex items-center gap-2.5 text-xs text-muted-foreground'>
