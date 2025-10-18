@@ -21,6 +21,12 @@
 		"yes": "Yes",
 		"no": "No"
 	},
+	"employerLoginVal": {
+		"reqEmail": "Email is required",
+		"validEmail": "Please enter a valid email.",
+		"reqPassword": "Password is required",
+		"validPassword": "Password must be at least 6 characters"
+	},
 	"splash": {
 		"title": "TipTop",
 		"subtitle": "Find Work. Get Paid. Grow Skills.",

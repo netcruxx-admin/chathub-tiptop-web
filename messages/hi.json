@@ -21,6 +21,12 @@
 		"yes": "हाँ",
 		"no": "नहीं"
 	},
+	"employerLoginVal": {
+		"reqEmail": "ईमेल आवश्यक है",
+		"validEmail": "कृपया एक मान्य ईमेल दर्ज करें।",
+		"reqPassword": "पासवर्ड आवश्यक है",
+		"validPassword": "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए"
+	},
 	"splash": {
 		"title": "TipTop",
 		"subtitle": "काम खोजें। पैसे कमाएं। कौशल बढ़ाएं।",

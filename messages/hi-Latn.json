@@ -21,6 +21,12 @@
 		"yes": "Haan",
 		"no": "Nahi"
 	},
+	"employerLoginVal": {
+		"reqEmail": "Email zaroori hai",
+		"validEmail": "Kripya ek valid email daalein.",
+		"reqPassword": "Password zaroori hai",
+		"validPassword": "Password kam se kam 6 characters ka hona chahiye"
+	},
 	"splash": {
 		"title": "TipTop",
 		"subtitle": "Kaam dhundo. Paise kamao. Skills badhao.",
