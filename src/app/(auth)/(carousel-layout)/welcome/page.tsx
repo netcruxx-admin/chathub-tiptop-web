@@ -17,7 +17,7 @@ export default function WelcomePage() {
 					<p className='text-muted-foreground'>{t('userType.workerDesc')}</p>
 				</div>
 				<div className='flex flex-col sm:flex-row gap-4 mb-12 w-full justify-center items-center'>
-					<Link href='/numberInput'>
+					<Link href='/signup-phone'>
 						<Button className='h-12 px-8 text-base bg-[#10B981] hover:bg-[#059669] text-white font-semibold rounded-xl shadow-lg'>
 							{t('userType.worker')}
 						</Button>

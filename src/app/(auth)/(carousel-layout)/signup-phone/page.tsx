@@ -30,7 +30,7 @@ export default function NumberInput() {
 					validateOnMount={true}
 					onSubmit={values => {
 						console.log(values)
-						router.push(`/otpInput?number=${values.phoneNumber}`)
+						router.push(`/signup-otp?number=${values.phoneNumber}`)
 					}}
 				>
 					{props => (

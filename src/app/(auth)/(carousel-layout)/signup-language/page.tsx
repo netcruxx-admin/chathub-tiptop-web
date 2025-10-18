@@ -57,7 +57,7 @@ export default function ConfirmLanguage() {
 				<Button
 					className='w-full h-12 text-base font-semibold'
 					onClick={() => {
-						router.push('/onboarding')
+						router.push('/signup-onboarding')
 					}}
 				>
 					Continue

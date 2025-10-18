@@ -30,7 +30,7 @@ export default function OTPInput() {
 					className='space-y-6'
 					onSubmit={e => {
 						e.preventDefault()
-						router.push('/confirmLanguage')
+						router.push('/signup-language')
 					}}
 				>
 					<div className='w-full'>
