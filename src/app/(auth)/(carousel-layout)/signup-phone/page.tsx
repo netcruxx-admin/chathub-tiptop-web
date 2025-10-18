@@ -19,7 +19,9 @@ export default function NumberInput() {
 		<div className='flex flex-col justify-center items-center p-8 w-full h-full flex-1'>
 			<div className='w-full'>
 				<div className='mb-6'>
-					<BackBtn />
+					<div className='mb-4'>
+						<BackBtn />
+					</div>
 					<h2 className='text-2xl font-bold mb-2'>{t('phone.title')}</h2>
 					<p className='text-muted-foreground'>{t('phone.subtitle')}</p>
 				</div>
