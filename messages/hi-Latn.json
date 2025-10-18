@@ -27,6 +27,18 @@
 		"selectLanguage": "Apni language choose karein",
 		"getStarted": "Shuru karein"
 	},
+	"employerLogin": {
+		"header": "Niyokta Login",
+		"title": "Niyokta Portal",
+		"subtitle": "Naukri aur talent manage karne ke liye tools ka access",
+		"labelEmail": "Email Address",
+		"placeholderEmail": "Apna email daalein",
+		"labelPassword": "Password",
+		"placeholderPassword": "Apna password daalein",
+		"loginBtn": "Dashboard mein login karein",
+		"footer": "Kya aapka account nahi hai?",
+		"signUp": "Sign Up karein"
+	},
 	"userType": {
 		"title": "Aap kaun hain?",
 		"subtitle": "Apna role select karein",

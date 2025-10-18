@@ -6,10 +6,12 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/cn'
 import { EmployerLoginValidation } from '@/lib/validation/authValidation'
 import { Formik } from 'formik'
+import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
 export default function EmployerLogin() {
 	const router = useRouter()
+	const t = useTranslations()
 	const initialValues = {
 		email: '',
 		password: '',
@@ -19,15 +21,17 @@ export default function EmployerLogin() {
 		<div className='min-h-screen bg-background flex flex-col'>
 			<div className='p-4 border-b flex items-center justify-between'>
 				<BackBtn />
-				<h1 className='text-lg font-semibold'>Employer Login</h1>
+				<h1 className='text-lg font-semibold'>{t('employerLogin.header')}</h1>
 			</div>
 
 			<div className='flex-1 flex flex-col justify-center p-6'>
 				<div className='max-w-md mx-auto w-full space-y-6'>
 					<div className='text-center'>
-						<h2 className='text-2xl font-bold mb-2'>Employer Portal</h2>
+						<h2 className='text-2xl font-bold mb-2'>
+							{t('employerLogin.title')}
+						</h2>
 						<p className='text-muted-foreground'>
-							Access tools to manage jobs and talent
+							{t('employerLogin.subtitle')}
 						</p>
 					</div>
 
@@ -48,7 +52,7 @@ export default function EmployerLogin() {
 											className='block text-sm font-medium mb-2'
 											htmlFor='email'
 										>
-											Email Address
+											{t('employerLogin.labelEmail')}
 										</label>
 										<Input
 											type='email'
@@ -57,7 +61,7 @@ export default function EmployerLogin() {
 											value={props.values.email}
 											onChange={props.handleChange}
 											onBlur={props.handleBlur}
-											placeholder='Enter your email'
+											placeholder={t('employerLogin.placeholderEmail')}
 											className={cn(
 												props.touched.email &&
 													props.errors.email &&
@@ -75,7 +79,7 @@ export default function EmployerLogin() {
 											className='block text-sm font-medium mb-2'
 											htmlFor='password'
 										>
-											Password
+											{t('employerLogin.labelPassword')}
 										</label>
 										<Input
 											type='password'
@@ -84,7 +88,7 @@ export default function EmployerLogin() {
 											value={props.values.password}
 											onChange={props.handleChange}
 											onBlur={props.handleBlur}
-											placeholder='Enter your password'
+											placeholder={t('employerLogin.placeholderPassword')}
 											className={cn(
 												props.touched.password &&
 													props.errors.password &&
@@ -100,7 +104,7 @@ export default function EmployerLogin() {
 								</div>
 
 								<Button className='w-full h-12' type='submit'>
-									Login to Dashboard
+									{t('employerLogin.loginBtn')}
 								</Button>
 							</form>
 						)}
@@ -108,9 +112,9 @@ export default function EmployerLogin() {
 
 					<div className='text-center text-sm'>
 						<p>
-							Don&apos;t have an account?{' '}
+							{t('employerLogin.footer')}{' '}
 							<button className='text-primary font-medium hover:underline cursor-pointer'>
-								Sign Up
+								{t('employerLogin.signUp')}
 							</button>
 						</p>
 					</div>

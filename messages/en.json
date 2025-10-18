@@ -27,6 +27,18 @@
 		"selectLanguage": "Select your language",
 		"getStarted": "Get Started"
 	},
+	"employerLogin": {
+		"header": "Employer Login",
+		"title": "Employer Portal",
+		"subtitle": "Access tools to manage jobs and talent",
+		"labelEmail": "Email Address",
+		"placeholderEmail": "Enter your email",
+		"labelPassword": "Password",
+		"placeholderPassword": "Enter your password",
+		"loginBtn": "Login to Dashboard",
+		"footer": "Don't have an account?",
+		"signUp": "Sign Up"
+	},
 	"userType": {
 		"title": "Who are you?",
 		"subtitle": "Select your role",

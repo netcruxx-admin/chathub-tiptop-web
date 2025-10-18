@@ -27,6 +27,18 @@
 		"selectLanguage": "अपनी भाषा चुनें",
 		"getStarted": "शुरू करें"
 	},
+	"employerLogin": {
+		"header": "नियोक्ता लॉगिन",
+		"title": "नियोक्ता पोर्टल",
+		"subtitle": "नौकरियों और प्रतिभा को प्रबंधित करने के लिए उपकरणों तक पहुँचें",
+		"labelEmail": "ईमेल पता",
+		"placeholderEmail": "अपना ईमेल दर्ज करें",
+		"labelPassword": "पासवर्ड",
+		"placeholderPassword": "अपना पासवर्ड दर्ज करें",
+		"loginBtn": "डैशबोर्ड में लॉगिन करें",
+		"footer": "क्या आपका खाता नहीं है?",
+		"signUp": "साइन अप करें"
+	},
 	"userType": {
 		"title": "आप कौन हैं?",
 		"subtitle": "अपनी भूमिका चुनें",
