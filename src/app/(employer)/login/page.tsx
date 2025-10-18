@@ -1,11 +1,11 @@
 'use client'
 
+import BackBtn from '@/components/backBtn'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/cn'
 import { EmployerLoginValidation } from '@/lib/validation/authValidation'
 import { Formik } from 'formik'
-import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export default function EmployerLogin() {
@@ -18,14 +18,7 @@ export default function EmployerLogin() {
 	return (
 		<div className='min-h-screen bg-background flex flex-col'>
 			<div className='p-4 border-b flex items-center justify-between'>
-				<Button
-					variant='ghost'
-					size='icon'
-					onClick={() => router.back()}
-					className='mr-2'
-				>
-					<ArrowLeft className='w-5 h-5' />
-				</Button>
+				<BackBtn />
 				<h1 className='text-lg font-semibold'>Employer Login</h1>
 			</div>
 

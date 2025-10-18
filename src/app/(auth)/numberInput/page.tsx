@@ -1,10 +1,10 @@
 'use client'
 
+import BackBtn from '@/components/backBtn'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
 import { NumberValidation } from '@/lib/validation/authValidation'
 import { Formik } from 'formik'
-import { ArrowLeft } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
@@ -19,15 +19,7 @@ export default function NumberInput() {
 		<div className='flex flex-col justify-center items-center p-8 w-full h-full flex-1'>
 			<div className='w-full'>
 				<div className='mb-6'>
-					<Button
-						variant='ghost'
-						size='sm'
-						onClick={() => router.back()}
-						className='mb-4 -ml-2'
-					>
-						<ArrowLeft className='w-4 h-4 mr-2' />
-						Back
-					</Button>
+					<BackBtn />
 					<h2 className='text-2xl font-bold mb-2'>{t('phone.title')}</h2>
 					<p className='text-muted-foreground'>{t('phone.subtitle')}</p>
 				</div>

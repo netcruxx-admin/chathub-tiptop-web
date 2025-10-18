@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { cn } from '@/lib/cn'
+import BackBtn from '@/components/backBtn'
 
 export default function ConfirmLanguage() {
 	const router = useRouter()
@@ -19,15 +20,7 @@ export default function ConfirmLanguage() {
 		<div className='flex flex-col justify-center items-center p-8 w-full h-full flex-1'>
 			<div className='w-full flex flex-col'>
 				<div className='mb-6'>
-					<Button
-						variant='ghost'
-						size='sm'
-						onClick={() => router.back()}
-						className='mb-4 -ml-2'
-					>
-						<ArrowLeft className='w-4 h-4 mr-2' />
-						Back
-					</Button>
+					<BackBtn />
 				</div>
 				<div className='text-center space-y-2 mb-6'>
 					<h1 className='text-2xl font-bold'>Confirm your language</h1>
@@ -47,7 +40,7 @@ export default function ConfirmLanguage() {
 								'w-full p-4 rounded-lg border-2 transition-all flex items-center justify-between',
 								language === lang.code
 									? 'border-primary bg-primary/5'
-									: 'border-border hover:border-primary/50 hover:bg-muted/50',
+									: 'border-border hover:border-primary/50 hover:bg-muted/50'
 							)}
 						>
 							<div className='text-left'>
