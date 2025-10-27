@@ -6,43 +6,47 @@ import { Button } from '@/components/ui/button'
 import { Globe, GraduationCap } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import type { CarouselImage } from '@/types'
+import { useGetLocale } from '@/lib/hooks/i18n'
+import { languages } from '@/lib/utils/languages'
 
-const carouselImages = [
+const carouselImagesSrcs: CarouselImage[] = [
 	{
 		src: '/indian-delivery-worker-with-food-bag-on-bike-wearin.jpg',
 		alt: 'Food delivery worker on bike',
-		stat: '50,000+',
-		description: 'Active job seekers finding opportunities',
+		statKey: 'activeJobSeekers',
+		descKey: 'activeJobSeekersDesc',
 	},
 	{
 		src: '/indian-construction-workers-at-building-site-weari.jpg',
 		alt: 'Construction workers at site',
-		stat: '10,000+',
-		description: 'Jobs posted every month',
+		statKey: 'jobsPosted',
+		descKey: 'jobsPostedDesc',
 	},
 	{
 		src: '/indian-woman-cooking-in-small-kitchen-wearing-apron.jpg',
 		alt: 'Woman cook preparing food',
-		stat: '500+',
-		description: 'Trusted employers hiring',
+		statKey: 'trustedEmployers',
+		descKey: 'trustedEmployersDesc',
 	},
 	{
 		src: '/indian-warehouse-worker-moving-boxes-in-casual-work.jpg',
 		alt: 'Warehouse worker handling packages',
-		stat: '95%',
-		description: 'Job seekers get interviews within 7 days',
+		statKey: 'interviewRate',
+		descKey: 'interviewRateDesc',
 	},
 	{
 		src: '/indian-electrician-working-on-electrical-panel-wea.jpg',
 		alt: 'Electrician at work',
-		stat: '₹15-25k',
-		description: 'Average monthly salary range',
+		statKey: 'salaryRange',
+		descKey: 'salaryRangeDesc',
 	},
 	{
 		src: '/indian-woman-housekeeping-worker-cleaning-in-unifor.jpg',
 		alt: 'Woman housekeeping worker',
-		stat: '24/7',
-		description: 'Support available anytime',
+		statKey: 'support',
+		descKey: 'supportDesc',
 	},
 ]
 
@@ -52,10 +56,13 @@ export default function AuthLayout({
 	children: React.ReactNode
 }) {
 	const [currentImageIndex, setCurrentImageIndex] = useState(0)
+	const t = useTranslations()
+	const currentLocale = useGetLocale()
+	const currentLanguage = languages.find(lang => lang.code === currentLocale) || languages[1] // Default to English
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			setCurrentImageIndex(prev => (prev + 1) % carouselImages.length)
+			setCurrentImageIndex(prev => (prev + 1) % carouselImagesSrcs.length)
 		}, 3000)
 		return () => clearInterval(interval)
 	}, [])
@@ -69,7 +76,7 @@ export default function AuthLayout({
 					<div className='w-full flex flex-col justify-center items-center p-12'>
 						<div className='w-full max-w-md mb-8 relative'>
 							<div className='relative h-96 rounded-2xl shadow-2xl overflow-hidden'>
-								{carouselImages.map((image, index) => (
+								{carouselImagesSrcs.map((image, index) => (
 									<div
 										key={index}
 										className={`absolute inset-0 transition-opacity duration-500 ${
@@ -86,10 +93,10 @@ export default function AuthLayout({
 										<div className='absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-end p-6'>
 											<div className='text-white'>
 												<div className='text-4xl font-bold mb-2'>
-													{image.stat}
+													{t(`carousel.stats.${image.statKey}`)}
 												</div>
 												<div className='text-sm opacity-90'>
-													{image.description}
+													{t(`carousel.stats.${image.descKey}`)}
 												</div>
 											</div>
 										</div>
@@ -97,7 +104,7 @@ export default function AuthLayout({
 								))}
 							</div>
 							<div className='flex justify-center space-x-2 mt-4'>
-								{carouselImages.map((_, index) => (
+								{carouselImagesSrcs.map((_, index) => (
 									<Button
 										key={index}
 										size='icon'
@@ -116,12 +123,12 @@ export default function AuthLayout({
 						<div className='text-center space-y-6 max-w-md'>
 							<div className='bg-primary text-primary-foreground px-4 py-2 rounded-full inline-flex items-center space-x-2 shadow-lg'>
 								<GraduationCap className='w-4 h-4' />
-								<span className='font-semibold text-sm'>NSDC Partner</span>
+								<span className='font-semibold text-sm'>{t('carousel.nsdcPartner')}</span>
 							</div>
 
 							<div className='space-y-3'>
 								<p className='text-sm text-muted-foreground font-medium'>
-									Trusted by leading companies
+									{t('carousel.trustedByCompanies')}
 								</p>
 								<div className='flex items-center justify-center space-x-6'>
 									<div className='relative w-14 h-14 bg-white rounded-lg flex items-center justify-center shadow-md p-2'>
@@ -165,7 +172,7 @@ export default function AuthLayout({
 										</div>
 									</div>
 								</div>
-								<p className='text-sm text-muted-foreground'>+200 more...</p>
+								<p className='text-sm text-muted-foreground'>{t('carousel.moreCompanies')}</p>
 							</div>
 						</div>
 					</div>
@@ -187,7 +194,7 @@ export default function AuthLayout({
 										Rozgari
 									</span>
 									<span className='text-xs text-muted-foreground'>
-										by AHALTS
+										{t('carousel.poweredBy')}
 									</span>
 								</div>
 							</Link>
@@ -198,7 +205,7 @@ export default function AuthLayout({
 									className='h-9 px-3 text-sm gap-1.5'
 								>
 									<Globe className='w-3.5 h-3.5' />
-									<span className='font-medium'>HE</span>
+									<span className='font-medium'>{currentLanguage.displayCode}</span>
 								</Button>
 							</Link>
 						</div>

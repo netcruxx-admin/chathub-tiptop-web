@@ -27,6 +27,12 @@
 		"reqPassword": "Password zaroori hai",
 		"validPassword": "Password kam se kam 6 characters ka hona chahiye"
 	},
+	"employeeLoginVal": {
+		"reqEmail": "Email zaroori hai",
+		"validEmail": "Kripya ek valid email daalein.",
+		"reqPassword": "Password zaroori hai",
+		"validPassword": "Password kam se kam 6 characters ka hona chahiye"
+	},
 	"splash": {
 		"title": "TipTop",
 		"subtitle": "Kaam dhundo. Paise kamao. Skills badhao.",
@@ -37,6 +43,18 @@
 		"header": "Niyokta Login",
 		"title": "Niyokta Portal",
 		"subtitle": "Naukri aur talent manage karne ke liye tools ka access",
+		"labelEmail": "Email Address",
+		"placeholderEmail": "Apna email daalein",
+		"labelPassword": "Password",
+		"placeholderPassword": "Apna password daalein",
+		"loginBtn": "Dashboard mein login karein",
+		"footer": "Kya aapka account nahi hai?",
+		"signUp": "Sign Up karein"
+	},
+	"employeeLogin": {
+		"header": "Employee Login",
+		"title": "Employee Portal",
+		"subtitle": "Apne account ko access karein aur opportunities khojein",
 		"labelEmail": "Email Address",
 		"placeholderEmail": "Apna email daalein",
 		"labelPassword": "Password",
@@ -61,7 +79,9 @@
 		"enterOTP": "OTP enter karein",
 		"otpSent": "OTP bhej diya gaya hai",
 		"resendOTP": "OTP dobara bhejein",
-		"verifying": "Verify ho raha hai..."
+		"verifying": "Verify ho raha hai...",
+		"phoneRequired": "Phone number zaroori hai",
+		"phoneInvalid": "Kripya ek valid 10-digit phone number daalen"
 	},
 	"otp": {
 		"title": "Verification code enter karein",
@@ -90,7 +110,72 @@
 		"autoGenerate": "Auto-generated account details",
 		"showAdvanced": "Edit username & email",
 		"hideAdvanced": "Hide advanced options",
-		"usernameHint": "Yeh aapka unique identifier hoga"
+		"usernameHint": "Yeh aapka unique identifier hoga",
+		"firstNameRequired": "First name zaroori hai",
+		"firstNameMin": "First name mein kam se kam 2 letters hone chahiye",
+		"lastNameRequired": "Last name zaroori hai",
+		"lastNameMin": "Last name mein kam se kam 2 letters hone chahiye",
+		"usernameRequired": "Username zaroori hai",
+		"usernameMin": "Username mein kam se kam 3 letters hone chahiye",
+		"usernameInvalid": "Username mein sirf letters, numbers aur underscores ho sakte hain",
+		"emailRequired": "Email zaroori hai",
+		"emailInvalid": "Kripya ek valid email daalein"
+	},
+	"profileForm": {
+		"title": "Profile Details",
+		"subtitle": "Apni basic details fill karein",
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"dob": "Date of Birth",
+		"aadhaar": "Aadhaar Number (Optional)",
+		"scanAadhaar": "Scan Aadhaar to Auto-fill",
+		"orDivider": "ya manually enter karein",
+		"firstNameRequired": "First name zaroori hai",
+		"firstNameMin": "First name mein kam se kam 2 letters hone chahiye",
+		"lastNameRequired": "Last name zaroori hai",
+		"lastNameMin": "Last name mein kam se kam 2 letters hone chahiye",
+		"dobRequired": "Date of birth zaroori hai",
+		"dobInvalid": "Date of birth future mein nahi ho sakti",
+		"dobAge": "Aapki age kam se kam 16 saal honi chahiye",
+		"aadhaarInvalid": "Aadhaar number 12 digits ka hona chahiye"
+	},
+	"aadhaarScan": {
+		"title": "Quick Profile Setup",
+		"heading": "Scan Aadhaar for Instant Setup",
+		"benefit1": "Auto-fill name aur date of birth",
+		"benefit2": "Permanent address save karein baad ke liye",
+		"benefit3": "Faster profile completion",
+		"scanButton": "Scan Aadhaar",
+		"skipButton": "Skip for Now"
+	},
+	"aadhaarReview": {
+		"title": "Confirm Details",
+		"heading": "Review Scanned Information",
+		"name": "Name",
+		"dob": "Date of Birth",
+		"gender": "Gender",
+		"male": "Male",
+		"female": "Female",
+		"transgender": "Transgender",
+		"preferNotToSay": "Prefer not to say",
+		"address": "Permanent Address",
+		"aadhaar": "Aadhaar Number",
+		"confirm": "Confirm & Continue",
+		"rescan": "Scan Again",
+		"genderRequired": "Kripya apna gender select karein"
+	},
+	"location": {
+		"areaRequired": "Area zaroori hai",
+		"cityRequired": "City zaroori hai",
+		"pincodeInvalid": "Pincode 6 digits ka hona chahiye"
+	},
+	"distance": {
+		"radiusRequired": "Job radius zaroori hai",
+		"radiusMin": "Minimum radius 5 km hai",
+		"radiusMax": "Maximum radius 50 km hai"
+	},
+	"skills": {
+		"skillsRequired": "Kripya kam se kam ek skill choose karein"
 	},
 	"introduction": {
 		"poweredBy": "AHALTS Academy ke saath",
@@ -148,5 +233,56 @@
 			"csr": "CSR-funded courses - koi cost nahi",
 			"verified": "Verified jobs aur fair payment"
 		}
+	},
+	"carousel": {
+		"stats": {
+			"activeJobSeekers": "50,000+",
+			"activeJobSeekersDesc": "Active job seekers opportunities khoj rahe hain",
+			"jobsPosted": "10,000+",
+			"jobsPostedDesc": "Har mahine post ki gayi jobs",
+			"trustedEmployers": "500+",
+			"trustedEmployersDesc": "Trusted employers hiring kar rahe hain",
+			"interviewRate": "95%",
+			"interviewRateDesc": "Job seekers ko 7 dino mein interview milta hai",
+			"salaryRange": "₹15-25k",
+			"salaryRangeDesc": "Average monthly salary range",
+			"support": "24/7",
+			"supportDesc": "Support kabhi bhi available"
+		},
+		"nsdcPartner": "NSDC Partner",
+		"trustedByCompanies": "Leading companies dwara trusted",
+		"moreCompanies": "+200 aur...",
+		"poweredBy": "AHALTS dwara"
+	},
+	"resume": {
+		"reviewTitle": "Resume Check Karein",
+		"reviewSubtitle": "Nikali gayi information verify karein",
+		"reviewDesc": "Humne jo details paayi hai uski jaanch karein",
+		"firstName": "Pehla Naam",
+		"lastName": "Last Naam",
+		"dateOfBirth": "Janam Tithi",
+		"email": "Email",
+		"phoneNumber": "Phone Number",
+		"detectedSkills": "Mile Huye Skills",
+		"experience": "Experience",
+		"continue": "Jaari Rakhein",
+		"edit": "Details Edit Karein",
+		"save": "Changes Save Karein",
+		"cancel": "Cancel",
+		"verifyAadhaar": "Aadhaar se Verify Karein",
+		"uploadDifferent": "Alag Resume Upload Karein"
+	},
+	"resumeReview": {
+		"firstNameRequired": "First name zaroori hai",
+		"firstNameMin": "First name mein kam se kam 2 letters hone chahiye",
+		"lastNameRequired": "Last name zaroori hai",
+		"lastNameMin": "Last name mein kam se kam 2 letters hone chahiye",
+		"dobRequired": "Date of birth zaroori hai",
+		"dobInvalid": "Date of birth future mein nahi ho sakti",
+		"emailRequired": "Email zaroori hai",
+		"emailInvalid": "Kripya ek valid email daalein"
+	},
+	"aadhaarReviewValidation": {
+		"genderRequired": "Kripya apna gender choose karein"
 	}
 }

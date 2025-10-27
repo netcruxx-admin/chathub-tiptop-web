@@ -27,6 +27,12 @@
 		"reqPassword": "Password is required",
 		"validPassword": "Password must be at least 6 characters"
 	},
+	"employeeLoginVal": {
+		"reqEmail": "Email is required",
+		"validEmail": "Please enter a valid email.",
+		"reqPassword": "Password is required",
+		"validPassword": "Password must be at least 6 characters"
+	},
 	"splash": {
 		"title": "TipTop",
 		"subtitle": "Find Work. Get Paid. Grow Skills.",
@@ -37,6 +43,18 @@
 		"header": "Employer Login",
 		"title": "Employer Portal",
 		"subtitle": "Access tools to manage jobs and talent",
+		"labelEmail": "Email Address",
+		"placeholderEmail": "Enter your email",
+		"labelPassword": "Password",
+		"placeholderPassword": "Enter your password",
+		"loginBtn": "Login to Dashboard",
+		"footer": "Don't have an account?",
+		"signUp": "Sign Up"
+	},
+	"employeeLogin": {
+		"header": "Employee Login",
+		"title": "Employee Portal",
+		"subtitle": "Access your account and find opportunities",
 		"labelEmail": "Email Address",
 		"placeholderEmail": "Enter your email",
 		"labelPassword": "Password",
@@ -61,7 +79,9 @@
 		"enterOTP": "Enter OTP",
 		"otpSent": "OTP has been sent",
 		"resendOTP": "Resend OTP",
-		"verifying": "Verifying..."
+		"verifying": "Verifying...",
+		"phoneRequired": "Phone Number is required",
+		"phoneInvalid": "Please enter a valid 10-digit phone number"
 	},
 	"otp": {
 		"title": "Enter verification code",
@@ -90,7 +110,16 @@
 		"autoGenerate": "Auto-generated account details",
 		"showAdvanced": "Edit username & email",
 		"hideAdvanced": "Hide advanced options",
-		"usernameHint": "This will be your unique identifier"
+		"usernameHint": "This will be your unique identifier",
+		"firstNameRequired": "First name is required",
+		"firstNameMin": "First name must be at least 2 characters",
+		"lastNameRequired": "Last name is required",
+		"lastNameMin": "Last name must be at least 2 characters",
+		"usernameRequired": "Username is required",
+		"usernameMin": "Username must be at least 3 characters",
+		"usernameInvalid": "Username can only contain letters, numbers, and underscores",
+		"emailRequired": "Email is required",
+		"emailInvalid": "Please enter a valid email"
 	},
 	"flowSelection": {
 		"title": "How would you like to proceed?",
@@ -141,12 +170,55 @@
 		"looksGood": "Looks Good",
 		"rescan": "Rescan"
 	},
+	"aadhaarScan": {
+		"title": "Quick Profile Setup",
+		"heading": "Scan Aadhaar for Instant Setup",
+		"benefit1": "Auto-fill name and date of birth",
+		"benefit2": "Save permanent address for later",
+		"benefit3": "Faster profile completion",
+		"scanButton": "Scan Aadhaar",
+		"skipButton": "Skip for Now"
+	},
+	"aadhaarReview": {
+		"title": "Confirm Details",
+		"heading": "Review Scanned Information",
+		"name": "Name",
+		"dob": "Date of Birth",
+		"gender": "Gender",
+		"male": "Male",
+		"female": "Female",
+		"transgender": "Transgender",
+		"preferNotToSay": "Prefer not to say",
+		"address": "Permanent Address",
+		"aadhaar": "Aadhaar Number",
+		"confirm": "Confirm & Continue",
+		"rescan": "Scan Again",
+		"genderRequired": "Please select your gender"
+	},
 	"manualData": {
 		"title": "Enter your details",
 		"subtitle": "We're creating your profile",
 		"dob": "Date of Birth",
 		"dobPlaceholder": "DD/MM/YYYY",
 		"dobHelper": "Enter your date of birth"
+	},
+	"profileForm": {
+		"title": "Profile Details",
+		"subtitle": "Fill in your basic details",
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"dob": "Date of Birth",
+		"aadhaar": "Aadhaar Number (Optional)",
+		"scanAadhaar": "Scan Aadhaar to Auto-fill",
+		"orDivider": "or enter manually",
+		"firstNameRequired": "First name is required",
+		"firstNameMin": "First name must be at least 2 characters",
+		"lastNameRequired": "Last name is required",
+		"lastNameMin": "Last name must be at least 2 characters",
+		"dobRequired": "Date of birth is required",
+		"dobInvalid": "Date of birth cannot be in the future",
+		"dobAge": "You must be at least 16 years old",
+		"aadhaarInvalid": "Aadhaar number must be 12 digits"
 	},
 	"skills": {
 		"title": "Select Your Skills",
@@ -164,6 +236,7 @@
 		"infoMessage": "Select all skills that apply to you. You can always add more skills later from your profile.",
 		"jobs": "jobs",
 		"voiceGuidance": "Here are the skills. If you're open to any work, select the top option. Or choose specific skills. You can always change later.",
+		"skillsRequired": "Please select at least one skill",
 		"verificationInfo": {
 			"title": "Skill Verification",
 			"description": "Your skills are currently unverified. They will be verified as you complete jobs:",
@@ -268,7 +341,10 @@
 		"permissionDenied": "Location permission denied",
 		"enterCity": "Please enter city",
 		"selectOnMap": "Select on map",
-		"dragPinToAdjust": "Drag pin to adjust"
+		"dragPinToAdjust": "Drag pin to adjust",
+		"areaRequired": "Area is required",
+		"cityRequired": "City is required",
+		"pincodeInvalid": "Pincode must be 6 digits"
 	},
 	"distance": {
 		"title": "How far can you travel?",
@@ -276,7 +352,10 @@
 		"radiusLabel": "Search radius from your location",
 		"infoTitle": "You can change this anytime",
 		"infoDesc": "We'll show you jobs within this radius. You can adjust it later from your profile settings.",
-		"browseJobs": "Browse Jobs"
+		"browseJobs": "Browse Jobs",
+		"radiusRequired": "Job radius is required",
+		"radiusMin": "Minimum radius is 5 km",
+		"radiusMax": "Maximum radius is 50 km"
 	},
 	"introduction": {
 		"poweredBy": "Powered by AHALTS Academy",
@@ -334,5 +413,56 @@
 			"csr": "CSR-funded courses - no cost",
 			"verified": "Verified jobs and fair payment"
 		}
+	},
+	"carousel": {
+		"stats": {
+			"activeJobSeekers": "50,000+",
+			"activeJobSeekersDesc": "Active job seekers finding opportunities",
+			"jobsPosted": "10,000+",
+			"jobsPostedDesc": "Jobs posted every month",
+			"trustedEmployers": "500+",
+			"trustedEmployersDesc": "Trusted employers hiring",
+			"interviewRate": "95%",
+			"interviewRateDesc": "Job seekers get interviews within 7 days",
+			"salaryRange": "₹15-25k",
+			"salaryRangeDesc": "Average monthly salary range",
+			"support": "24/7",
+			"supportDesc": "Support available anytime"
+		},
+		"nsdcPartner": "NSDC Partner",
+		"trustedByCompanies": "Trusted by leading companies",
+		"moreCompanies": "+200 more...",
+		"poweredBy": "by AHALTS"
+	},
+	"resume": {
+		"reviewTitle": "Review Resume",
+		"reviewSubtitle": "Verify extracted information",
+		"reviewDesc": "Check the details we found",
+		"firstName": "First Name",
+		"lastName": "Last Name",
+		"dateOfBirth": "Date of Birth",
+		"email": "Email",
+		"phoneNumber": "Phone Number",
+		"detectedSkills": "Skills Found",
+		"experience": "Experience",
+		"continue": "Continue",
+		"edit": "Edit Details",
+		"save": "Save Changes",
+		"cancel": "Cancel",
+		"verifyAadhaar": "Verify with Aadhaar",
+		"uploadDifferent": "Upload Different Resume"
+	},
+	"resumeReview": {
+		"firstNameRequired": "First name is required",
+		"firstNameMin": "First name must be at least 2 characters",
+		"lastNameRequired": "Last name is required",
+		"lastNameMin": "Last name must be at least 2 characters",
+		"dobRequired": "Date of birth is required",
+		"dobInvalid": "Date of birth cannot be in the future",
+		"emailRequired": "Email is required",
+		"emailInvalid": "Please enter a valid email"
+	},
+	"aadhaarReviewValidation": {
+		"genderRequired": "Please select your gender"
 	}
 }

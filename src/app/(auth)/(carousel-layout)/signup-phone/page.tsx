@@ -3,14 +3,23 @@
 import BackBtn from '@/components/backBtn'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/cn'
-import { NumberValidation } from '@/lib/validation/authValidation'
+import { createNumberValidation } from '@/lib/validation/authValidation'
 import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
+import { useSendVerificationCodeMutation } from '@/redux/apis/authApi'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setPhoneNumber } from '@/redux/slices/authSlice'
+import { toast } from 'sonner'
 
 export default function NumberInput() {
 	const router = useRouter()
 	const t = useTranslations()
+	const dispatch = useDispatch()
+	const [sendVerificationCode, { isLoading }] =
+		useSendVerificationCodeMutation()
+	const [error, setError] = useState('')
 
 	const initialValues = {
 		phoneNumber: '',
@@ -28,11 +37,30 @@ export default function NumberInput() {
 
 				<Formik
 					initialValues={initialValues}
-					validationSchema={NumberValidation}
+					validationSchema={createNumberValidation(t)}
 					validateOnMount={true}
-					onSubmit={values => {
-						console.log(values)
-						router.push(`/signup-otp?number=${values.phoneNumber}`)
+					onSubmit={async values => {
+						try {
+							setError('')
+							const response = await sendVerificationCode({
+								phoneNumber: values.phoneNumber,
+							}).unwrap()
+							console.log('response', response)
+							// Save phone number to Redux
+							dispatch(setPhoneNumber(values.phoneNumber))
+
+							// Show success toast
+							toast.success('OTP sent successfully!')
+
+							// Navigate to OTP page
+							router.push(`/signup-otp`)
+						} catch (err: any) {
+							console.error('Failed to send OTP:', err)
+							const errorMessage =
+								err?.data?.message || 'Failed to send OTP. Please try again.'
+							setError(errorMessage)
+							toast.error(errorMessage)
+						}
 					}}
 				>
 					{props => (
@@ -60,12 +88,13 @@ export default function NumberInput() {
 							{props.touched.phoneNumber && props.errors.phoneNumber && (
 								<p className='text-red-500'>{props.errors.phoneNumber}</p>
 							)}
+							{error && <p className='text-red-500 text-sm'>{error}</p>}
 							<Button
 								type='submit'
-								disabled={props.values.phoneNumber.length !== 10}
-								className='w-full h-12 bg-[#10B981] hover:bg-[#059669] text-white font-semibold rounded-xl shadow-lg'
+								disabled={props.values.phoneNumber.length !== 10 || isLoading}
+								className='w-full h-12 bg-[#10B981] hover:bg-[#059669] text-white font-semibold rounded-xl shadow-lg cursor-pointer'
 							>
-								{t('phone.sendOTP')}
+								{isLoading ? t('phone.verifying') : t('phone.sendOTP')}
 							</Button>
 						</form>
 					)}

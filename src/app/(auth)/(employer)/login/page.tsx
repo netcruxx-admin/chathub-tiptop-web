@@ -4,7 +4,7 @@ import BackBtn from '@/components/backBtn'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/cn'
-import { EmployerLoginValidation } from '@/lib/validation/authValidation'
+import { createEmployerLoginValidation } from '@/lib/validation/authValidation'
 import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -37,7 +37,7 @@ export default function EmployerLogin() {
 
 					<Formik
 						initialValues={initialValues}
-						validationSchema={EmployerLoginValidation}
+						validationSchema={createEmployerLoginValidation(t)}
 						validateOnMount={true}
 						onSubmit={values => {
 							console.log(values)

@@ -13,11 +13,13 @@ import {
 } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 
 export default function Onboarding() {
 	const [currentCard, setCurrentCard] = useState(0)
 	const [isVoicePlaying, setIsVoicePlaying] = useState(false)
 	const t = useTranslations()
+	const router = useRouter()
 
 	const cards = [
 		{
@@ -85,7 +87,7 @@ export default function Onboarding() {
 		if (currentCard < cards.length - 1) {
 			setCurrentCard(currentCard + 1)
 		} else {
-			alert('DONE')
+			router.push('/name-collection')
 		}
 	}
 
@@ -151,7 +153,7 @@ export default function Onboarding() {
 							{/* Voice Assistant Button */}
 							<button
 								onClick={handleVoicePlay}
-								className='w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-muted hover:bg-muted/80 transition-colors'
+								className='w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-muted hover:bg-muted/80 transition-colors cursor-pointer'
 								disabled={isVoicePlaying}
 							>
 								<Volume2
@@ -170,7 +172,7 @@ export default function Onboarding() {
 							<button
 								key={index}
 								onClick={() => setCurrentCard(index)}
-								className={`h-2 rounded-full transition-all ${
+								className={`h-2 rounded-full transition-all cursor-pointer ${
 									index === currentCard
 										? 'w-8 bg-primary'
 										: 'w-2 bg-muted-foreground/30'
@@ -185,13 +187,13 @@ export default function Onboarding() {
 						<Button
 							variant='outline'
 							onClick={handlePrev}
-							className='flex-1 flex items-center bg-transparent disabled:hover:bg-transparent'
+							className='flex-1 flex items-center bg-transparent disabled:hover:bg-transparent cursor-pointer'
 							disabled={currentCard <= 0}
 						>
 							<ChevronLeft className='w-4 h-4 mr-1 mt-[1px]' />
 							{t('common.back')}
 						</Button>
-						<Button onClick={handleNext} className='flex-1 flex items-center'>
+						<Button onClick={handleNext} className='flex-1 flex items-center cursor-pointer'>
 							{currentCard < cards.length - 1 ? (
 								<>
 									{t('common.next')}
@@ -208,8 +210,8 @@ export default function Onboarding() {
 
 					{/* Skip Option */}
 					<button
-						onClick={() => alert('DONE')}
-						className='w-full text-center text-sm text-muted-foreground mt-4 hover:text-foreground transition-colors'
+						onClick={() => router.push('/name-collection')}
+						className='w-full text-center text-sm text-muted-foreground mt-4 hover:text-foreground transition-colors cursor-pointer'
 					>
 						{t('common.skip')}
 					</button>
