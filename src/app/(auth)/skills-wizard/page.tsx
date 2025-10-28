@@ -44,12 +44,16 @@ import {
 	ChevronUp,
 } from 'lucide-react'
 import { ProgressBar } from '@/components/ui/progress-bar'
+import { useDispatch } from 'react-redux'
+import { RootState } from '@/redux/store'
+import { setJobRole } from '@/redux/slices/authSlice'
 
 type WizardStep = 'choice' | 'categories' | 'skills'
 
 export default function SkillsWizard() {
 	const t = useTranslations()
 	const router = useRouter()
+	const dispatch = useDispatch()
 	const [wizardStep, setWizardStep] = useState<WizardStep>('choice')
 	const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 	const [expandedCategories, setExpandedCategories] = useState<string[]>([])
@@ -157,6 +161,7 @@ export default function SkillsWizard() {
 	]
 
 	const handleOpenToAnyWork = () => {
+		dispatch(setJobRole(entryLevelSkillIds))
 		localStorage.setItem('selectedSkills', JSON.stringify(entryLevelSkillIds))
 		router.push('/location-selection')
 	}
@@ -180,6 +185,7 @@ export default function SkillsWizard() {
 	}
 
 	const handleContinue = () => {
+		dispatch(setJobRole(selectedSkills))
 		localStorage.setItem('selectedSkills', JSON.stringify(selectedSkills))
 		router.push('/location-selection')
 	}

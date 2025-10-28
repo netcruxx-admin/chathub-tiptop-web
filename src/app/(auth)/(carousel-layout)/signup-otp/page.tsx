@@ -24,7 +24,7 @@ export default function OTPInput() {
 	const [canResend, setCanResend] = useState(false)
 
 	// Read from Redux store with fallback to URL params
-	const phoneNumber = useSelector((state: RootState) => state.auth.phoneNumber)
+	const phoneNumber = useSelector((state: RootState) => state.auth.user.Phone)
 	const senderId = useSelector((state: RootState) => state.auth.senderId)
 
 	const [verifyCode, { isLoading: isVerifying }] = useVerifyCodeMutation()
@@ -91,8 +91,9 @@ export default function OTPInput() {
 								toast.success('OTP verified successfully!')
 								setResendTimer(30)
 								// Navigate to language selection
-								router.push('/signup-language')
+								// router.push('/signup-language')
 							}
+							router.push('/signup-language')
 						} catch (err: any) {
 							console.error('Failed to verify OTP:', err)
 							const errorMessage =
@@ -143,8 +144,7 @@ export default function OTPInput() {
 
 							try {
 								setError('')
-								// API call commented out
-								// await sendVerificationCode({ phoneNumber }).unwrap()
+								await sendVerificationCode({ phoneNumber }).unwrap()
 								setOtp('')
 
 								// Reset timer

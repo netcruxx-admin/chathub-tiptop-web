@@ -6,9 +6,8 @@ import { Input } from '@/components/ui/input'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { MapPin, Loader2, Navigation, X, Edit2, Check } from 'lucide-react'
-import { useFormik } from 'formik'
-import { createLocationSelectionValidation } from '@/lib/validation/authValidation'
-import type { LocationSelectionValidationValues } from '@/types/validation'
+import { useDispatch } from 'react-redux'
+import { updateUser } from '@/redux/slices/authSlice'
 
 interface DetailedAddress {
 	addressLine1: string
@@ -24,51 +23,21 @@ interface DetailedAddress {
 export default function LocationDetection() {
 	const t = useTranslations()
 	const router = useRouter()
+	const dispatch = useDispatch()
 	const [detecting, setDetecting] = useState(false)
-	const [detectedAddress, setDetectedAddress] = useState<DetailedAddress | null>(null)
+	const [detectedAddress, setDetectedAddress] =
+		useState<DetailedAddress | null>(null)
 	const [manualEntry, setManualEntry] = useState(false)
 	const [editMode, setEditMode] = useState(false)
-	const [error, setError] = useState('')
-
-	const formik = useFormik<LocationSelectionValidationValues>({
-		initialValues: {
-			addressLine1: '',
-			addressLine2: '',
-			area: '',
-			city: '',
-			state: '',
-			pincode: '',
-		},
-		validationSchema: createLocationSelectionValidation(t),
-		onSubmit: (values) => {
-			const fullAddress = [
-				values.addressLine1,
-				values.addressLine2,
-				values.area,
-				values.city,
-				values.state,
-				values.pincode,
-			]
-				.filter(Boolean)
-				.join(', ')
-
-			// Save to localStorage
-			localStorage.setItem('locationData', JSON.stringify({
-				permanentAddress: fullAddress,
-				addressLine1: values.addressLine1,
-				addressLine2: values.addressLine2,
-				area: values.area,
-				city: values.city,
-				state: values.state,
-				pincode: values.pincode,
-				latitude: detectedAddress?.latitude,
-				longitude: detectedAddress?.longitude,
-			}))
-
-			// Navigate to next page
-			router.push('/distance-selection')
-		},
+	const [addressForm, setAddressForm] = useState<DetailedAddress>({
+		addressLine1: '',
+		addressLine2: '',
+		area: '',
+		city: '',
+		state: '',
+		pincode: '',
 	})
+	const [error, setError] = useState('')
 
 	const detectLocation = () => {
 		setDetecting(true)
@@ -99,7 +68,12 @@ export default function LocationDetection() {
 						addressLine1: addr.road || addr.neighbourhood || '',
 						addressLine2: addr.suburb || '',
 						area: addr.suburb || addr.neighbourhood || addr.locality || '',
-						city: addr.city || addr.town || addr.village || addr.state_district || '',
+						city:
+							addr.city ||
+							addr.town ||
+							addr.village ||
+							addr.state_district ||
+							'',
 						state: addr.state || '',
 						pincode: addr.postcode || '',
 						latitude,
@@ -107,14 +81,7 @@ export default function LocationDetection() {
 					}
 
 					setDetectedAddress(detectedAddr)
-					formik.setValues({
-						addressLine1: detectedAddr.addressLine1,
-						addressLine2: detectedAddr.addressLine2,
-						area: detectedAddr.area,
-						city: detectedAddr.city,
-						state: detectedAddr.state,
-						pincode: detectedAddr.pincode,
-					})
+					setAddressForm(detectedAddr)
 					setDetecting(false)
 				} catch (err) {
 					console.error('Geocoding error:', err)
@@ -138,11 +105,59 @@ export default function LocationDetection() {
 	}
 
 	const confirmLocation = () => {
-		formik.handleSubmit()
+		const fullAddress = [
+			addressForm.addressLine1,
+			addressForm.addressLine2,
+			addressForm.area,
+			addressForm.city,
+			addressForm.state,
+			addressForm.pincode,
+		]
+			.filter(Boolean)
+			.join(', ')
+
+		dispatch(
+			updateUser({
+				Address1: addressForm.addressLine1,
+				Address2: addressForm.addressLine2,
+				Area: addressForm.area,
+				City: addressForm.city,
+				State: addressForm.state,
+				Zip: addressForm.pincode
+			})
+		)
+
+		// Save to localStorage
+		localStorage.setItem(
+			'locationData',
+			JSON.stringify({
+				permanentAddress: fullAddress,
+				addressLine1: addressForm.addressLine1,
+				addressLine2: addressForm.addressLine2,
+				area: addressForm.area,
+				city: addressForm.city,
+				state: addressForm.state,
+				pincode: addressForm.pincode,
+				latitude: addressForm.latitude || detectedAddress?.latitude,
+				longitude: addressForm.longitude || detectedAddress?.longitude,
+			})
+		)
+
+		// Navigate to next page (distance selection or completion)
+		router.push('/distance-selection')
+	}
+
+	const validateAddress = () => {
+		if (!addressForm.area.trim() || !addressForm.city.trim()) {
+			setError(t('location.enterAreaCity'))
+			return false
+		}
+		return true
 	}
 
 	const submitManualLocation = () => {
-		formik.handleSubmit()
+		if (!validateAddress()) return
+		confirmLocation()
 	}
 
 	return (
@@ -155,7 +170,9 @@ export default function LocationDetection() {
 							<MapPin className='w-8 h-8 text-primary' />
 						</div>
 						<h1 className='text-2xl font-bold'>{t('location.title')}</h1>
-						<p className='text-sm text-muted-foreground'>{t('location.subtitle')}</p>
+						<p className='text-sm text-muted-foreground'>
+							{t('location.subtitle')}
+						</p>
 					</div>
 
 					{/* Auto-detection */}
@@ -184,7 +201,9 @@ export default function LocationDetection() {
 									<div className='w-full border-t border-border' />
 								</div>
 								<div className='relative flex justify-center text-xs uppercase'>
-									<span className='bg-background px-2 text-muted-foreground'>{t('location.or')}</span>
+									<span className='bg-background px-2 text-muted-foreground'>
+										{t('location.or')}
+									</span>
 								</div>
 							</div>
 
@@ -206,21 +225,33 @@ export default function LocationDetection() {
 									<div className='flex items-start space-x-3 flex-1'>
 										<MapPin className='w-5 h-5 text-primary mt-0.5 flex-shrink-0' />
 										<div className='flex-1 min-w-0'>
-											<p className='text-sm font-medium mb-2'>{t('location.detected')}</p>
+											<p className='text-sm font-medium mb-2'>
+												{t('location.detected')}
+											</p>
 											<div className='space-y-1 text-sm'>
-												{formik.values.addressLine1 && (
-													<p className='font-medium'>{formik.values.addressLine1}</p>
+												{addressForm.addressLine1 && (
+													<p className='font-medium'>
+														{addressForm.addressLine1}
+													</p>
 												)}
-												{formik.values.addressLine2 && (
-													<p className='text-muted-foreground'>{formik.values.addressLine2}</p>
+												{addressForm.addressLine2 && (
+													<p className='text-muted-foreground'>
+														{addressForm.addressLine2}
+													</p>
 												)}
-												{formik.values.area && <p className='text-muted-foreground'>{formik.values.area}</p>}
+												{addressForm.area && (
+													<p className='text-muted-foreground'>
+														{addressForm.area}
+													</p>
+												)}
 												<p className='font-medium text-primary'>
-													{formik.values.city}
-													{formik.values.state && `, ${formik.values.state}`}
+													{addressForm.city}
+													{addressForm.state && `, ${addressForm.state}`}
 												</p>
-												{formik.values.pincode && (
-													<p className='text-muted-foreground'>{formik.values.pincode}</p>
+												{addressForm.pincode && (
+													<p className='text-muted-foreground'>
+														{addressForm.pincode}
+													</p>
 												)}
 											</div>
 										</div>
@@ -237,14 +268,16 @@ export default function LocationDetection() {
 							</div>
 
 							<div className='flex gap-3'>
-								<Button onClick={confirmLocation} className='flex-1 h-12 text-base cursor-pointer'>
+								<Button
+									onClick={confirmLocation}
+									className='flex-1 h-12 text-base cursor-pointer'
+								>
 									{t('location.confirm')}
 								</Button>
 								<Button
 									onClick={() => {
 										setDetectedAddress(null)
 										setManualEntry(true)
-										formik.resetForm()
 									}}
 									variant='outline'
 									className='h-12 px-4 cursor-pointer'
@@ -260,100 +293,107 @@ export default function LocationDetection() {
 						<div className='space-y-4'>
 							<div className='space-y-3'>
 								<div className='space-y-2'>
-									<label className='text-sm font-medium'>{t('location.addressLine1')}</label>
+									<label className='text-sm font-medium'>
+										{t('location.addressLine1')}
+									</label>
 									<Input
-										name='addressLine1'
-										value={formik.values.addressLine1}
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
+										value={addressForm.addressLine1}
+										onChange={e => {
+											setAddressForm({
+												...addressForm,
+												addressLine1: e.target.value,
+											})
+											setError('')
+										}}
 										placeholder={t('location.addressLine1Placeholder')}
 										className='h-11 text-base'
 									/>
-									{formik.touched.addressLine1 && formik.errors.addressLine1 && (
-										<p className='text-xs text-destructive mt-1'>{formik.errors.addressLine1}</p>
-									)}
-								</div>
-
-								<div className='space-y-2'>
-									<label className='text-sm font-medium'>{t('location.addressLine2')}</label>
-									<Input
-										name='addressLine2'
-										value={formik.values.addressLine2}
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										placeholder={t('location.addressLine2Placeholder')}
-										className='h-11 text-base'
-									/>
-									{formik.touched.addressLine2 && formik.errors.addressLine2 && (
-										<p className='text-xs text-destructive mt-1'>{formik.errors.addressLine2}</p>
-									)}
 								</div>
 
 								<div className='space-y-2'>
 									<label className='text-sm font-medium'>
-										{t('location.areaLabel')} <span className='text-destructive'>*</span>
+										{t('location.addressLine2')}
 									</label>
 									<Input
-										name='area'
-										value={formik.values.area}
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
+										value={addressForm.addressLine2}
+										onChange={e => {
+											setAddressForm({
+												...addressForm,
+												addressLine2: e.target.value,
+											})
+											setError('')
+										}}
+										placeholder={t('location.addressLine2Placeholder')}
+										className='h-11 text-base'
+									/>
+								</div>
+
+								<div className='space-y-2'>
+									<label className='text-sm font-medium'>
+										{t('location.areaLabel')}{' '}
+										<span className='text-destructive'>*</span>
+									</label>
+									<Input
+										value={addressForm.area}
+										onChange={e => {
+											setAddressForm({ ...addressForm, area: e.target.value })
+											setError('')
+										}}
 										placeholder={t('location.areaPlaceholder')}
 										className='h-11 text-base'
 									/>
-									{formik.touched.area && formik.errors.area && (
-										<p className='text-xs text-destructive mt-1'>{formik.errors.area}</p>
-									)}
 								</div>
 
 								<div className='grid grid-cols-2 gap-3'>
 									<div className='space-y-2'>
 										<label className='text-sm font-medium'>
-											{t('location.cityLabel')} <span className='text-destructive'>*</span>
+											{t('location.cityLabel')}{' '}
+											<span className='text-destructive'>*</span>
 										</label>
 										<Input
-											name='city'
-											value={formik.values.city}
-											onChange={formik.handleChange}
-											onBlur={formik.handleBlur}
+											value={addressForm.city}
+											onChange={e => {
+												setAddressForm({ ...addressForm, city: e.target.value })
+												setError('')
+											}}
 											placeholder={t('location.cityPlaceholder')}
 											className='h-11 text-base'
 										/>
-										{formik.touched.city && formik.errors.city && (
-											<p className='text-xs text-destructive mt-1'>{formik.errors.city}</p>
-										)}
 									</div>
 
 									<div className='space-y-2'>
-										<label className='text-sm font-medium'>{t('location.pincodeLabel')}</label>
+										<label className='text-sm font-medium'>
+											{t('location.pincodeLabel')}
+										</label>
 										<Input
-											name='pincode'
-											value={formik.values.pincode}
-											onChange={formik.handleChange}
-											onBlur={formik.handleBlur}
+											value={addressForm.pincode}
+											onChange={e => {
+												setAddressForm({
+													...addressForm,
+													pincode: e.target.value,
+												})
+												setError('')
+											}}
 											placeholder={t('location.pincodePlaceholder')}
 											className='h-11 text-base'
 											maxLength={6}
 										/>
-										{formik.touched.pincode && formik.errors.pincode && (
-											<p className='text-xs text-destructive mt-1'>{formik.errors.pincode}</p>
-										)}
 									</div>
 								</div>
 
 								<div className='space-y-2'>
-									<label className='text-sm font-medium'>{t('location.stateLabel')}</label>
+									<label className='text-sm font-medium'>
+										{t('location.stateLabel')}
+									</label>
 									<Input
-										name='state'
-										value={formik.values.state}
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
+										value={addressForm.state}
+										onChange={e => {
+											setAddressForm({ ...addressForm, state: e.target.value })
+											setError('')
+										}}
 										placeholder={t('location.statePlaceholder')}
 										className='h-11 text-base'
 									/>
-									{formik.touched.state && formik.errors.state && (
-										<p className='text-xs text-destructive mt-1'>{formik.errors.state}</p>
-									)}
 								</div>
 							</div>
 
@@ -372,18 +412,11 @@ export default function LocationDetection() {
 									{t('location.continue')}
 								</Button>
 
-								{editMode && detectedAddress && (
+								{editMode && (
 									<Button
 										onClick={() => {
 											setEditMode(false)
-											formik.setValues({
-												addressLine1: detectedAddress.addressLine1,
-												addressLine2: detectedAddress.addressLine2,
-												area: detectedAddress.area,
-												city: detectedAddress.city,
-												state: detectedAddress.state,
-												pincode: detectedAddress.pincode,
-											})
+											setAddressForm(detectedAddress!)
 										}}
 										variant='outline'
 										className='h-12 px-4 cursor-pointer'
@@ -397,7 +430,14 @@ export default function LocationDetection() {
 								<Button
 									onClick={() => {
 										setManualEntry(false)
-										formik.resetForm()
+										setAddressForm({
+											addressLine1: '',
+											addressLine2: '',
+											area: '',
+											city: '',
+											state: '',
+											pincode: '',
+										})
 										setError('')
 									}}
 									variant='ghost'

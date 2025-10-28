@@ -16,18 +16,24 @@ import {
 	Play,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import BackBtn from '@/components/backBtn'
-import { useFormik } from 'formik'
-import { createNameCollectionValidation } from '@/lib/validation/authValidation'
-import type { NameCollectionValidationValues } from '@/types/validation'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
+import { useSignupMutation } from '@/redux/apis/authApi'
+import { updateUser } from '@/redux/slices/authSlice'
+// import { REACT_APP_TENANT_ID } from '@/lib/constants'
 
 export default function NameCollection() {
 	const router = useRouter()
 	const t = useTranslations()
 
-	const [showAdvanced, setShowAdvanced] = useState(false)
+	const [firstName, setFirstName] = useState('')
+	const [lastName, setLastName] = useState('')
+	const [username, setUsername] = useState('')
+	const [email, setEmail] = useState('')
+	const [showAdvanced, setShowAdvanced] = useState(true)
 	const [showVoicePreview, setShowVoicePreview] = useState(false)
 	const [voicePreviewPlayed, setVoicePreviewPlayed] = useState(false)
+	const [error, setError] = useState('')
 
 	// Availability checks
 	const [usernameAvailable, setUsernameAvailable] = useState<boolean | null>(
@@ -37,34 +43,21 @@ export default function NameCollection() {
 	const [checkingUsername, setCheckingUsername] = useState(false)
 	const [checkingEmail, setCheckingEmail] = useState(false)
 
-	const formik = useFormik<NameCollectionValidationValues>({
-		initialValues: {
-			firstName: '',
-			middleName: '',
-			lastName: '',
-			username: '',
-			email: '',
-		},
-		validationSchema: createNameCollectionValidation(t),
-		onSubmit: (values) => {
-			// Store data and navigate
-			localStorage.setItem('nameData', JSON.stringify(values))
-			router.push('/flow-selection')
-		},
-	})
+	const phoneNumber = useSelector((state: RootState) => state.auth.user.Phone)
+	const dispatch = useDispatch()
+	const [signUpUser, { isLoading: isLoading }] = useSignupMutation()
 
 	useEffect(() => {
 		// Auto-generate username and email when component mounts
-		const phoneNumber = new URLSearchParams(window.location.search).get('phone')
 		if (phoneNumber) {
 			const generatedUsername = phoneNumber
 			const generatedEmail = generateEmail(phoneNumber)
-			formik.setFieldValue('username', generatedUsername)
-			formik.setFieldValue('email', generatedEmail)
+			setUsername(generatedUsername)
+			setEmail(generatedEmail)
 			checkUsername(generatedUsername)
 			checkEmail(generatedEmail)
 		}
-	}, [])
+	}, [phoneNumber])
 
 	const generateEmail = (user: string) => {
 		return `${user}@tiptopmail.com`
@@ -91,9 +84,9 @@ export default function NameCollection() {
 	}
 
 	const handleUsernameChange = (value: string) => {
-		formik.setFieldValue('username', value)
+		setUsername(value)
 		const newEmail = generateEmail(value)
-		formik.setFieldValue('email', newEmail)
+		setEmail(newEmail)
 		checkUsername(value)
 		checkEmail(newEmail)
 	}
@@ -107,12 +100,74 @@ export default function NameCollection() {
 		}, 3000)
 	}
 
+	const handleContinue = async () => {
+		// Store data and navigate
+		// const nameData = {
+		// 	firstName,
+		// 	lastName,
+		// 	username,
+		// 	email,
+		// }
+		// You can store this in Redux or localStorage
+		// localStorage.setItem('nameData', JSON.stringify(nameData))
+
+		// Navigate to next step
+		// router.push('/flow-selection')
+		console.log('Handle Continue working')
+		try {
+			setError('')
+			const response = await signUpUser({
+				Rid: 0,
+				Title: '',
+				FirstName: firstName,
+				MiddleName: '',
+				LastName: lastName,
+				UserName: username,
+				Email: email,
+				DOB: '',
+				Gender: '',
+				BirthPlace: '',
+				Marital: '',
+				FatherName: '',
+				MotherName: '',
+				MobileNo: phoneNumber,
+				Address1: '',
+				Password: '',
+				City: '',
+				State: '',
+				Country: '',
+				SecretQuestion: '',
+				SecretAnswer: '',
+				TenantGroupId: 3,
+				Remark: '',
+			}).unwrap()
+			console.log('response', response)
+			// if (response && response.Status === 0) {
+			dispatch(
+				updateUser({
+					Email: email,
+					FirstName: firstName,
+					LastName: lastName,
+					UserName: username,
+				})
+			)
+			// Navigate to OTP page
+			// router.push(`/signup-otp?number=${values.phoneNumber}`)
+			// }
+
+			// Save phone number to Redux
+			router.push(`/flow-selection`)
+		} catch (err: any) {
+			console.error('Failed to send OTP:', err)
+			setError(err?.data?.message || 'Failed to send OTP. Please try again.')
+		}
+	}
+
 	const isValid =
-		formik.isValid &&
-		formik.values.firstName &&
-		formik.values.lastName &&
-		formik.values.username &&
-		formik.values.email &&
+		firstName &&
+		lastName &&
+		username &&
+		email &&
 		usernameAvailable &&
 		emailAvailable
 
@@ -188,17 +243,12 @@ export default function NameCollection() {
 							</div>
 							<Input
 								id='firstName'
-								name='firstName'
-								value={formik.values.firstName}
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
+								value={firstName}
+								onChange={e => setFirstName(e.target.value)}
 								placeholder={t('nameCollection.firstNamePlaceholder')}
 								className='h-11 text-base'
 								autoFocus
 							/>
-							{formik.touched.firstName && formik.errors.firstName && (
-								<p className='text-xs text-red-600 mt-1'>{formik.errors.firstName}</p>
-							)}
 						</div>
 
 						<div>
@@ -212,16 +262,11 @@ export default function NameCollection() {
 							</div>
 							<Input
 								id='lastName'
-								name='lastName'
-								value={formik.values.lastName}
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
+								value={lastName}
+								onChange={e => setLastName(e.target.value)}
 								placeholder={t('nameCollection.lastNamePlaceholder')}
 								className='h-11 text-base'
 							/>
-							{formik.touched.lastName && formik.errors.lastName && (
-								<p className='text-xs text-red-600 mt-1'>{formik.errors.lastName}</p>
-							)}
 						</div>
 					</div>
 
@@ -255,10 +300,8 @@ export default function NameCollection() {
 									<div className='relative mt-1'>
 										<Input
 											id='username'
-											name='username'
-											value={formik.values.username}
+											value={username}
 											onChange={e => handleUsernameChange(e.target.value)}
-											onBlur={formik.handleBlur}
 											placeholder={t('nameCollection.usernamePlaceholder')}
 											className='pr-10'
 										/>
@@ -274,20 +317,19 @@ export default function NameCollection() {
 											)}
 										</div>
 									</div>
-									{formik.touched.username && formik.errors.username && (
-										<p className='text-xs text-red-600 mt-1'>{formik.errors.username}</p>
-									)}
-									{!checkingUsername && usernameAvailable === true && !formik.errors.username && (
-										<p className='text-xs text-green-600 mt-1'>{t('nameCollection.available')}</p>
-									)}
-									{!checkingUsername && usernameAvailable === false && (
-										<p className='text-xs text-red-600 mt-1'>{t('nameCollection.taken')}</p>
-									)}
-									{!formik.errors.username && (
-										<p className='text-xs text-muted-foreground mt-1'>
-											{t('nameCollection.usernameHint')}
+									{!checkingUsername && usernameAvailable === true && (
+										<p className='text-xs text-green-600 mt-1'>
+											{t('nameCollection.available')}
 										</p>
 									)}
+									{!checkingUsername && usernameAvailable === false && (
+										<p className='text-xs text-red-600 mt-1'>
+											{t('nameCollection.taken')}
+										</p>
+									)}
+									<p className='text-xs text-muted-foreground mt-1'>
+										{t('nameCollection.usernameHint')}
+									</p>
 								</div>
 
 								<div>
@@ -297,8 +339,7 @@ export default function NameCollection() {
 									<div className='relative mt-1'>
 										<Input
 											id='email'
-											name='email'
-											value={formik.values.email}
+											value={email}
 											readOnly
 											className='bg-muted pr-10'
 										/>
@@ -314,22 +355,23 @@ export default function NameCollection() {
 											)}
 										</div>
 									</div>
-									{formik.touched.email && formik.errors.email && (
-										<p className='text-xs text-red-600 mt-1'>{formik.errors.email}</p>
-									)}
-									{!checkingEmail && emailAvailable === true && !formik.errors.email && (
-										<p className='text-xs text-green-600 mt-1'>{t('nameCollection.available')}</p>
+									{!checkingEmail && emailAvailable === true && (
+										<p className='text-xs text-green-600 mt-1'>
+											{t('nameCollection.available')}
+										</p>
 									)}
 									{!checkingEmail && emailAvailable === false && (
-										<p className='text-xs text-red-600 mt-1'>{t('nameCollection.taken')}</p>
+										<p className='text-xs text-red-600 mt-1'>
+											{t('nameCollection.taken')}
+										</p>
 									)}
 								</div>
 							</div>
 						)}
 					</div>
-
+					{error && <p className='text-red-500 text-sm'>{error}</p>}
 					<Button
-						onClick={() => formik.handleSubmit()}
+						onClick={handleContinue}
 						disabled={!isValid}
 						className='w-full h-12 text-base font-semibold cursor-pointer'
 					>

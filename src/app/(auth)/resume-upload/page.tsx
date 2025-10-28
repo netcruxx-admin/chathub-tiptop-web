@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, Upload, FileText, CheckCircle, Loader2 } from 'lucide-react'
+import { useUploadResumeMutation } from '@/redux/apis/profileApi'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/redux/store'
 
 export default function ResumeUpload() {
 	const t = useTranslations()
@@ -13,6 +16,9 @@ export default function ResumeUpload() {
 	const [file, setFile] = useState<File | null>(null)
 	const [uploading, setUploading] = useState(false)
 	const [parsed, setParsed] = useState(false)
+	const [uploadResume] = useUploadResumeMutation()
+	const phoneNumber = useSelector((state: RootState) => state.auth.user.Phone)
+	const dispatch = useDispatch()
 
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files[0]) {
@@ -23,33 +29,46 @@ export default function ResumeUpload() {
 
 	const handleUpload = async (uploadedFile: File) => {
 		setUploading(true)
+		try {
+			const response = await uploadResume({
+				file: uploadedFile,
+				id: 'fe90c0f7-e637-43f3-966a-50e0e2dbd135',
+				name: 'Samarth Kumar Nathawat',
+				phone: '9829095713',
+			}).unwrap()
+			console.log('response', response)
+		} catch (err: any) {
+			console.error('Failed to upload resume:', err)
+		} finally {
+			setUploading(false)
+		}
 
 		// Simulate upload and parsing
-		setTimeout(() => {
-			// Mock parsed data from resume
-			const phoneNumber = localStorage.getItem('phoneNumber') || ''
-			const mockResumeData = {
-				firstName: 'Rahul',
-				lastName: 'Kumar',
-				dateOfBirth: '1995-05-15',
-				username: phoneNumber,
-				email: `${phoneNumber}@tiptopmail.com`,
-				skills: ['JavaScript', 'React', 'Node.js'],
-				experience: [
-					{
-						title: 'Software Developer',
-						company: 'Tech Company',
-						duration: '2020-2023',
-					},
-				],
-			}
+		// setTimeout(() => {
+		// 	// Mock parsed data from resume
+		// 	const phoneNumber = localStorage.getItem('phoneNumber') || ''
+		// 	const mockResumeData = {
+		// 		firstName: 'Rahul',
+		// 		lastName: 'Kumar',
+		// 		dateOfBirth: '1995-05-15',
+		// 		username: phoneNumber,
+		// 		email: `${phoneNumber}@tiptopmail.com`,
+		// 		skills: ['JavaScript', 'React', 'Node.js'],
+		// 		experience: [
+		// 			{
+		// 				title: 'Software Developer',
+		// 				company: 'Tech Company',
+		// 				duration: '2020-2023',
+		// 			},
+		// 		],
+		// 	}
 
-			// Save parsed data to localStorage
-			localStorage.setItem('resumeData', JSON.stringify(mockResumeData))
+		// 	// Save parsed data to localStorage
+		// 	localStorage.setItem('resumeData', JSON.stringify(mockResumeData))
 
-			setUploading(false)
-			setParsed(true)
-		}, 3000)
+		// 	setUploading(false)
+		// 	setParsed(true)
+		// }, 3000)
 	}
 
 	const handleContinue = () => {
@@ -81,12 +100,16 @@ export default function ResumeUpload() {
 							{uploading ? (
 								<div className='space-y-4'>
 									<Loader2 className='w-16 h-16 mx-auto text-primary animate-spin' />
-									<p className='text-lg font-medium'>Uploading and parsing...</p>
+									<p className='text-lg font-medium'>
+										Uploading and parsing...
+									</p>
 								</div>
 							) : (
 								<>
 									<Upload className='w-16 h-16 mx-auto text-muted-foreground mb-4' />
-									<p className='text-lg font-medium mb-2'>Drag & drop your resume here</p>
+									<p className='text-lg font-medium mb-2'>
+										Drag & drop your resume here
+									</p>
 									<p className='text-sm text-muted-foreground mb-4'>or</p>
 									<label htmlFor='resume-upload'>
 										<Button asChild className='cursor-pointer'>
@@ -103,8 +126,12 @@ export default function ResumeUpload() {
 										onChange={handleFileChange}
 										className='hidden'
 									/>
-									<p className='text-xs text-muted-foreground mt-4'>PDF, DOC, DOCX supported</p>
-									{file && <p className='text-sm mt-2 text-primary'>{file.name}</p>}
+									<p className='text-xs text-muted-foreground mt-4'>
+										PDF, DOC, DOCX supported
+									</p>
+									{file && (
+										<p className='text-sm mt-2 text-primary'>{file.name}</p>
+									)}
 								</>
 							)}
 						</div>
@@ -112,13 +139,20 @@ export default function ResumeUpload() {
 						<div className='text-center space-y-6'>
 							<CheckCircle className='w-20 h-20 mx-auto text-green-500' />
 							<div>
-								<h2 className='text-2xl font-bold mb-2'>Resume successfully parsed!</h2>
+								<h2 className='text-2xl font-bold mb-2'>
+									Resume successfully parsed!
+								</h2>
 								<p className='text-muted-foreground'>
-									We've extracted your information. You can review and edit it in the next steps.
+									We&apos;ve extracted your information. You can review and edit
+									it in the next steps.
 								</p>
 							</div>
 							<div className='space-y-3 max-w-md mx-auto'>
-								<Button onClick={handleContinue} className='w-full cursor-pointer' size='lg'>
+								<Button
+									onClick={handleContinue}
+									className='w-full cursor-pointer'
+									size='lg'
+								>
 									Continue
 								</Button>
 								<Button

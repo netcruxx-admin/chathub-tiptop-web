@@ -1,31 +1,28 @@
 'use client'
 
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, ArrowRight, MapPin, Info } from 'lucide-react'
 import { ProgressBar } from '@/components/ui/progress-bar'
-import { useFormik } from 'formik'
-import { createDistanceSelectionValidation } from '@/lib/validation/authValidation'
-import type { DistanceSelectionValidationValues } from '@/types/validation'
+import { useDispatch } from 'react-redux'
+import { setJobDistance } from '@/redux/slices/authSlice'
 
 export default function DistanceSelection() {
 	const t = useTranslations()
 	const router = useRouter()
+	const dispatch = useDispatch()
+	const [jobRadius, setJobRadius] = useState(15)
 
-	const formik = useFormik<DistanceSelectionValidationValues>({
-		initialValues: {
-			jobRadius: 15,
-		},
-		validationSchema: createDistanceSelectionValidation(t),
-		onSubmit: (values) => {
-			// Save distance preference to localStorage
-			localStorage.setItem('jobRadius', values.jobRadius.toString())
+	const handleComplete = () => {
+		dispatch(setJobDistance(jobRadius.toString()))
+		// Save distance preference to localStorage
+		localStorage.setItem('jobRadius', jobRadius.toString())
 
-			// Navigate to job board or profile completion
-			router.push('/job-board')
-		},
-	})
+		// Navigate to job board or profile completion
+		router.push('/job-board')
+	}
 
 	const currentProgress = 80
 
@@ -62,20 +59,18 @@ export default function DistanceSelection() {
 								<div className='inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full mb-3 shadow-lg'>
 									<MapPin className='w-10 h-10 text-white' />
 								</div>
-								<div className='text-4xl font-bold text-primary mb-1'>{formik.values.jobRadius} km</div>
+								<div className='text-4xl font-bold text-primary mb-1'>{jobRadius} km</div>
 								<p className='text-sm text-muted-foreground'>{t('distance.radiusLabel')}</p>
 							</div>
 
 							<div className='space-y-3'>
 								<input
 									type='range'
-									name='jobRadius'
 									min='5'
 									max='50'
 									step='5'
-									value={formik.values.jobRadius}
-									onChange={e => formik.setFieldValue('jobRadius', Number.parseInt(e.target.value))}
-									onBlur={formik.handleBlur}
+									value={jobRadius}
+									onChange={e => setJobRadius(Number.parseInt(e.target.value))}
 									className='w-full h-2 bg-muted rounded-lg appearance-none cursor-pointer accent-primary'
 								/>
 								<div className='flex items-center justify-between text-xs text-muted-foreground'>
@@ -83,9 +78,6 @@ export default function DistanceSelection() {
 									<span>25 km</span>
 									<span>50 km</span>
 								</div>
-								{formik.touched.jobRadius && formik.errors.jobRadius && (
-									<p className='text-xs text-destructive text-center'>{formik.errors.jobRadius}</p>
-								)}
 							</div>
 						</div>
 
@@ -104,7 +96,7 @@ export default function DistanceSelection() {
 
 			<div className='p-4 border-t'>
 				<div className='max-w-2xl mx-auto'>
-					<Button onClick={() => formik.handleSubmit()} disabled={!formik.isValid} className='w-full h-12 cursor-pointer'>
+					<Button onClick={handleComplete} className='w-full h-12 cursor-pointer'>
 						{t('distance.browseJobs')}
 						<ArrowRight className='w-4 h-4 ml-2' />
 					</Button>

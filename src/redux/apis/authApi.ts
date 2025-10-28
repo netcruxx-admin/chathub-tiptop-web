@@ -44,7 +44,7 @@ export const authApi = createApi({
 			query: data => ({
 				url: '/AhaltsSMS/UserRegistration',
 				method: 'POST',
-				body: data,
+				body: [data],
 			}),
 			transformErrorResponse: (response: FetchBaseQueryError) =>
 				response.data as ErrorResponse,
@@ -70,7 +70,6 @@ export const authApi = createApi({
 			transformResponse: response => response,
 			transformErrorResponse: response => response.data,
 		}),
-
 		sendVerificationCode: builder.mutation({
 			query: data => ({
 				url: `/AhaltsSMS/OTPRequest/${data.phoneNumber}`,

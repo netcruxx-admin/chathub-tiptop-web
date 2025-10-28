@@ -4,9 +4,6 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight, Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useFormik } from 'formik'
-import { createSkillsSelectionValidation } from '@/lib/validation/authValidation'
-import type { SkillsSelectionValidationValues } from '@/types/validation'
 
 const skillsData = [
 	{ id: 1, name: 'Delivery', category: 'delivery', jobs: 5000 },
@@ -25,50 +22,44 @@ const skillsData = [
 
 export default function SkillsSelection() {
 	const router = useRouter()
+	const [selectedSkills, setSelectedSkills] = useState<number[]>([])
 	const [searchQuery, setSearchQuery] = useState('')
-
-	const formik = useFormik<SkillsSelectionValidationValues>({
-		initialValues: {
-			selectedSkills: [],
-			openToAnyWork: false,
-		},
-		validationSchema: createSkillsSelectionValidation(t => t),
-		onSubmit: (values) => {
-			const skillsToSave = values.openToAnyWork
-				? { openToAny: true, skills: [] }
-				: {
-						openToAny: false,
-						skills: skillsData.filter(s => values.selectedSkills.includes(s.name)),
-				  }
-			localStorage.setItem('selectedSkills', JSON.stringify(skillsToSave))
-			router.push('/location-selection')
-		},
-	})
+	const [openToAnyWork, setOpenToAnyWork] = useState(false)
 
 	const filteredSkills = skillsData.filter(skill =>
 		skill.name.toLowerCase().includes(searchQuery.toLowerCase())
 	)
 
-	const toggleSkill = (skillName: string) => {
-		if (formik.values.openToAnyWork) {
-			formik.setFieldValue('openToAnyWork', false)
+	const toggleSkill = (skillId: number) => {
+		if (openToAnyWork) {
+			setOpenToAnyWork(false)
 		}
-		const currentSkills = formik.values.selectedSkills
-		const updatedSkills = currentSkills.includes(skillName)
-			? currentSkills.filter(name => name !== skillName)
-			: [...currentSkills, skillName]
-		formik.setFieldValue('selectedSkills', updatedSkills)
+		setSelectedSkills(prev =>
+			prev.includes(skillId)
+				? prev.filter(id => id !== skillId)
+				: [...prev, skillId]
+		)
 	}
 
 	const handleOpenToAnyWork = () => {
-		const newValue = !formik.values.openToAnyWork
-		formik.setFieldValue('openToAnyWork', newValue)
-		if (newValue) {
-			formik.setFieldValue('selectedSkills', [])
+		setOpenToAnyWork(!openToAnyWork)
+		if (!openToAnyWork) {
+			setSelectedSkills([])
 		}
 	}
 
-	const isValid = formik.values.openToAnyWork || formik.values.selectedSkills.length > 0
+	const handleContinue = () => {
+		const skillsToSave = openToAnyWork
+			? { openToAny: true, skills: [] }
+			: {
+					openToAny: false,
+					skills: skillsData.filter(s => selectedSkills.includes(s.id)),
+			  }
+		localStorage.setItem('selectedSkills', JSON.stringify(skillsToSave))
+		router.push('/location-selection')
+	}
+
+	const isValid = openToAnyWork || selectedSkills.length > 0
 
 	return (
 		<div className='min-h-screen bg-background flex flex-col'>
@@ -84,7 +75,7 @@ export default function SkillsSelection() {
 				<div>
 					<h1 className='text-lg font-semibold'>Select Your Skills</h1>
 					<p className='text-xs text-muted-foreground'>
-						{formik.values.selectedSkills.length} selected
+						{selectedSkills.length} selected
 					</p>
 				</div>
 			</div>
@@ -95,7 +86,7 @@ export default function SkillsSelection() {
 					<button
 						onClick={handleOpenToAnyWork}
 						className={`w-full p-4 border-2 rounded-xl text-left transition-all ${
-							formik.values.openToAnyWork
+							openToAnyWork
 								? 'border-primary bg-primary/5'
 								: 'border-border hover:border-primary/50'
 						}`}
@@ -111,12 +102,12 @@ export default function SkillsSelection() {
 							</div>
 							<div
 								className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
-									formik.values.openToAnyWork
+									openToAnyWork
 										? 'bg-primary border-primary'
 										: 'border-gray-300'
 								}`}
 							>
-								{formik.values.openToAnyWork && (
+								{openToAnyWork && (
 									<svg
 										className='w-3 h-3 text-white'
 										fill='none'
@@ -131,7 +122,7 @@ export default function SkillsSelection() {
 								)}
 							</div>
 						</div>
-						{formik.values.openToAnyWork && (
+						{openToAnyWork && (
 							<div className='mt-2 text-xs text-primary font-medium'>
 								Auto-selected
 							</div>
@@ -163,17 +154,17 @@ export default function SkillsSelection() {
 						<h3 className='font-semibold mb-3'>Skills</h3>
 						<div className='grid grid-cols-2 sm:grid-cols-3 gap-3'>
 							{filteredSkills.map(skill => {
-								const isSelected = formik.values.selectedSkills.includes(skill.name)
+								const isSelected = selectedSkills.includes(skill.id)
 								return (
 									<button
 										key={skill.id}
-										onClick={() => toggleSkill(skill.name)}
-										disabled={formik.values.openToAnyWork}
+										onClick={() => toggleSkill(skill.id)}
+										disabled={openToAnyWork}
 										className={`p-3 border-2 rounded-xl text-left transition-all ${
 											isSelected
 												? 'border-primary bg-primary/5'
 												: 'border-border hover:border-primary/50'
-										} ${formik.values.openToAnyWork ? 'opacity-50 cursor-not-allowed' : ''}`}
+										} ${openToAnyWork ? 'opacity-50 cursor-not-allowed' : ''}`}
 									>
 										<div className='flex items-start justify-between mb-2'>
 											<h4 className='font-medium text-sm'>{skill.name}</h4>
@@ -218,17 +209,14 @@ export default function SkillsSelection() {
 
 			<div className='p-4 border-t'>
 				<Button
-					onClick={() => formik.handleSubmit()}
-					disabled={!isValid || !formik.isValid}
+					onClick={handleContinue}
+					disabled={!isValid}
 					className='w-full'
 					size='lg'
 				>
 					Continue
 					<ArrowRight className='w-5 h-5 ml-2' />
 				</Button>
-				{formik.touched.selectedSkills && formik.errors.selectedSkills && !formik.values.openToAnyWork && (
-					<p className='text-xs text-destructive text-center mt-2'>{formik.errors.selectedSkills}</p>
-				)}
 			</div>
 		</div>
 	)

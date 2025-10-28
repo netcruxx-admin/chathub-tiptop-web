@@ -8,9 +8,6 @@ import { useRouter } from 'next/navigation'
 import { ArrowLeft, Edit2, Check, FileText, Shield } from 'lucide-react'
 import { useSelector } from 'react-redux'
 import type { RootState } from '@/redux/store'
-import { useFormik } from 'formik'
-import { createResumeReviewValidation } from '@/lib/validation/authValidation'
-import type { ResumeReviewValidationValues } from '@/types/validation'
 
 interface ResumeData {
 	firstName: string
@@ -32,28 +29,11 @@ export default function ResumeReview() {
 	const phoneNumber = useSelector((state: RootState) => state.auth.phoneNumber)
 	const [resumeData, setResumeData] = useState<ResumeData | null>(null)
 	const [editMode, setEditMode] = useState(false)
-
-	const formik = useFormik<ResumeReviewValidationValues>({
-		initialValues: {
-			firstName: '',
-			lastName: '',
-			dateOfBirth: '',
-			email: '',
-		},
-		validationSchema: createResumeReviewValidation(t),
-		onSubmit: (values) => {
-			if (!resumeData) return
-
-			const updatedData = {
-				...resumeData,
-				...values,
-			}
-
-			// Save to localStorage
-			localStorage.setItem('resumeData', JSON.stringify(updatedData))
-			setResumeData(updatedData)
-			setEditMode(false)
-		},
+	const [formData, setFormData] = useState({
+		firstName: '',
+		lastName: '',
+		dateOfBirth: '',
+		email: '',
 	})
 
 	useEffect(() => {
@@ -62,7 +42,7 @@ export default function ResumeReview() {
 		if (savedData) {
 			const data = JSON.parse(savedData)
 			setResumeData(data)
-			formik.setValues({
+			setFormData({
 				firstName: data.firstName || '',
 				lastName: data.lastName || '',
 				dateOfBirth: data.dateOfBirth || '',
@@ -74,6 +54,19 @@ export default function ResumeReview() {
 		}
 	}, [router])
 
+	const handleSave = () => {
+		if (!resumeData) return
+
+		const updatedData = {
+			...resumeData,
+			...formData,
+		}
+
+		// Save to localStorage
+		localStorage.setItem('resumeData', JSON.stringify(updatedData))
+		setResumeData(updatedData)
+		setEditMode(false)
+	}
 
 	const handleVerifyAadhaar = () => {
 		// Set onboarding flow context so aadhaar-review knows to return here
@@ -125,18 +118,11 @@ export default function ResumeReview() {
 								{t('resume.firstName')}
 							</label>
 							{editMode ? (
-								<>
-									<Input
-										name='firstName'
-										value={formik.values.firstName}
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										className='h-11 text-base'
-									/>
-									{formik.touched.firstName && formik.errors.firstName && (
-										<p className='text-xs text-destructive'>{formik.errors.firstName}</p>
-									)}
-								</>
+								<Input
+									value={formData.firstName}
+									onChange={e => setFormData({ ...formData, firstName: e.target.value })}
+									className='h-11 text-base'
+								/>
 							) : (
 								<div className='p-4 bg-muted rounded-lg'>
 									<p className='font-semibold'>{resumeData.firstName}</p>
@@ -150,18 +136,11 @@ export default function ResumeReview() {
 								{t('resume.lastName')}
 							</label>
 							{editMode ? (
-								<>
-									<Input
-										name='lastName'
-										value={formik.values.lastName}
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										className='h-11 text-base'
-									/>
-									{formik.touched.lastName && formik.errors.lastName && (
-										<p className='text-xs text-destructive'>{formik.errors.lastName}</p>
-									)}
-								</>
+								<Input
+									value={formData.lastName}
+									onChange={e => setFormData({ ...formData, lastName: e.target.value })}
+									className='h-11 text-base'
+								/>
 							) : (
 								<div className='p-4 bg-muted rounded-lg'>
 									<p className='font-semibold'>{resumeData.lastName}</p>
@@ -175,19 +154,12 @@ export default function ResumeReview() {
 								{t('resume.dateOfBirth')}
 							</label>
 							{editMode ? (
-								<>
-									<Input
-										type='date'
-										name='dateOfBirth'
-										value={formik.values.dateOfBirth}
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										className='h-11 text-base'
-									/>
-									{formik.touched.dateOfBirth && formik.errors.dateOfBirth && (
-										<p className='text-xs text-destructive'>{formik.errors.dateOfBirth}</p>
-									)}
-								</>
+								<Input
+									type='date'
+									value={formData.dateOfBirth}
+									onChange={e => setFormData({ ...formData, dateOfBirth: e.target.value })}
+									className='h-11 text-base'
+								/>
 							) : (
 								<div className='p-4 bg-muted rounded-lg'>
 									<p className='font-semibold'>{resumeData.dateOfBirth}</p>
@@ -201,19 +173,12 @@ export default function ResumeReview() {
 								{t('resume.email')}
 							</label>
 							{editMode ? (
-								<>
-									<Input
-										type='email'
-										name='email'
-										value={formik.values.email}
-										onChange={formik.handleChange}
-										onBlur={formik.handleBlur}
-										className='h-11 text-base'
-									/>
-									{formik.touched.email && formik.errors.email && (
-										<p className='text-xs text-destructive'>{formik.errors.email}</p>
-									)}
-								</>
+								<Input
+									type='email'
+									value={formData.email}
+									onChange={e => setFormData({ ...formData, email: e.target.value })}
+									className='h-11 text-base'
+								/>
 							) : (
 								<div className='p-4 bg-muted rounded-lg'>
 									<p className='font-semibold'>{resumeData.email}</p>
@@ -275,14 +240,14 @@ export default function ResumeReview() {
 					<div className='space-y-3'>
 						{editMode ? (
 							<div className='flex gap-3'>
-								<Button onClick={() => formik.handleSubmit()} disabled={!formik.isValid} className='flex-1 h-12 cursor-pointer'>
+								<Button onClick={handleSave} className='flex-1 h-12 cursor-pointer'>
 									<Check className='w-5 h-5 mr-2' />
 									{t('resume.save')}
 								</Button>
 								<Button
 									onClick={() => {
 										setEditMode(false)
-										formik.setValues({
+										setFormData({
 											firstName: resumeData.firstName || '',
 											lastName: resumeData.lastName || '',
 											dateOfBirth: resumeData.dateOfBirth || '',

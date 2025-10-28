@@ -7,93 +7,73 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/redux/store'
-import { setProfileFormData } from '@/redux/slices/authSlice'
-import { useFormik } from 'formik'
-import { createFormBasedProfileValidation } from '@/lib/validation/authValidation'
-import type { FormBasedProfileValidationValues } from '@/types/validation'
+import { updateUser } from '@/redux/slices/authSlice'
 
 export default function FormBasedProfile() {
 	const router = useRouter()
 	const t = useTranslations()
 	const dispatch = useDispatch()
 
-	const phoneNumber = useSelector((state: RootState) => state.auth.phoneNumber)
-	const profileFormData = useSelector((state: RootState) => state.auth.profileFormData)
+	const phoneNumber = useSelector((state: RootState) => state.auth.user.Phone)
+	const email = useSelector((state: RootState) => state.auth.user.Email)
+	const userData = useSelector((state: RootState) => state.auth.user)
 
 	const [step, setStep] = useState(1)
-
-	const formik = useFormik<FormBasedProfileValidationValues>({
-		initialValues: {
-			firstName: profileFormData?.firstName || '',
-			lastName: profileFormData?.lastName || '',
-			dateOfBirth: profileFormData?.dateOfBirth || '',
-			aadhaarNumber: profileFormData?.aadhaarNumber || '',
-		},
-		validationSchema: createFormBasedProfileValidation(t),
-		onSubmit: (values) => {
-			// Save form data to Redux
-			const profileData = {
-				...values,
-				username: phoneNumber,
-				email: `${phoneNumber}@tiptopmail.com`,
-			}
-			dispatch(setProfileFormData(profileData))
-
-			// Also save to localStorage as backup
-			localStorage.setItem('profileData', JSON.stringify(profileData))
-
-			// Go to skills wizard
-			router.push('/skills-wizard')
-		},
+	const [formData, setFormData] = useState({
+		firstName: userData?.FirstName || '',
+		lastName: userData?.LastName || '',
+		dateOfBirth: userData?.DOB || '',
+		aadhaarNumber: userData?.AadharNumber || '',
 	})
 
-	// Load saved data from localStorage (including Aadhaar scan data)
+	// Load saved name data if available from localStorage (fallback)
 	useEffect(() => {
-		// Check if returning from Aadhaar scan
-		const confirmedAadhaarData = localStorage.getItem('confirmedAadhaarData')
-		const aadhaarDataConfirmed = localStorage.getItem('aadhaarDataConfirmed')
-
-		if (confirmedAadhaarData && aadhaarDataConfirmed === 'true') {
-			const parsed = JSON.parse(confirmedAadhaarData)
-			formik.setValues({
-				firstName: parsed.firstName || '',
-				lastName: parsed.lastName || '',
-				dateOfBirth: parsed.dateOfBirth || '',
-				aadhaarNumber: parsed.aadhaarNumber || '',
-			})
-			// Clear the flag
-			localStorage.removeItem('aadhaarDataConfirmed')
-		} else {
-			// Fallback to nameData
-			const savedData = localStorage.getItem('nameData')
-			if (savedData) {
-				const parsed = JSON.parse(savedData)
-				formik.setValues({
-					...formik.values,
-					firstName: parsed.firstName || formik.values.firstName,
-					lastName: parsed.lastName || formik.values.lastName,
-				})
-			}
+		const savedData = localStorage.getItem('nameData')
+		if (savedData) {
+			const parsed = JSON.parse(savedData)
+			setFormData(prev => ({
+				...prev,
+				firstName: parsed.firstName || prev.firstName,
+				lastName: parsed.lastName || prev.lastName,
+			}))
 		}
 	}, [])
+
+	const handleNext = () => {
+		// Save form data to Redux
+		const profileData = {
+			...formData,
+			username: phoneNumber,
+			email: email,
+		}
+		dispatch(
+			updateUser({
+				FirstName: formData.firstName,
+				LastName: formData.lastName,
+				DOB: formData.dateOfBirth,
+				AadharNumber: formData.aadhaarNumber,
+			})
+		)
+
+		// Also save to localStorage as backup
+		localStorage.setItem('profileData', JSON.stringify(profileData))
+
+		// Go to skills wizard
+		router.push('/skills-wizard')
+	}
 
 	const handleAadhaarScan = () => {
 		// Save current form data before navigating
 		const profileData = {
-			firstName: formik.values.firstName,
-			lastName: formik.values.lastName,
-			dateOfBirth: formik.values.dateOfBirth,
+			firstName: formData.firstName,
+			lastName: formData.lastName,
+			dateOfBirth: formData.dateOfBirth,
 			username: phoneNumber,
 			email: `${phoneNumber}@tiptopmail.com`,
 		}
-		dispatch(setProfileFormData(profileData))
+		// dispatch(setuserData(profileData))
 		localStorage.setItem('profileData', JSON.stringify(profileData))
-
-		// Set onboarding flow to 'form' so review page knows to return here
-		localStorage.setItem('onboardingFlow', 'form')
-
-		// Skip the offer page and go directly to camera
-		router.push('/aadhaar-camera')
+		router.push('/aadhaar-scan')
 	}
 
 	return (
@@ -102,9 +82,7 @@ export default function FormBasedProfile() {
 				<Button
 					variant='ghost'
 					size='icon'
-					onClick={() =>
-						step === 1 ? router.back() : setStep(1)
-					}
+					onClick={() => (step === 1 ? router.back() : setStep(1))}
 					className='mr-2 cursor-pointer'
 				>
 					<ArrowLeft className='w-5 h-5' />
@@ -147,16 +125,13 @@ export default function FormBasedProfile() {
 								</label>
 								<input
 									type='text'
-									name='firstName'
-									value={formik.values.firstName}
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
+									value={formData.firstName}
+									onChange={e =>
+										setFormData({ ...formData, firstName: e.target.value })
+									}
 									className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
 									placeholder={t('profileForm.firstName')}
 								/>
-								{formik.touched.firstName && formik.errors.firstName && (
-									<p className='text-xs text-red-600 mt-1'>{formik.errors.firstName}</p>
-								)}
 							</div>
 
 							<div>
@@ -165,16 +140,13 @@ export default function FormBasedProfile() {
 								</label>
 								<input
 									type='text'
-									name='lastName'
-									value={formik.values.lastName}
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
+									value={formData.lastName}
+									onChange={e =>
+										setFormData({ ...formData, lastName: e.target.value })
+									}
 									className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
 									placeholder={t('profileForm.lastName')}
 								/>
-								{formik.touched.lastName && formik.errors.lastName && (
-									<p className='text-xs text-red-600 mt-1'>{formik.errors.lastName}</p>
-								)}
 							</div>
 
 							<div>
@@ -183,15 +155,12 @@ export default function FormBasedProfile() {
 								</label>
 								<input
 									type='date'
-									name='dateOfBirth'
-									value={formik.values.dateOfBirth}
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
+									value={formData.dateOfBirth}
+									onChange={e =>
+										setFormData({ ...formData, dateOfBirth: e.target.value })
+									}
 									className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
 								/>
-								{formik.touched.dateOfBirth && formik.errors.dateOfBirth && (
-									<p className='text-xs text-red-600 mt-1'>{formik.errors.dateOfBirth}</p>
-								)}
 							</div>
 
 							<div>
@@ -200,17 +169,14 @@ export default function FormBasedProfile() {
 								</label>
 								<input
 									type='text'
-									name='aadhaarNumber'
-									value={formik.values.aadhaarNumber}
-									onChange={formik.handleChange}
-									onBlur={formik.handleBlur}
+									value={formData.aadhaarNumber}
+									onChange={e =>
+										setFormData({ ...formData, aadhaarNumber: e.target.value })
+									}
 									className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
 									placeholder='XXXX XXXX XXXX'
 									maxLength={12}
 								/>
-								{formik.touched.aadhaarNumber && formik.errors.aadhaarNumber && (
-									<p className='text-xs text-red-600 mt-1'>{formik.errors.aadhaarNumber}</p>
-								)}
 							</div>
 						</div>
 					)}
@@ -219,8 +185,10 @@ export default function FormBasedProfile() {
 
 			<div className='p-4 border-t'>
 				<Button
-					onClick={() => formik.handleSubmit()}
-					disabled={!formik.isValid || !formik.values.firstName || !formik.values.lastName || !formik.values.dateOfBirth}
+					onClick={handleNext}
+					disabled={
+						!formData.firstName || !formData.lastName || !formData.dateOfBirth
+					}
 					className='w-full cursor-pointer'
 					size='lg'
 				>

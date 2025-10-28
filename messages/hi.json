@@ -27,12 +27,6 @@
 		"reqPassword": "पासवर्ड आवश्यक है",
 		"validPassword": "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए"
 	},
-	"employeeLoginVal": {
-		"reqEmail": "ईमेल आवश्यक है",
-		"validEmail": "कृपया एक मान्य ईमेल दर्ज करें।",
-		"reqPassword": "पासवर्ड आवश्यक है",
-		"validPassword": "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए"
-	},
 	"splash": {
 		"title": "TipTop",
 		"subtitle": "काम खोजें। पैसे कमाएं। कौशल बढ़ाएं।",
@@ -43,18 +37,6 @@
 		"header": "नियोक्ता लॉगिन",
 		"title": "नियोक्ता पोर्टल",
 		"subtitle": "नौकरियों और प्रतिभा को प्रबंधित करने के लिए उपकरणों तक पहुँचें",
-		"labelEmail": "ईमेल पता",
-		"placeholderEmail": "अपना ईमेल दर्ज करें",
-		"labelPassword": "पासवर्ड",
-		"placeholderPassword": "अपना पासवर्ड दर्ज करें",
-		"loginBtn": "डैशबोर्ड में लॉगिन करें",
-		"footer": "क्या आपका खाता नहीं है?",
-		"signUp": "साइन अप करें"
-	},
-	"employeeLogin": {
-		"header": "कर्मचारी लॉगिन",
-		"title": "कर्मचारी पोर्टल",
-		"subtitle": "अपने खाते तक पहुँचें और अवसर खोजें",
 		"labelEmail": "ईमेल पता",
 		"placeholderEmail": "अपना ईमेल दर्ज करें",
 		"labelPassword": "पासवर्ड",
@@ -110,16 +92,7 @@
 		"autoGenerate": "स्वचालित रूप से बनाए गए खाता विवरण",
 		"showAdvanced": "उपयोगकर्ता नाम और ईमेल संपादित करें",
 		"hideAdvanced": "उन्नत विकल्प छुपाएं",
-		"usernameHint": "यह आपका अद्वितीय पहचानकर्ता होगा",
-		"firstNameRequired": "पहला नाम आवश्यक है",
-		"firstNameMin": "पहले नाम में कम से कम 2 अक्षर होने चाहिए",
-		"lastNameRequired": "अंतिम नाम आवश्यक है",
-		"lastNameMin": "अंतिम नाम में कम से कम 2 अक्षर होने चाहिए",
-		"usernameRequired": "उपयोगकर्ता नाम आवश्यक है",
-		"usernameMin": "उपयोगकर्ता नाम में कम से कम 3 अक्षर होने चाहिए",
-		"usernameInvalid": "उपयोगकर्ता नाम में केवल अक्षर, संख्याएं और अंडरस्कोर हो सकते हैं",
-		"emailRequired": "ईमेल आवश्यक है",
-		"emailInvalid": "कृपया एक मान्य ईमेल दर्ज करें"
+		"usernameHint": "यह आपका अद्वितीय पहचानकर्ता होगा"
 	},
 	"profileForm": {
 		"title": "प्रोफ़ाइल विवरण",
@@ -129,53 +102,7 @@
 		"dob": "जन्म तिथि",
 		"aadhaar": "आधार नंबर (वैकल्पिक)",
 		"scanAadhaar": "ऑटो-फिल के लिए आधार स्कैन करें",
-		"orDivider": "या मैन्युअल रूप से दर्ज करें",
-		"firstNameRequired": "पहला नाम आवश्यक है",
-		"firstNameMin": "पहले नाम में कम से कम 2 अक्षर होने चाहिए",
-		"lastNameRequired": "अंतिम नाम आवश्यक है",
-		"lastNameMin": "अंतिम नाम में कम से कम 2 अक्षर होने चाहिए",
-		"dobRequired": "जन्म तिथि आवश्यक है",
-		"dobInvalid": "जन्म तिथि भविष्य में नहीं हो सकती",
-		"dobAge": "आपकी उम्र कम से कम 16 वर्ष होनी चाहिए",
-		"aadhaarInvalid": "आधार नंबर 12 अंकों का होना चाहिए"
-	},
-	"aadhaarScan": {
-		"title": "त्वरित प्रोफ़ाइल सेटअप",
-		"heading": "तुरंत सेटअप के लिए आधार स्कैन करें",
-		"benefit1": "नाम और जन्म तिथि स्वतः भरें",
-		"benefit2": "बाद के लिए स्थायी पता सहेजें",
-		"benefit3": "तेज़ प्रोफ़ाइल पूर्णता",
-		"scanButton": "आधार स्कैन करें",
-		"skipButton": "अभी छोड़ें"
-	},
-	"aadhaarReview": {
-		"title": "विवरण की पुष्टि करें",
-		"heading": "स्कैन की गई जानकारी की समीक्षा करें",
-		"name": "नाम",
-		"dob": "जन्म तिथि",
-		"gender": "लिंग",
-		"male": "पुरुष",
-		"female": "महिला",
-		"transgender": "ट्रांसजेंडर",
-		"preferNotToSay": "नहीं बताना चाहते",
-		"address": "स्थायी पता",
-		"aadhaar": "आधार नंबर",
-		"confirm": "पुष्टि करें और जारी रखें",
-		"rescan": "फिर से स्कैन करें",
-		"genderRequired": "कृपया अपना लिंग चुनें"
-	},
-	"location": {
-		"areaRequired": "क्षेत्र आवश्यक है",
-		"cityRequired": "शहर आवश्यक है",
-		"pincodeInvalid": "पिन कोड 6 अंकों का होना चाहिए"
-	},
-	"distance": {
-		"radiusRequired": "नौकरी की त्रिज्या आवश्यक है",
-		"radiusMin": "न्यूनतम त्रिज्या 5 किमी है",
-		"radiusMax": "अधिकतम त्रिज्या 50 किमी है"
-	},
-	"skills": {
-		"skillsRequired": "कृपया कम से कम एक कौशल चुनें"
+		"orDivider": "या मैन्युअल रूप से दर्ज करें"
 	},
 	"introduction": {
 		"poweredBy": "AHALTS Academy के साथ",
@@ -271,18 +198,5 @@
 		"cancel": "रद्द करें",
 		"verifyAadhaar": "आधार से सत्यापित करें",
 		"uploadDifferent": "अलग रिज्यूमे अपलोड करें"
-	},
-	"resumeReview": {
-		"firstNameRequired": "पहला नाम आवश्यक है",
-		"firstNameMin": "पहले नाम में कम से कम 2 अक्षर होने चाहिए",
-		"lastNameRequired": "अंतिम नाम आवश्यक है",
-		"lastNameMin": "अंतिम नाम में कम से कम 2 अक्षर होने चाहिए",
-		"dobRequired": "जन्म तिथि आवश्यक है",
-		"dobInvalid": "जन्म तिथि भविष्य में नहीं हो सकती",
-		"emailRequired": "ईमेल आवश्यक है",
-		"emailInvalid": "कृपया एक मान्य ईमेल दर्ज करें"
-	},
-	"aadhaarReviewValidation": {
-		"genderRequired": "कृपया अपना लिंग चुनें"
 	}
 }
