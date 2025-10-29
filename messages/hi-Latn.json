@@ -19,11 +19,19 @@
 		"required": "Required",
 		"optional": "Optional",
 		"yes": "Haan",
-		"no": "Nahi"
+		"no": "Nahi",
+		"makeInIndia": "Make in India",
+		"ahalts": "AHALTS"
 	},
 	"employerLoginVal": {
-		"reqEmail": "Email zaroori hai",
-		"validEmail": "Kripya ek valid email daalein.",
+		"reqEmail": "Username ya Email zaroori hai",
+		"validEmail": "Kripya ek valid username ya email daalein",
+		"reqPassword": "Password zaroori hai",
+		"validPassword": "Password kam se kam 6 characters ka hona chahiye"
+	},
+	"employeeLoginVal": {
+		"reqEmail": "Username ya Email zaroori hai",
+		"validEmail": "Kripya ek valid username ya email daalein",
 		"reqPassword": "Password zaroori hai",
 		"validPassword": "Password kam se kam 6 characters ka hona chahiye"
 	},
@@ -37,13 +45,29 @@
 		"header": "Niyokta Login",
 		"title": "Niyokta Portal",
 		"subtitle": "Naukri aur talent manage karne ke liye tools ka access",
-		"labelEmail": "Email Address",
-		"placeholderEmail": "Apna email daalein",
+		"labelEmail": "Username ya Email",
+		"placeholderEmail": "Username ya email daalein",
 		"labelPassword": "Password",
 		"placeholderPassword": "Apna password daalein",
 		"loginBtn": "Dashboard mein login karein",
 		"footer": "Kya aapka account nahi hai?",
-		"signUp": "Sign Up karein"
+		"signUp": "Sign Up karein",
+		"loginSuccess": "Login successful!",
+		"loginError": "Login fail ho gaya. Kripya apne credentials check karein."
+	},
+	"employeeLogin": {
+		"header": "Karmachari Login",
+		"title": "Karmachari Portal",
+		"subtitle": "Apne kaam dashboard aur opportunities tak access karein",
+		"labelEmail": "Username ya Email",
+		"placeholderEmail": "Username ya email daalein",
+		"labelPassword": "Password",
+		"placeholderPassword": "Apna password daalein",
+		"loginBtn": "Dashboard mein login karein",
+		"footer": "Kya aapka account nahi hai?",
+		"signUp": "Sign Up karein",
+		"loginSuccess": "Login successful!",
+		"loginError": "Login fail ho gaya. Kripya apne credentials check karein."
 	},
 	"userType": {
 		"title": "Aap kaun hain?",
@@ -69,7 +93,16 @@
 		"title": "Verification code enter karein",
 		"subtitle": "OTP bheja gaya hai",
 		"verify": "Verify & Continue",
-		"resend": "OTP dobara bhejein"
+		"resend": "OTP dobara bhejein",
+		"phoneMissing": "Phone number missing hai",
+		"invalidCode": "Kripya ek valid 6-digit code enter karein.",
+		"verifySuccess": "OTP successfully verify ho gaya!",
+		"verifyError": "Invalid OTP. Kripya dobara try karein.",
+		"resendSuccess": "OTP successfully dobara bhej diya gaya!",
+		"resendError": "OTP dobara bhejne mein fail ho gaya.",
+		"sending": "Bheja ja raha hai...",
+		"in": "mein",
+		"seconds": "s"
 	},
 	"nameCollection": {
 		"title": "Apna naam batayein",
@@ -102,7 +135,63 @@
 		"dob": "Date of Birth",
 		"aadhaar": "Aadhaar Number (Optional)",
 		"scanAadhaar": "Scan Aadhaar to Auto-fill",
-		"orDivider": "ya manually enter karein"
+		"orDivider": "ya manually enter karein",
+		"aadhaarPlaceholder": "XXXX XXXX XXXX"
+	},
+	"signupLanguage": {
+		"title": "Apni language confirm karein",
+		"subtitle": "Apni language confirm karein"
+	},
+	"aadhaar": {
+		"scanOfferTitle": "Aadhaar Scan karein?",
+		"scanOfferDesc": "Details jaldi bharne ke liye apna Aadhaar card scan karein",
+		"cameraNotSupported": "Camera is device ya browser par supported nahi hai.",
+		"allowCameraPermissions": "Kripya apne browser settings mein camera permissions allow karein.",
+		"noCameraFound": "Is device par koi camera nahi mila.",
+		"cameraInUse": "Camera already kisi aur application dwara use ho raha hai.",
+		"checkPermissions": "Kripya apne camera permissions check karein.",
+		"processingFailed": "Image process karne mein fail ho gaya. Kripya dobara try karein.",
+		"uploadAadhaarCard": "Aadhaar Card Upload Karein",
+		"retryCamera": "Camera Dobara Try Karein",
+		"positionCard": "Aadhaar card ko frame ke andar position karein",
+		"alignCard": "Apne Aadhaar card ko frame ke andar align karein aur capture karein",
+		"uploadImageGuide": "Information nikalne ke liye apne Aadhaar card ki image upload karein",
+		"processingOCR": "OCR se process ho raha hai...",
+		"capture": "Capture",
+		"retake": "Dobara Le",
+		"chooseFile": "Upload Karne Ke Liye File Choose Karein",
+		"benefits": [
+			"Naam aur DOB automatically fill ho jayenge",
+			"Address details save ho jayengi",
+			"Sirf 30 seconds lagenge"
+		],
+		"scanNow": "Abhi Scan Karein",
+		"skipManual": "Manually Fill Karein",
+		"scanningTitle": "Aadhaar Scan Ho Raha Hai",
+		"scanningDesc": "Apne Aadhaar card ko camera ke saamne rakhein",
+		"reviewTitle": "Details Review Karein",
+		"reviewDesc": "Kya scanned details sahi hain?",
+		"name": "Naam",
+		"dob": "Janam Tithi",
+		"address": "Address",
+		"aadhaarNumber": "Aadhaar Number",
+		"looksGood": "Sahi Hai",
+		"rescan": "Dobara Scan Karein"
+	},
+	"distance": {
+		"title": "Aap kitni door tak travel kar sakte hain?",
+		"subtitle": "Apni job search radius set karein",
+		"radiusLabel": "Apne location se search radius",
+		"infoTitle": "Aap ise kabhi bhi badal sakte hain",
+		"infoDesc": "Hum aapko is radius ke andar jobs dikhayenge. Aap ise baad mein apne profile settings se adjust kar sakte hain.",
+		"browseJobs": "Jobs Browse Karein",
+		"step": "Step 3 of 3",
+		"profileProgress": "Profile Progress",
+		"minRange": "5 km",
+		"midRange": "25 km",
+		"maxRange": "50 km",
+		"updateSuccess": "Profile successfully update ho gaya!",
+		"updateError": "Profile update karne mein fail ho gaya. Kripya dobara try karein."
 	},
 	"introduction": {
 		"poweredBy": "AHALTS Academy ke saath",
@@ -197,6 +286,65 @@
 		"save": "Changes Save Karein",
 		"cancel": "Cancel",
 		"verifyAadhaar": "Aadhaar se Verify Karein",
-		"uploadDifferent": "Alag Resume Upload Karein"
+		"uploadDifferent": "Alag Resume Upload Karein",
+		"uploadTitle": "Resume Upload",
+		"uploadSubtitle": "Apna resume upload karein",
+		"uploadingParsing": "Upload aur parse ho raha hai...",
+		"dragDrop": "Apna resume yahan drag & drop karein",
+		"or": "ya",
+		"browseFiles": "Files Browse Karein",
+		"supportedFormats": "PDF, DOC, DOCX supported hain",
+		"parseSuccess": "Resume successfully parse ho gaya!",
+		"parseSuccessDesc": "Humne aapki information extract kar li hai. Aap ise agle steps mein review aur edit kar sakte hain."
+	},
+	"skillsWizard": {
+		"profileProgress": "Profile Progress",
+		"openToAnyWorkTitle": "Kya aap kisi bhi kaam ke liye ready hain?",
+		"openToAnyWorkSubtitle": "Jo aapke liye best hai wo choose karein",
+		"chooseSpecificSkills": "Specific skills choose karein",
+		"selectFromSkills": "{count} skills mein se select karein",
+		"chooseCategoriesTitle": "Categories choose karein",
+		"chooseCategoriesSubtitle": "Ek ya multiple types of work select karein",
+		"continueToSkills": "Skills Par Continue Karein",
+		"selectSkillsTitle": "Apne skills select karein",
+		"selectSkillsSubtitle": "Wo saare skills choose karein jo aap par apply hote hain",
+		"addMoreCategories": "Aur Categories Add Karein"
+	},
+	"skillsSelection": {
+		"title": "Apne Skills Select Karein",
+		"selectedCount": "{count} selected",
+		"openToAnyWork": "Main naya hoon aur kisi bhi kaam ke liye ready hoon",
+		"openToAnyWorkDesc": "Entry-level jobs",
+		"autoSelected": "Auto-selected",
+		"searchPlaceholder": "Skills search karein...",
+		"infoMessage": "Wo saare skills select karein jo aap par apply hote hain. Aap hamesha apne profile se aur skills add kar sakte hain.",
+		"skillsHeading": "Skills",
+		"noSkillsFound": "Koi skills nahi mile",
+		"continue": "Continue"
+	},
+	"nameCollectionPage": {
+		"handleContinue": "Handle Continue working",
+		"sendOTPFailed": "OTP bhejne mein fail ho gaya. Kripya dobara try karein.",
+		"voiceAssistantTitle": "Voice Assistant Available Hai",
+		"voiceAssistantDesc": "Main aapki help kar sakta hoon. Sunne ke liye tap karein",
+		"playing": "Play ho raha hai...",
+		"playAgain": "Dobara Play Karein",
+		"previewVoiceHelp": "Voice Help Preview Karein"
+	},
+	"signupOnboarding": {
+		"appName": "Rozgari",
+		"voicePlaying": "Play ho raha hai...",
+		"startProfileCreation": "Profile Creation Start Karein"
+	},
+	"flowSelectionPage": {
+		"howToProceedTitle": "Aap kaise aage badhna chahte hain?",
+		"headerSubtitle": "Apna preferred method choose karein",
+		"recommended": "Recommended",
+		"voiceAssistantTitle": "Voice Assistant",
+		"voiceAssistantDesc": "Apna profile complete karne ke liye baat karein",
+		"fillFormTitle": "Form Fill Karein",
+		"fillFormDesc": "Ek simple form fill karein",
+		"uploadResumeTitle": "Resume Upload Karein",
+		"uploadResumeDesc": "Apna resume upload karein"
 	}
 }

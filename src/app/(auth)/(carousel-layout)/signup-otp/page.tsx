@@ -69,7 +69,7 @@ export default function OTPInput() {
 					onSubmit={async e => {
 						e.preventDefault()
 						if (!phoneNumber) {
-							setError('Phone number is missing')
+							setError(t('otp.phoneMissing'))
 							return
 						}
 
@@ -85,10 +85,10 @@ export default function OTPInput() {
 
 							// Validate response
 							if (response && !response.Result) {
-								toast.error('Please enter a valid 6-digit code.')
+								toast.error(t('otp.invalidCode'))
 							} else {
 								// Show success toast
-								toast.success('OTP verified successfully!')
+								toast.success(t('otp.verifySuccess'))
 								setResendTimer(30)
 								// Navigate to language selection
 								// router.push('/signup-language')
@@ -97,7 +97,7 @@ export default function OTPInput() {
 						} catch (err: any) {
 							console.error('Failed to verify OTP:', err)
 							const errorMessage =
-								err?.data?.message || 'Invalid OTP. Please try again.'
+								err?.data?.message || t('otp.verifyError')
 							setError(errorMessage)
 							toast.error(errorMessage)
 						}
@@ -152,11 +152,11 @@ export default function OTPInput() {
 								setCanResend(false)
 
 								// Show success toast
-								toast.success('OTP resent successfully!')
+								toast.success(t('otp.resendSuccess'))
 							} catch (err: any) {
 								console.error('Failed to resend OTP:', err)
 								const errorMessage =
-									err?.data?.message || 'Failed to resend OTP.'
+									err?.data?.message || t('otp.resendError')
 								setError(errorMessage)
 								toast.error(errorMessage)
 							}
@@ -165,10 +165,10 @@ export default function OTPInput() {
 						className='w-full text-sm text-primary hover:underline cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
 					>
 						{isResending
-							? 'Sending...'
+							? t('otp.sending')
 							: canResend
 							? t('otp.resend')
-							: `${t('otp.resend')} in ${resendTimer}s`}
+							: `${t('otp.resend')} ${t('otp.in')} ${resendTimer}${t('otp.seconds')}`}
 					</button>
 				</form>
 			</div>

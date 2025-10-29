@@ -19,11 +19,19 @@
 		"required": "Required",
 		"optional": "Optional",
 		"yes": "Yes",
-		"no": "No"
+		"no": "No",
+		"makeInIndia": "Make in India",
+		"ahalts": "AHALTS"
 	},
 	"employerLoginVal": {
-		"reqEmail": "Email is required",
-		"validEmail": "Please enter a valid email.",
+		"reqEmail": "Username or Email is required",
+		"validEmail": "Please enter a valid username or email",
+		"reqPassword": "Password is required",
+		"validPassword": "Password must be at least 6 characters"
+	},
+	"employeeLoginVal": {
+		"reqEmail": "Username or Email is required",
+		"validEmail": "Please enter a valid username or email",
 		"reqPassword": "Password is required",
 		"validPassword": "Password must be at least 6 characters"
 	},
@@ -37,13 +45,29 @@
 		"header": "Employer Login",
 		"title": "Employer Portal",
 		"subtitle": "Access tools to manage jobs and talent",
-		"labelEmail": "Email Address",
-		"placeholderEmail": "Enter your email",
+		"labelEmail": "Username or Email",
+		"placeholderEmail": "Enter username or email",
 		"labelPassword": "Password",
 		"placeholderPassword": "Enter your password",
 		"loginBtn": "Login to Dashboard",
 		"footer": "Don't have an account?",
-		"signUp": "Sign Up"
+		"signUp": "Sign Up",
+		"loginSuccess": "Login successful!",
+		"loginError": "Login failed. Please check your credentials."
+	},
+	"employeeLogin": {
+		"header": "Employee Login",
+		"title": "Employee Portal",
+		"subtitle": "Access your work dashboard and opportunities",
+		"labelEmail": "Username or Email",
+		"placeholderEmail": "Enter username or email",
+		"labelPassword": "Password",
+		"placeholderPassword": "Enter your password",
+		"loginBtn": "Login to Dashboard",
+		"footer": "Don't have an account?",
+		"signUp": "Sign Up",
+		"loginSuccess": "Login successful!",
+		"loginError": "Login failed. Please check your credentials."
 	},
 	"userType": {
 		"title": "Who are you?",
@@ -69,7 +93,16 @@
 		"title": "Enter verification code",
 		"subtitle": "OTP has been sent",
 		"verify": "Verify & Continue",
-		"resend": "Resend OTP"
+		"resend": "Resend OTP",
+		"phoneMissing": "Phone number is missing",
+		"invalidCode": "Please enter a valid 6-digit code.",
+		"verifySuccess": "OTP verified successfully!",
+		"verifyError": "Invalid OTP. Please try again.",
+		"resendSuccess": "OTP resent successfully!",
+		"resendError": "Failed to resend OTP.",
+		"sending": "Sending...",
+		"in": "in",
+		"seconds": "s"
 	},
 	"nameCollection": {
 		"title": "Tell us your name",
@@ -122,9 +155,28 @@
 		],
 		"ready": "Let's get started"
 	},
+	"signupLanguage": {
+		"title": "Confirm your language",
+		"subtitle": "Confirm your language"
+	},
 	"aadhaar": {
 		"scanOfferTitle": "Scan Aadhaar?",
 		"scanOfferDesc": "Scan your Aadhaar card to quickly fill in details",
+		"cameraNotSupported": "Camera is not supported on this device or browser.",
+		"allowCameraPermissions": "Please allow camera permissions in your browser settings.",
+		"noCameraFound": "No camera found on this device.",
+		"cameraInUse": "Camera is already in use by another application.",
+		"checkPermissions": "Please check your camera permissions.",
+		"processingFailed": "Failed to process image. Please try again.",
+		"uploadAadhaarCard": "Upload Aadhaar Card",
+		"retryCamera": "Retry Camera",
+		"positionCard": "Position Aadhaar card within the frame",
+		"alignCard": "Align your Aadhaar card within the frame and capture",
+		"uploadImageGuide": "Upload an image of your Aadhaar card to extract information",
+		"processingOCR": "Processing with OCR...",
+		"capture": "Capture",
+		"retake": "Retake",
+		"chooseFile": "Choose File to Upload",
 		"benefits": [
 			"Name and DOB will be filled automatically",
 			"Address details will be saved",
@@ -158,7 +210,8 @@
 		"dob": "Date of Birth",
 		"aadhaar": "Aadhaar Number (Optional)",
 		"scanAadhaar": "Scan Aadhaar to Auto-fill",
-		"orDivider": "or enter manually"
+		"orDivider": "or enter manually",
+		"aadhaarPlaceholder": "XXXX XXXX XXXX"
 	},
 	"skills": {
 		"title": "Select Your Skills",
@@ -288,7 +341,14 @@
 		"radiusLabel": "Search radius from your location",
 		"infoTitle": "You can change this anytime",
 		"infoDesc": "We'll show you jobs within this radius. You can adjust it later from your profile settings.",
-		"browseJobs": "Browse Jobs"
+		"browseJobs": "Browse Jobs",
+		"step": "Step 3 of 3",
+		"profileProgress": "Profile Progress",
+		"minRange": "5 km",
+		"midRange": "25 km",
+		"maxRange": "50 km",
+		"updateSuccess": "Profile updated successfully!",
+		"updateError": "Failed to update profile. Please try again."
 	},
 	"introduction": {
 		"poweredBy": "Powered by AHALTS Academy",
@@ -383,6 +443,65 @@
 		"save": "Save Changes",
 		"cancel": "Cancel",
 		"verifyAadhaar": "Verify with Aadhaar",
-		"uploadDifferent": "Upload Different Resume"
+		"uploadDifferent": "Upload Different Resume",
+		"uploadTitle": "Resume Upload",
+		"uploadSubtitle": "Upload your resume",
+		"uploadingParsing": "Uploading and parsing...",
+		"dragDrop": "Drag & drop your resume here",
+		"or": "or",
+		"browseFiles": "Browse Files",
+		"supportedFormats": "PDF, DOC, DOCX supported",
+		"parseSuccess": "Resume successfully parsed!",
+		"parseSuccessDesc": "We've extracted your information. You can review and edit it in the next steps."
+	},
+	"skillsWizard": {
+		"profileProgress": "Profile Progress",
+		"openToAnyWorkTitle": "Are you open to any work?",
+		"openToAnyWorkSubtitle": "Choose what works best for you",
+		"chooseSpecificSkills": "Choose specific skills",
+		"selectFromSkills": "Select from {count} skills",
+		"chooseCategoriesTitle": "Choose categories",
+		"chooseCategoriesSubtitle": "Select one or multiple types of work",
+		"continueToSkills": "Continue to Skills",
+		"selectSkillsTitle": "Select your skills",
+		"selectSkillsSubtitle": "Choose all skills that apply to you",
+		"addMoreCategories": "Add more categories"
+	},
+	"skillsSelection": {
+		"title": "Select Your Skills",
+		"selectedCount": "{count} selected",
+		"openToAnyWork": "I'm new and open to any work",
+		"openToAnyWorkDesc": "Entry-level jobs",
+		"autoSelected": "Auto-selected",
+		"searchPlaceholder": "Search skills...",
+		"infoMessage": "Select all skills that apply to you. You can always add more skills later from your profile.",
+		"skillsHeading": "Skills",
+		"noSkillsFound": "No skills found",
+		"continue": "Continue"
+	},
+	"nameCollectionPage": {
+		"handleContinue": "Handle Continue working",
+		"sendOTPFailed": "Failed to send OTP. Please try again.",
+		"voiceAssistantTitle": "Voice Assistant Available",
+		"voiceAssistantDesc": "I can help you. Tap to hear how",
+		"playing": "Playing...",
+		"playAgain": "Play Again",
+		"previewVoiceHelp": "Preview Voice Help"
+	},
+	"signupOnboarding": {
+		"appName": "Rozgari",
+		"voicePlaying": "Playing...",
+		"startProfileCreation": "Start Profile Creation"
+	},
+	"flowSelectionPage": {
+		"howToProceedTitle": "How would you like to proceed?",
+		"headerSubtitle": "Choose your preferred method",
+		"recommended": "Recommended",
+		"voiceAssistantTitle": "Voice Assistant",
+		"voiceAssistantDesc": "Talk to complete your profile",
+		"fillFormTitle": "Fill Form",
+		"fillFormDesc": "Fill a simple form",
+		"uploadResumeTitle": "Upload Resume",
+		"uploadResumeDesc": "Upload your resume"
 	}
 }

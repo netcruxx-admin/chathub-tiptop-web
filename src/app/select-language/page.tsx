@@ -5,14 +5,15 @@ import { Button } from '@/components/ui/button'
 import { languages } from '@/lib/utils/languages'
 import { useGetLocale, useSetLocale } from '@/lib/hooks/i18n'
 import { useTranslations } from 'next-intl'
+import type { Locale } from '@/types'
 
 export default function LanguageSelection() {
 	const locale = useGetLocale()
 	const setLocale = useSetLocale()
-	const [language, setLanguage] = useState(locale)
+	const [language, setLanguage] = useState(locale || 'en')
 	const t = useTranslations()
 
-	const changeLanguage = (newLang: string) => {
+	const changeLanguage = (newLang: Locale) => {
 		setLanguage(newLang)
 		setLocale(newLang)
 		// Use window.location to force a full page reload with new locale

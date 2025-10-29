@@ -35,13 +35,13 @@ export default function WelcomePage() {
 					<div className='flex items-center gap-2.5 text-xs text-muted-foreground'>
 						<Image
 							src='/make-in-india-logo.jpg'
-							alt='Make in India'
+							alt={t('common.makeInIndia')}
 							width={20}
 							height={20}
 							className='rounded-sm'
 							// style={{ objectFit: "cover" }}
 						/>
-						<span>Make in India</span>
+						<span>{t('common.makeInIndia')}</span>
 						<span>•</span>
 						<Shield className='size-3' />
 						<a
@@ -50,7 +50,7 @@ export default function WelcomePage() {
 							rel='noopener noreferrer'
 							className='hover:text-primary transition-colors'
 						>
-							AHALTS
+							{t('common.ahalts')}
 						</a>
 					</div>
 				</div>

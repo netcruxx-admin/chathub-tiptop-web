@@ -174,7 +174,7 @@ export default function FormBasedProfile() {
 										setFormData({ ...formData, aadhaarNumber: e.target.value })
 									}
 									className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
-									placeholder='XXXX XXXX XXXX'
+									placeholder={t('profileForm.aadhaarPlaceholder')}
 									maxLength={12}
 								/>
 							</div>

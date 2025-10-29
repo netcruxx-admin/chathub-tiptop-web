@@ -19,11 +19,19 @@
 		"required": "आवश्यक",
 		"optional": "वैकल्पिक",
 		"yes": "हाँ",
-		"no": "नहीं"
+		"no": "नहीं",
+		"makeInIndia": "Make in India",
+		"ahalts": "AHALTS"
 	},
 	"employerLoginVal": {
-		"reqEmail": "ईमेल आवश्यक है",
-		"validEmail": "कृपया एक मान्य ईमेल दर्ज करें।",
+		"reqEmail": "उपयोगकर्ता नाम या ईमेल आवश्यक है",
+		"validEmail": "कृपया एक मान्य उपयोगकर्ता नाम या ईमेल दर्ज करें",
+		"reqPassword": "पासवर्ड आवश्यक है",
+		"validPassword": "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए"
+	},
+	"employeeLoginVal": {
+		"reqEmail": "उपयोगकर्ता नाम या ईमेल आवश्यक है",
+		"validEmail": "कृपया एक मान्य उपयोगकर्ता नाम या ईमेल दर्ज करें",
 		"reqPassword": "पासवर्ड आवश्यक है",
 		"validPassword": "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए"
 	},
@@ -37,13 +45,29 @@
 		"header": "नियोक्ता लॉगिन",
 		"title": "नियोक्ता पोर्टल",
 		"subtitle": "नौकरियों और प्रतिभा को प्रबंधित करने के लिए उपकरणों तक पहुँचें",
-		"labelEmail": "ईमेल पता",
-		"placeholderEmail": "अपना ईमेल दर्ज करें",
+		"labelEmail": "उपयोगकर्ता नाम या ईमेल",
+		"placeholderEmail": "उपयोगकर्ता नाम या ईमेल दर्ज करें",
 		"labelPassword": "पासवर्ड",
 		"placeholderPassword": "अपना पासवर्ड दर्ज करें",
 		"loginBtn": "डैशबोर्ड में लॉगिन करें",
 		"footer": "क्या आपका खाता नहीं है?",
-		"signUp": "साइन अप करें"
+		"signUp": "साइन अप करें",
+		"loginSuccess": "लॉगिन सफल!",
+		"loginError": "लॉगिन विफल। कृपया अपनी साख जांचें।"
+	},
+	"employeeLogin": {
+		"header": "कर्मचारी लॉगिन",
+		"title": "कर्मचारी पोर्टल",
+		"subtitle": "अपने कार्य डैशबोर्ड और अवसरों तक पहुँचें",
+		"labelEmail": "उपयोगकर्ता नाम या ईमेल",
+		"placeholderEmail": "उपयोगकर्ता नाम या ईमेल दर्ज करें",
+		"labelPassword": "पासवर्ड",
+		"placeholderPassword": "अपना पासवर्ड दर्ज करें",
+		"loginBtn": "डैशबोर्ड में लॉगिन करें",
+		"footer": "क्या आपका खाता नहीं है?",
+		"signUp": "साइन अप करें",
+		"loginSuccess": "लॉगिन सफल!",
+		"loginError": "लॉगिन विफल। कृपया अपनी साख जांचें।"
 	},
 	"userType": {
 		"title": "आप कौन हैं?",
@@ -69,7 +93,16 @@
 		"title": "सत्यापन कोड दर्ज करें",
 		"subtitle": "OTP भेज दिया गया है",
 		"verify": "सत्यापित करें और जारी रखें",
-		"resend": "OTP फिर से भेजें"
+		"resend": "OTP फिर से भेजें",
+		"phoneMissing": "फोन नंबर गायब है",
+		"invalidCode": "कृपया एक मान्य 6 अंकों का कोड दर्ज करें।",
+		"verifySuccess": "OTP सफलतापूर्वक सत्यापित हो गया!",
+		"verifyError": "अमान्य OTP। कृपया पुनः प्रयास करें।",
+		"resendSuccess": "OTP सफलतापूर्वक फिर से भेज दिया गया!",
+		"resendError": "OTP फिर से भेजने में विफल।",
+		"sending": "भेजा जा रहा है...",
+		"in": "में",
+		"seconds": "से"
 	},
 	"nameCollection": {
 		"title": "अपना नाम बताएं",
@@ -102,7 +135,63 @@
 		"dob": "जन्म तिथि",
 		"aadhaar": "आधार नंबर (वैकल्पिक)",
 		"scanAadhaar": "ऑटो-फिल के लिए आधार स्कैन करें",
-		"orDivider": "या मैन्युअल रूप से दर्ज करें"
+		"orDivider": "या मैन्युअल रूप से दर्ज करें",
+		"aadhaarPlaceholder": "XXXX XXXX XXXX"
+	},
+	"signupLanguage": {
+		"title": "अपनी भाषा की पुष्टि करें",
+		"subtitle": "अपनी भाषा की पुष्टि करें"
+	},
+	"aadhaar": {
+		"scanOfferTitle": "आधार स्कैन करें?",
+		"scanOfferDesc": "विवरण जल्दी भरने के लिए अपना आधार कार्ड स्कैन करें",
+		"cameraNotSupported": "कैमरा इस डिवाइस या ब्राउज़र पर समर्थित नहीं है।",
+		"allowCameraPermissions": "कृपया अपनी ब्राउज़र सेटिंग्स में कैमरा अनुमतियां दें।",
+		"noCameraFound": "इस डिवाइस पर कोई कैमरा नहीं मिला।",
+		"cameraInUse": "कैमरा पहले से ही किसी अन्य एप्लिकेशन द्वारा उपयोग में है।",
+		"checkPermissions": "कृपया अपनी कैमरा अनुमतियां जांचें।",
+		"processingFailed": "छवि प्रक्रिया करने में विफल। कृपया पुनः प्रयास करें।",
+		"uploadAadhaarCard": "आधार कार्ड अपलोड करें",
+		"retryCamera": "कैमरा पुनः प्रयास करें",
+		"positionCard": "आधार कार्ड को फ्रेम के भीतर स्थित करें",
+		"alignCard": "अपने आधार कार्ड को फ्रेम के भीतर संरेखित करें और कैप्चर करें",
+		"uploadImageGuide": "जानकारी निकालने के लिए अपने आधार कार्ड की छवि अपलोड करें",
+		"processingOCR": "OCR से प्रक्रिया हो रही है...",
+		"capture": "कैप्चर करें",
+		"retake": "फिर से लें",
+		"chooseFile": "अपलोड करने के लिए फ़ाइल चुनें",
+		"benefits": [
+			"नाम और जन्मतिथि स्वचालित रूप से भर जाएंगे",
+			"पता विवरण सहेजे जाएंगे",
+			"केवल 30 सेकंड लगेंगे"
+		],
+		"scanNow": "अभी स्कैन करें",
+		"skipManual": "मैन्युअल रूप से भरें",
+		"scanningTitle": "आधार स्कैन हो रहा है",
+		"scanningDesc": "अपने आधार कार्ड को कैमरे के सामने रखें",
+		"reviewTitle": "विवरण समीक्षा करें",
+		"reviewDesc": "क्या स्कैन किए गए विवरण सही हैं?",
+		"name": "नाम",
+		"dob": "जन्मतिथि",
+		"address": "पता",
+		"aadhaarNumber": "आधार संख्या",
+		"looksGood": "सही है",
+		"rescan": "फिर से स्कैन करें"
+	},
+	"distance": {
+		"title": "आप कितनी दूर तक यात्रा कर सकते हैं?",
+		"subtitle": "अपनी नौकरी खोज त्रिज्या सेट करें",
+		"radiusLabel": "अपने स्थान से खोज त्रिज्या",
+		"infoTitle": "आप इसे कभी भी बदल सकते हैं",
+		"infoDesc": "हम आपको इस त्रिज्या के भीतर नौकरियां दिखाएंगे। आप इसे बाद में अपनी प्रोफाइल सेटिंग्स से समायोजित कर सकते हैं।",
+		"browseJobs": "नौकरियां ब्राउज़ करें",
+		"step": "चरण 3 का 3",
+		"profileProgress": "प्रोफाइल प्रगति",
+		"minRange": "5 किमी",
+		"midRange": "25 किमी",
+		"maxRange": "50 किमी",
+		"updateSuccess": "प्रोफाइल सफलतापूर्वक अपडेट हो गया!",
+		"updateError": "प्रोफाइल अपडेट करने में विफल। कृपया पुनः प्रयास करें।"
 	},
 	"introduction": {
 		"poweredBy": "AHALTS Academy के साथ",
@@ -197,6 +286,65 @@
 		"save": "परिवर्तन सहेजें",
 		"cancel": "रद्द करें",
 		"verifyAadhaar": "आधार से सत्यापित करें",
-		"uploadDifferent": "अलग रिज्यूमे अपलोड करें"
+		"uploadDifferent": "अलग रिज्यूमे अपलोड करें",
+		"uploadTitle": "रिज्यूमे अपलोड",
+		"uploadSubtitle": "अपना रिज्यूमे अपलोड करें",
+		"uploadingParsing": "अपलोड और पार्स हो रहा है...",
+		"dragDrop": "अपना रिज्यूमे यहाँ ड्रैग और ड्रॉप करें",
+		"or": "या",
+		"browseFiles": "फाइलें ब्राउज़ करें",
+		"supportedFormats": "PDF, DOC, DOCX समर्थित हैं",
+		"parseSuccess": "रिज्यूमे सफलतापूर्वक पार्स हो गया!",
+		"parseSuccessDesc": "हमने आपकी जानकारी निकाल ली है। आप इसे अगले चरणों में समीक्षा और संपादित कर सकते हैं।"
+	},
+	"skillsWizard": {
+		"profileProgress": "प्रोफाइल प्रगति",
+		"openToAnyWorkTitle": "क्या आप किसी भी काम के लिए तैयार हैं?",
+		"openToAnyWorkSubtitle": "जो आपके लिए सबसे अच्छा है वह चुनें",
+		"chooseSpecificSkills": "विशिष्ट कौशल चुनें",
+		"selectFromSkills": "{count} कौशलों में से चुनें",
+		"chooseCategoriesTitle": "श्रेणियां चुनें",
+		"chooseCategoriesSubtitle": "एक या एकाधिक प्रकार के काम का चयन करें",
+		"continueToSkills": "कौशल पर जारी रखें",
+		"selectSkillsTitle": "अपने कौशल चुनें",
+		"selectSkillsSubtitle": "वे सभी कौशल चुनें जो आप पर लागू होते हैं",
+		"addMoreCategories": "और श्रेणियां जोड़ें"
+	},
+	"skillsSelection": {
+		"title": "अपने कौशल चुनें",
+		"selectedCount": "{count} चुने गए",
+		"openToAnyWork": "मैं नया हूँ और किसी भी काम के लिए तैयार हूँ",
+		"openToAnyWorkDesc": "एंट्री-लेवल नौकरियां",
+		"autoSelected": "स्वतः चयनित",
+		"searchPlaceholder": "कौशल खोजें...",
+		"infoMessage": "वे सभी कौशल चुनें जो आप पर लागू होते हैं। आप हमेशा अपनी प्रोफाइल से और कौशल जोड़ सकते हैं।",
+		"skillsHeading": "कौशल",
+		"noSkillsFound": "कोई कौशल नहीं मिले",
+		"continue": "जारी रखें"
+	},
+	"nameCollectionPage": {
+		"handleContinue": "जारी रखने का काम संभाल रहे हैं",
+		"sendOTPFailed": "OTP भेजने में विफल। कृपया पुनः प्रयास करें।",
+		"voiceAssistantTitle": "वॉयस असिस्टेंट उपलब्ध है",
+		"voiceAssistantDesc": "मैं आपकी मदद कर सकता हूँ। सुनने के लिए टैप करें",
+		"playing": "प्ले हो रहा है...",
+		"playAgain": "फिर से प्ले करें",
+		"previewVoiceHelp": "वॉयस हेल्प पूर्वावलोकन करें"
+	},
+	"signupOnboarding": {
+		"appName": "रोजगारी",
+		"voicePlaying": "प्ले हो रहा है...",
+		"startProfileCreation": "प्रोफाइल बनाना शुरू करें"
+	},
+	"flowSelectionPage": {
+		"howToProceedTitle": "आप कैसे आगे बढ़ना चाहते हैं?",
+		"headerSubtitle": "अपनी पसंदीदा विधि चुनें",
+		"recommended": "अनुशंसित",
+		"voiceAssistantTitle": "वॉयस असिस्टेंट",
+		"voiceAssistantDesc": "अपनी प्रोफाइल पूरी करने के लिए बात करें",
+		"fillFormTitle": "फॉर्म भरें",
+		"fillFormDesc": "एक सरल फॉर्म भरें",
+		"uploadResumeTitle": "रिज्यूमे अपलोड करें",
+		"uploadResumeDesc": "अपना रिज्यूमे अपलोड करें"
 	}
 }

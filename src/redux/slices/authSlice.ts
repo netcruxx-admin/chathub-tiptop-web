@@ -1,11 +1,42 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+interface EmployeeData {
+	email: string
+	accessToken: string
+	refreshToken: string
+	tokenType: string
+	expiresIn: number
+}
+
+interface EmployerData {
+	email: string
+	accessToken: string
+	refreshToken: string
+	tokenType: string
+	expiresIn: number
+}
+
+interface UserIdentity {
+	[key: string]: any
+}
+
+interface UserSession {
+	accessToken: string
+	issueDate: string
+	expiration: string
+	[key: string]: any
+}
+
 interface AuthState {
 	phoneNumber: string | null
 	senderId: string | null
 	isAuthenticated: boolean
 	userToken: string | null
 	userName: string | null
+	employeeData: EmployeeData | null
+	employerData: EmployerData | null
+	userIdentity: UserIdentity | null
+	userSession: UserSession | null
 	user: {
 		Email: string
 		FirstName: string
@@ -69,6 +100,10 @@ const initialState: AuthState = {
 	isAuthenticated: false,
 	userToken: null,
 	userName: null,
+	employeeData: null,
+	employerData: null,
+	userIdentity: null,
+	userSession: null,
 	user: {
 		Email: '',
 		FirstName: '',
@@ -155,11 +190,29 @@ const authSlice = createSlice({
 		setJobDistance: (state, action: PayloadAction<string>) => {
 			state.profile.job_distance = action.payload
 		},
+		setEmployeeData: (state, action: PayloadAction<EmployeeData>) => {
+			state.employeeData = action.payload
+			state.isAuthenticated = true
+		},
+		setEmployerData: (state, action: PayloadAction<EmployerData>) => {
+			state.employerData = action.payload
+			state.isAuthenticated = true
+		},
+		setUserIdentity: (state, action: PayloadAction<UserIdentity>) => {
+			state.userIdentity = action.payload
+		},
+		setUserSession: (state, action: PayloadAction<UserSession>) => {
+			state.userSession = action.payload
+		},
 		clearAuth: state => {
 			state.phoneNumber = null
 			state.senderId = null
 			state.isAuthenticated = false
 			state.userToken = null
+			state.employeeData = null
+			state.employerData = null
+			state.userIdentity = null
+			state.userSession = null
 		},
 	},
 })
@@ -172,6 +225,10 @@ export const {
 	updateUser,
 	clearAuth,
 	setJobRole,
-	setJobDistance
+	setJobDistance,
+	setEmployeeData,
+	setEmployerData,
+	setUserIdentity,
+	setUserSession,
 } = authSlice.actions
 export default authSlice.reducer

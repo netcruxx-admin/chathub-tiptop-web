@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { useSignupMutation } from '@/redux/apis/authApi'
 import { updateUser } from '@/redux/slices/authSlice'
+import { toast } from 'sonner'
 // import { REACT_APP_TENANT_ID } from '@/lib/constants'
 
 export default function NameCollection() {
@@ -45,7 +46,7 @@ export default function NameCollection() {
 
 	const phoneNumber = useSelector((state: RootState) => state.auth.user.Phone)
 	const dispatch = useDispatch()
-	const [signUpUser, { isLoading: isLoading }] = useSignupMutation()
+	const [signup, { isLoading: isLoading }] = useSignupMutation()
 
 	useEffect(() => {
 		// Auto-generate username and email when component mounts
@@ -115,8 +116,7 @@ export default function NameCollection() {
 		// router.push('/flow-selection')
 		console.log('Handle Continue working')
 		try {
-			setError('')
-			const response = await signUpUser({
+			const response = await signup({
 				Rid: 0,
 				Title: '',
 				FirstName: firstName,
@@ -124,13 +124,13 @@ export default function NameCollection() {
 				LastName: lastName,
 				UserName: username,
 				Email: email,
-				DOB: '',
+				DOB: '2025-10-23',
 				Gender: '',
 				BirthPlace: '',
 				Marital: '',
 				FatherName: '',
 				MotherName: '',
-				MobileNo: phoneNumber,
+				MobileNo: Number(phoneNumber),
 				Address1: '',
 				Password: '',
 				City: '',
@@ -142,24 +142,23 @@ export default function NameCollection() {
 				Remark: '',
 			}).unwrap()
 			console.log('response', response)
-			// if (response && response.Status === 0) {
-			dispatch(
-				updateUser({
-					Email: email,
-					FirstName: firstName,
-					LastName: lastName,
-					UserName: username,
-				})
-			)
-			// Navigate to OTP page
-			// router.push(`/signup-otp?number=${values.phoneNumber}`)
-			// }
-
-			// Save phone number to Redux
-			router.push(`/flow-selection`)
+			if (response && response.Status === 0) {
+				dispatch(
+					updateUser({
+						Email: email,
+						FirstName: firstName,
+						LastName: lastName,
+						UserName: username,
+					})
+				)
+				// Navigate to flow selection page
+				router.push(`/flow-selection`)
+			} else {
+				toast.error(response?.Message || 'Signup failed. Please try again.')
+			}
 		} catch (err: any) {
 			console.error('Failed to send OTP:', err)
-			setError(err?.data?.message || 'Failed to send OTP. Please try again.')
+			toast.error(err?.data?.message || 'Failed to send OTP. Please try again.')
 		}
 	}
 
@@ -369,8 +368,7 @@ export default function NameCollection() {
 							</div>
 						)}
 					</div>
-					{error && <p className='text-red-500 text-sm'>{error}</p>}
-					<Button
+						<Button
 						onClick={handleContinue}
 						disabled={!isValid}
 						className='w-full h-12 text-base font-semibold cursor-pointer'
