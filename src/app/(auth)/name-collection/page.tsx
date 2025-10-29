@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useFormik } from 'formik'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -14,6 +15,7 @@ import {
 	ChevronUp,
 	Mic,
 	Play,
+	Scan,
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,14 +26,11 @@ import { toast } from 'sonner'
 // import { REACT_APP_TENANT_ID } from '@/lib/constants'
 
 export default function NameCollection() {
+	const dispatch = useDispatch()
 	const router = useRouter()
 	const t = useTranslations()
 
-	const [firstName, setFirstName] = useState('')
-	const [lastName, setLastName] = useState('')
-	const [username, setUsername] = useState('')
-	const [email, setEmail] = useState('')
-	const [showAdvanced, setShowAdvanced] = useState(true)
+	const [showAdvanced, setShowAdvanced] = useState(false)
 	const [showVoicePreview, setShowVoicePreview] = useState(false)
 	const [voicePreviewPlayed, setVoicePreviewPlayed] = useState(false)
 	const [error, setError] = useState('')
@@ -45,19 +44,33 @@ export default function NameCollection() {
 	const [checkingEmail, setCheckingEmail] = useState(false)
 
 	const phoneNumber = useSelector((state: RootState) => state.auth.user.Phone)
-	const dispatch = useDispatch()
 	const [signup, { isLoading: isLoading }] = useSignupMutation()
+
+	const formik = useFormik({
+		initialValues: {
+			firstName: '',
+			lastName: '',
+			username: '',
+			email: '',
+			dateOfBirth: '',
+			aadhaarNum: '',
+		},
+		onSubmit: () => {
+			// submission is handled by handleContinue
+		},
+	})
 
 	useEffect(() => {
 		// Auto-generate username and email when component mounts
 		if (phoneNumber) {
 			const generatedUsername = phoneNumber
 			const generatedEmail = generateEmail(phoneNumber)
-			setUsername(generatedUsername)
-			setEmail(generatedEmail)
+			formik.setFieldValue('username', generatedUsername)
+			formik.setFieldValue('email', generatedEmail)
 			checkUsername(generatedUsername)
 			checkEmail(generatedEmail)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [phoneNumber])
 
 	const generateEmail = (user: string) => {
@@ -85,9 +98,9 @@ export default function NameCollection() {
 	}
 
 	const handleUsernameChange = (value: string) => {
-		setUsername(value)
+		formik.setFieldValue('username', value)
 		const newEmail = generateEmail(value)
-		setEmail(newEmail)
+		formik.setFieldValue('email', newEmail)
 		checkUsername(value)
 		checkEmail(newEmail)
 	}
@@ -99,6 +112,20 @@ export default function NameCollection() {
 		setTimeout(() => {
 			setShowVoicePreview(false)
 		}, 3000)
+	}
+
+	const handleAadhaarScan = () => {
+		// Save current form data before navigating
+		const profileData = {
+			firstName: formik.values.firstName,
+			lastName: formik.values.lastName,
+			dateOfBirth: formik.values.dateOfBirth,
+			username: phoneNumber,
+			email: `${phoneNumber}@tiptopmail.com`,
+		}
+		// dispatch(setuserData(profileData))
+		localStorage.setItem('profileData', JSON.stringify(profileData))
+		router.push('/aadhaar-scan')
 	}
 
 	const handleContinue = async () => {
@@ -116,15 +143,17 @@ export default function NameCollection() {
 		// router.push('/flow-selection')
 		console.log('Handle Continue working')
 		try {
+			const values = formik.values
+			console.log(values)
 			const response = await signup({
 				Rid: 0,
 				Title: '',
-				FirstName: firstName,
+				FirstName: values.firstName,
 				MiddleName: '',
-				LastName: lastName,
-				UserName: username,
-				Email: email,
-				DOB: '2025-10-23',
+				LastName: values.lastName,
+				UserName: values.username,
+				Email: values.email,
+				DOB: values.dateOfBirth,
 				Gender: '',
 				BirthPlace: '',
 				Marital: '',
@@ -145,10 +174,10 @@ export default function NameCollection() {
 			if (response && response.Status === 0) {
 				dispatch(
 					updateUser({
-						Email: email,
-						FirstName: firstName,
-						LastName: lastName,
-						UserName: username,
+						Email: values.email,
+						FirstName: values.firstName,
+						LastName: values.lastName,
+						UserName: values.username,
 					})
 				)
 				// Navigate to flow selection page
@@ -163,10 +192,11 @@ export default function NameCollection() {
 	}
 
 	const isValid =
-		firstName &&
-		lastName &&
-		username &&
-		email &&
+		formik.values.firstName &&
+		formik.values.lastName &&
+		formik.values.username &&
+		formik.values.email &&
+		formik.values.aadhaarNum &&
 		usernameAvailable &&
 		emailAvailable
 
@@ -229,8 +259,17 @@ export default function NameCollection() {
 						</div>
 					</div>
 
-					{/* Name Input Fields */}
+					{/* Name Input Fields (Formik) */}
 					<div className='space-y-4 p-5 bg-card rounded-xl border shadow-sm'>
+						<Button
+							onClick={handleAadhaarScan}
+							variant='outline'
+							className='w-full h-12 border-2 border-primary/20 hover:border-primary bg-transparent cursor-pointer'
+						>
+							<Scan className='w-5 h-5 mr-2' />
+							{t('profileForm.scanAadhaar')}
+						</Button>
+
 						<div>
 							<div className='flex items-center justify-between mb-2'>
 								<Label htmlFor='firstName' className='text-sm font-medium'>
@@ -242,8 +281,9 @@ export default function NameCollection() {
 							</div>
 							<Input
 								id='firstName'
-								value={firstName}
-								onChange={e => setFirstName(e.target.value)}
+								name='firstName'
+								value={formik.values.firstName}
+								onChange={formik.handleChange}
 								placeholder={t('nameCollection.firstNamePlaceholder')}
 								className='h-11 text-base'
 								autoFocus
@@ -261,9 +301,48 @@ export default function NameCollection() {
 							</div>
 							<Input
 								id='lastName'
-								value={lastName}
-								onChange={e => setLastName(e.target.value)}
+								name='lastName'
+								value={formik.values.lastName}
+								onChange={formik.handleChange}
 								placeholder={t('nameCollection.lastNamePlaceholder')}
+								className='h-11 text-base'
+							/>
+						</div>
+
+						<div>
+							<div className='flex items-center justify-between mb-2'>
+								<label className='block text-sm font-medium mb-2'>
+									{t('profileForm.dob')}
+								</label>
+								<span className='text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded'>
+									{t('common.required')}
+								</span>
+							</div>
+							<input
+								type='date'
+								name='dateOfBirth'
+								value={formik.values.dateOfBirth}
+								onChange={formik.handleChange}
+								className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
+							/>
+						</div>
+
+						<div>
+							{/* <div className='flex items-center justify-between mb-2'> */}
+								<Label htmlFor='aadhaarNum' className='text-sm font-medium'>
+									{t('aadhaar.aadhaarNumber')}
+								</Label>
+								{/* <span className='text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded'>
+									{t('common.required')}
+								</span> */}
+							{/* </div> */}
+							<Input
+								id='aadhaarNum'
+								name='aadhaarNum'
+								value={formik.values.aadhaarNum}
+								maxLength={12}
+								onChange={formik.handleChange}
+								placeholder='XXXX XXXX XXXX'
 								className='h-11 text-base'
 							/>
 						</div>
@@ -299,10 +378,12 @@ export default function NameCollection() {
 									<div className='relative mt-1'>
 										<Input
 											id='username'
-											value={username}
+											name='username'
+											value={formik.values.username}
 											onChange={e => handleUsernameChange(e.target.value)}
 											placeholder={t('nameCollection.usernamePlaceholder')}
 											className='pr-10'
+											disabled
 										/>
 										<div className='absolute right-3 top-1/2 -translate-y-1/2'>
 											{checkingUsername && (
@@ -338,9 +419,10 @@ export default function NameCollection() {
 									<div className='relative mt-1'>
 										<Input
 											id='email'
-											value={email}
-											readOnly
-											className='bg-muted pr-10'
+											name='email'
+											value={formik.values.email}
+											className='bg-muted pr-10 select-none'
+											disabled
 										/>
 										<div className='absolute right-3 top-1/2 -translate-y-1/2'>
 											{checkingEmail && (
@@ -368,7 +450,7 @@ export default function NameCollection() {
 							</div>
 						)}
 					</div>
-						<Button
+					<Button
 						onClick={handleContinue}
 						disabled={!isValid}
 						className='w-full h-12 text-base font-semibold cursor-pointer'

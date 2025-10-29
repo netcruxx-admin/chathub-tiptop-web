@@ -23,7 +23,7 @@ export default function LanguageSelection() {
 	return (
 		<div className='min-h-screen bg-background flex flex-col'>
 			<div className='p-4 border-b'>
-				<h1 className='text-lg font-semibold text-center'>{t('settings.language')}</h1>
+				<h1 className='text-lg font-semibold text-center'>{t('splash.selectLanguage')}</h1>
 			</div>
 
 			<div className='flex-1 p-6'>

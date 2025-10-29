@@ -6,8 +6,8 @@ import { ArrowLeft, CheckCircle2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useTranslations } from "next-intl"
 import { useFormik } from 'formik'
-import { createAadhaarReviewValidation } from '@/lib/validation/authValidation'
-import type { AadhaarReviewValidationValues } from '@/types/validation'
+// import { createAadhaarReviewValidation } from '@/lib/validation/authValidation'
+// import type { AadhaarReviewValidationValues } from '@/types/validation'
 
 interface AadhaarData {
   firstName?: string
@@ -29,7 +29,7 @@ export default function AadhaarReview() {
     initialValues: {
       gender: '',
     },
-    validationSchema: createAadhaarReviewValidation(t),
+    // validationSchema: createAadhaarReviewValidation(t),
     onSubmit: (values) => {
       if (!ocrScannedData) return
 

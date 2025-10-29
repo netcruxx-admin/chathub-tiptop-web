@@ -178,6 +178,32 @@
 		"looksGood": "Sahi Hai",
 		"rescan": "Dobara Scan Karein"
 	},
+	"aadhaarScan": {
+		"title": "Quick Profile Setup",
+		"heading": "Scan Aadhaar for Instant Setup",
+		"benefit1": "Auto-fill name and date of birth",
+		"benefit2": "Save permanent address for later",
+		"benefit3": "Faster profile completion",
+		"scanButton": "Scan Aadhaar",
+		"skipButton": "Skip for Now"
+	},
+	"aadhaarReview": {
+		"title": "Confirm Details",
+		"heading": "Review Scanned Information",
+		"name": "Name",
+		"dob": "Date of Birth",
+		"dobPrompt": "Tell us your date of birth",
+		"listening": "Listening...",
+		"address": "Permanent Address",
+		"aadhaar": "Aadhaar Number",
+		"gender": "Gender",
+		"male": "Male",
+		"female": "Female",
+		"transgender": "Transgender",
+		"preferNotToSay": "Prefer not to say",
+		"confirm": "Confirm & Continue",
+		"rescan": "Scan Again"
+	},
 	"distance": {
 		"title": "Aap kitni door tak travel kar sakte hain?",
 		"subtitle": "Apni job search radius set karein",
