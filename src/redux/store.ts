@@ -3,9 +3,11 @@ import storage from 'redux-persist/lib/storage'
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { authApi } from './apis/authApi'
 import authReducer from './slices/authSlice'
+import formReducer from './slices/formSlice'
 
 const rootReducer = combineReducers({
 	auth: authReducer,
+	form: formReducer,
 	[authApi.reducerPath]: authApi.reducer,
 })
 

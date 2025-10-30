@@ -87,7 +87,7 @@ export default function Onboarding() {
 		if (currentCard < cards.length - 1) {
 			setCurrentCard(currentCard + 1)
 		} else {
-			router.push('/name-collection')
+			router.push('/signup-choice')
 		}
 	}
 
@@ -212,7 +212,7 @@ export default function Onboarding() {
 
 					{/* Skip Option */}
 					<button
-						onClick={() => router.push('/name-collection')}
+						onClick={() => router.push('/signup-choice')}
 						className='w-full text-center text-sm text-muted-foreground mt-4 hover:text-foreground transition-colors cursor-pointer'
 					>
 						{t('common.skip')}
