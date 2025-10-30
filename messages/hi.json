@@ -20,7 +20,7 @@
 		"optional": "वैकल्पिक",
 		"yes": "हाँ",
 		"no": "नहीं",
-		"makeInIndia": "Make in India",
+		"makeInIndia": "मेक इन इंडिया",
 		"ahalts": "AHALTS"
 	},
 	"employerLoginVal": {
@@ -36,7 +36,7 @@
 		"validPassword": "पासवर्ड कम से कम 6 अक्षरों का होना चाहिए"
 	},
 	"splash": {
-		"title": "TipTop",
+		"title": "टिपटॉप",
 		"subtitle": "काम खोजें। पैसे कमाएं। कौशल बढ़ाएं।",
 		"selectLanguage": "अपनी भाषा चुनें",
 		"getStarted": "शुरू करें"
@@ -44,7 +44,7 @@
 	"employerLogin": {
 		"header": "नियोक्ता लॉगिन",
 		"title": "नियोक्ता पोर्टल",
-		"subtitle": "नौकरियों और प्रतिभा को प्रबंधित करने के लिए उपकरणों तक पहुँचें",
+		"subtitle": "नौकरियों और प्रतिभा को प्रबंधित करने के लिए उपकरण",
 		"labelEmail": "उपयोगकर्ता नाम या ईमेल",
 		"placeholderEmail": "उपयोगकर्ता नाम या ईमेल दर्ज करें",
 		"labelPassword": "पासवर्ड",
@@ -53,12 +53,12 @@
 		"footer": "क्या आपका खाता नहीं है?",
 		"signUp": "साइन अप करें",
 		"loginSuccess": "लॉगिन सफल!",
-		"loginError": "लॉगिन विफल। कृपया अपनी साख जांचें।"
+		"loginError": "लॉगिन विफल। कृपया अपनी जानकारी जांचें।"
 	},
 	"employeeLogin": {
 		"header": "कर्मचारी लॉगिन",
 		"title": "कर्मचारी पोर्टल",
-		"subtitle": "अपने कार्य डैशबोर्ड और अवसरों तक पहुँचें",
+		"subtitle": "अपना कार्य डैशबोर्ड और अवसर देखें",
 		"labelEmail": "उपयोगकर्ता नाम या ईमेल",
 		"placeholderEmail": "उपयोगकर्ता नाम या ईमेल दर्ज करें",
 		"labelPassword": "पासवर्ड",
@@ -67,15 +67,15 @@
 		"footer": "क्या आपका खाता नहीं है?",
 		"signUp": "साइन अप करें",
 		"loginSuccess": "लॉगिन सफल!",
-		"loginError": "लॉगिन विफल। कृपया अपनी साख जांचें।"
+		"loginError": "लॉगिन विफल। कृपया अपनी जानकारी जांचें।"
 	},
 	"userType": {
 		"title": "आप कौन हैं?",
 		"subtitle": "अपनी भूमिका चुनें",
-		"worker": "काम चाहिए",
-		"workerDesc": "नौकरियां ब्राउज़ करें और आवेदन करें",
-		"employer": "भर्ती करें",
-		"employerDesc": "नौकरियां पोस्ट करें और उम्मीदवार खोजें"
+		"worker": "काम की तलाश में",
+		"workerDesc": "नौकरियां देखें और आवेदन करें",
+		"employer": "हायर करना चाहते हैं",
+		"employerDesc": "नौकरी पोस्ट करें और उम्मीदवार खोजें"
 	},
 	"phone": {
 		"title": "अपना फोन नंबर दर्ज करें",
@@ -85,9 +85,9 @@
 		"enterOTP": "OTP दर्ज करें",
 		"otpSent": "OTP भेज दिया गया है",
 		"resendOTP": "OTP फिर से भेजें",
-		"verifying": "सत्यापित हो रहा है...",
+		"verifying": "सत्यापन हो रहा है...",
 		"phoneRequired": "फोन नंबर आवश्यक है",
-		"phoneInvalid": "कृपया एक मान्य 10 अंकों का फोन नंबर दर्ज करें"
+		"phoneInvalid": "कृपया एक मान्य 10-अंकों का फोन नंबर दर्ज करें"
 	},
 	"otp": {
 		"title": "सत्यापन कोड दर्ज करें",
@@ -95,7 +95,7 @@
 		"verify": "सत्यापित करें और जारी रखें",
 		"resend": "OTP फिर से भेजें",
 		"phoneMissing": "फोन नंबर गायब है",
-		"invalidCode": "कृपया एक मान्य 6 अंकों का कोड दर्ज करें।",
+		"invalidCode": "कृपया एक मान्य 6-अंकों का कोड दर्ज करें।",
 		"verifySuccess": "OTP सफलतापूर्वक सत्यापित हो गया!",
 		"verifyError": "अमान्य OTP। कृपया पुनः प्रयास करें।",
 		"resendSuccess": "OTP सफलतापूर्वक फिर से भेज दिया गया!",
@@ -113,30 +113,47 @@
 		"middleNamePlaceholder": "मध्य नाम",
 		"lastName": "अंतिम नाम",
 		"lastNamePlaceholder": "अंतिम नाम",
-		"username": "उपयोगकर्ता नाम",
-		"usernamePlaceholder": "अद्वितीय उपयोगकर्ता नाम",
+		"username": "यूज़रनेम",
+		"usernamePlaceholder": "अद्वितीय यूज़रनेम",
 		"email": "ईमेल",
 		"emailPlaceholder": "aapka@email.com",
 		"checking": "जांच हो रही है...",
-		"available": "उपलब्ध है",
-		"taken": "पहले से लिया हुआ है",
+		"available": "उपलब्ध",
+		"taken": "पहले से लिया गया",
 		"showMore": "अधिक विवरण दिखाएं",
 		"hideDetails": "विवरण छुपाएं",
-		"autoGenerate": "स्वचालित रूप से बनाए गए खाता विवरण",
-		"showAdvanced": "उपयोगकर्ता नाम और ईमेल संपादित करें",
-		"hideAdvanced": "उन्नत विकल्प छुपाएं",
-		"usernameHint": "यह आपका अद्वितीय पहचानकर्ता होगा"
+		"autoGenerate": "स्वतः जनरेटेड अकाउंट विवरण",
+		"showAdvanced": "यूज़रनेम और ईमेल संपादित करें",
+		"hideAdvanced": "एडवांस्ड विकल्प छुपाएं",
+		"usernameHint": "यह आपका यूनिक पहचानकर्ता होगा"
 	},
-	"profileForm": {
-		"title": "प्रोफ़ाइल विवरण",
-		"subtitle": "अपनी बुनियादी जानकारी भरें",
-		"firstName": "पहला नाम",
-		"lastName": "अंतिम नाम",
-		"dob": "जन्म तिथि",
-		"aadhaar": "आधार नंबर (वैकल्पिक)",
-		"scanAadhaar": "ऑटो-फिल के लिए आधार स्कैन करें",
-		"orDivider": "या मैन्युअल रूप से दर्ज करें",
-		"aadhaarPlaceholder": "XXXX XXXX XXXX"
+	"flowSelection": {
+		"title": "आप कैसे आगे बढ़ना चाहेंगे?",
+		"subtitle": "अपना पसंदीदा तरीका चुनें",
+		"whyChoose": "प्रोफ़ाइल पूरी करने का तरीका चुनें",
+		"whyChooseDesc": "हर तरीका आपकी पूरी प्रोफ़ाइल बनाएगा। आपको जो आसान लगे वो चुनें। आप विवरण बाद में बदल सकते हैं।",
+		"recommended": "अनुशंसित",
+		"nextSteps": "आगे क्या होगा:",
+		"voice": "वॉयस असिस्टेंट",
+		"voiceDesc": "बात करके प्रोफ़ाइल पूरी करें",
+		"voiceNext": "आप हमारे वॉयस असिस्टेंट से बात करेंगे जो सवाल पूछेगा और आपके जवाब रिकॉर्ड करेगा",
+		"form": "फॉर्म भरें",
+		"formDesc": "एक सिंपल फॉर्म भरें",
+		"formNext": "आप अपनी स्किल्स, अनुभव और पसंद का एक सिंपल फॉर्म भरेंगे",
+		"resume": "रिज्यूमे अपलोड करें",
+		"resumeDesc": "अपना रिज्यूमे अपलोड करें",
+		"resumeNext": "अपना रिज्यूमे अपलोड करें और हम स्वचालित रूप से आपकी जानकारी निकाल लेंगे"
+	},
+	"voiceBotIntro": {
+		"title": "टिपटॉप वॉयस असिस्टेंट",
+		"greeting": "नमस्ते! मैं आपकी प्रोफाइल पूरी करने में मदद करूंगा।",
+		"description": "मैं आपसे कुछ सवाल पूछूंगा और आपके जवाबों के आधार पर आपकी प्रोफाइल बनाऊंगा।",
+		"features": [
+			"अपनी भाषा में बोलें",
+			"कभी भी रुकें",
+			"हम आपकी गोपनीयता का सम्मान करते हैं"
+		],
+		"ready": "चलिए शुरू करते हैं"
 	},
 	"signupLanguage": {
 		"title": "अपनी भाषा की पुष्टि करें",
@@ -146,35 +163,35 @@
 		"scanOfferTitle": "आधार स्कैन करें?",
 		"scanOfferDesc": "विवरण जल्दी भरने के लिए अपना आधार कार्ड स्कैन करें",
 		"cameraNotSupported": "कैमरा इस डिवाइस या ब्राउज़र पर समर्थित नहीं है।",
-		"allowCameraPermissions": "कृपया अपनी ब्राउज़र सेटिंग्स में कैमरा अनुमतियां दें।",
+		"allowCameraPermissions": "कृपया अपनी ब्राउज़र सेटिंग्स में कैमरा अनुमति दें।",
 		"noCameraFound": "इस डिवाइस पर कोई कैमरा नहीं मिला।",
 		"cameraInUse": "कैमरा पहले से ही किसी अन्य एप्लिकेशन द्वारा उपयोग में है।",
 		"checkPermissions": "कृपया अपनी कैमरा अनुमतियां जांचें।",
-		"processingFailed": "छवि प्रक्रिया करने में विफल। कृपया पुनः प्रयास करें।",
+		"processingFailed": "छवि प्रोसेस करने में विफल। कृपया पुनः प्रयास करें।",
 		"uploadAadhaarCard": "आधार कार्ड अपलोड करें",
 		"retryCamera": "कैमरा पुनः प्रयास करें",
-		"positionCard": "आधार कार्ड को फ्रेम के भीतर स्थित करें",
+		"positionCard": "आधार कार्ड को फ्रेम के भीतर रखें",
 		"alignCard": "अपने आधार कार्ड को फ्रेम के भीतर संरेखित करें और कैप्चर करें",
 		"uploadImageGuide": "जानकारी निकालने के लिए अपने आधार कार्ड की छवि अपलोड करें",
-		"processingOCR": "OCR से प्रक्रिया हो रही है...",
+		"processingOCR": "OCR से प्रोसेस हो रहा है...",
 		"capture": "कैप्चर करें",
 		"retake": "फिर से लें",
-		"chooseFile": "अपलोड करने के लिए फ़ाइल चुनें",
+		"chooseFile": "अपलोड करने के लिए फाइल चुनें",
 		"benefits": [
 			"नाम और जन्मतिथि स्वचालित रूप से भर जाएंगे",
-			"पता विवरण सहेजे जाएंगे",
+			"पता विवरण सहेजा जाएगा",
 			"केवल 30 सेकंड लगेंगे"
 		],
 		"scanNow": "अभी स्कैन करें",
 		"skipManual": "मैन्युअल रूप से भरें",
 		"scanningTitle": "आधार स्कैन हो रहा है",
 		"scanningDesc": "अपने आधार कार्ड को कैमरे के सामने रखें",
-		"reviewTitle": "विवरण समीक्षा करें",
+		"reviewTitle": "विवरण की समीक्षा करें",
 		"reviewDesc": "क्या स्कैन किए गए विवरण सही हैं?",
 		"name": "नाम",
 		"dob": "जन्मतिथि",
 		"address": "पता",
-		"aadhaarNumber": "आधार संख्या",
+		"aadhaarNumber": "आधार नंबर",
 		"looksGood": "सही है",
 		"rescan": "फिर से स्कैन करें"
 	},
@@ -187,7 +204,7 @@
 		"scanButton": "आधार स्कैन करें",
 		"skipButton": "अभी छोड़ें"
 	},
-	"aadharReview": {
+	"aadhaarReview": {
 		"title": "विवरण की पुष्टि करें",
 		"heading": "स्कैन की गई जानकारी की समीक्षा करें",
 		"name": "नाम",
@@ -204,76 +221,216 @@
 		"confirm": "पुष्टि करें और जारी रखें",
 		"rescan": "फिर से स्कैन करें"
 	},
+	"manualData": {
+		"title": "अपना विवरण दर्ज करें",
+		"subtitle": "हम आपकी प्रोफाइल बना रहे हैं",
+		"dob": "जन्म तिथि",
+		"dobPlaceholder": "DD/MM/YYYY",
+		"dobHelper": "अपनी जन्म तिथि दर्ज करें"
+	},
+	"profileForm": {
+		"title": "प्रोफ़ाइल विवरण",
+		"subtitle": "अपनी मूल जानकारी भरें",
+		"firstName": "पहला नाम",
+		"lastName": "अंतिम नाम",
+		"dob": "जन्म तिथि",
+		"aadhaar": "आधार नंबर (वैकल्पिक)",
+		"scanAadhaar": "ऑटो-फिल के लिए आधार स्कैन करें",
+		"orDivider": "या मैन्युअल रूप से दर्ज करें",
+		"aadhaarPlaceholder": "XXXX XXXX XXXX"
+	},
+	"skills": {
+		"title": "अपने कौशल चुनें",
+		"subtitle": "कौशल चुनें",
+		"selected": "चुने गए",
+		"openToAnyWork": "मैं नया हूँ और किसी भी काम के लिए तैयार हूँ",
+		"openToAnyWorkDesc": "एंट्री-लेवल नौकरियां",
+		"autoSelected": "स्वतः चयनित",
+		"searchPlaceholder": "कौशल खोजें...",
+		"allSkills": "कौशल",
+		"mostPopular": "सबसे लोकप्रिय कौशल",
+		"showMore": "और दिखाएं",
+		"addCustom": "कस्टम स्किल जोड़ें",
+		"customPlaceholder": "स्किल का नाम...",
+		"infoMessage": "वे सभी कौशल चुनें जो आप पर लागू होते हैं। आप अपनी प्रोफाइल से बाद में और कौशल जोड़ सकते हैं।",
+		"jobs": "नौकरियां",
+		"voiceGuidance": "यहाँ कौशल हैं। अगर आप किसी भी काम के लिए तैयार हैं, तो सबसे ऊपर वाला विकल्प चुनें। या विशिष्ट कौशल चुनें। आप हमेशा बाद में बदल सकते हैं।",
+		"verificationInfo": {
+			"title": "कौशल सत्यापन",
+			"description": "आपके कौशल वर्तमान में असत्यापित हैं। जैसे-जैसे आप नौकरियां पूरी करेंगे वे सत्यापित होते जाएंगे:",
+			"unverified": "असत्यापित",
+			"verified": "सत्यापित",
+			"certified": "प्रमाणित",
+			"profileTitle": "कौशल सत्यापित करें",
+			"profileDescription": "जब आप नौकरियां पूरी करते हैं और आपका सुपरवाइजर उन कार्यों पर आपको रेटिंग देता है तो आपके कौशल सत्यापित होंगे। एक बार सत्यापित होने पर, आपको प्रमाणित किया जाएगा।",
+			"howToProgress": "अपने कौशल को कैसे सुधारें:",
+			"progressStep1": "नौकरियां पूरी करें",
+			"progressStep2": "प्रशिक्षण पाठ्यक्रम पूरे करें"
+		},
+		"categories": {
+			"all": "सभी",
+			"delivery": "डिलीवरी",
+			"housekeeping": "हाउसकीपिंग",
+			"construction": "कंस्ट्रक्शन",
+			"food": "खाना",
+			"warehouse": "वेयरहाउस",
+			"maintenance": "मेंटेनेंस",
+			"office": "ऑफिस",
+			"security": "सिक्योरिटी",
+			"retail": "रिटेल",
+			"personal": "पर्सनल",
+			"care": "केयर",
+			"outdoor": "आउटडोर"
+		}
+	},
+	"profile": {
+		"title": "आपकी प्रोफाइल",
+		"completion": "प्रोफाइल पूर्णता",
+		"editProfile": "प्रोफाइल संपादित करें",
+		"settings": "सेटिंग्स",
+		"viewJobs": "नौकरियां देखें",
+		"academy": "अकादमी",
+		"logout": "लॉगआउट",
+		"basicInfo": "बुनियादी जानकारी",
+		"skills": "कौशल",
+		"experience": "अनुभव",
+		"documents": "दस्तावेज़"
+	},
+	"settings": {
+		"title": "सेटिंग्स",
+		"language": "भाषा",
+		"languageDesc": "अपनी पसंदीदा भाषा चुनें",
+		"notifications": "नोटिफिकेशन",
+		"notificationsDesc": "नौकरी अलर्ट और अपडेट",
+		"privacy": "गोपनीयता",
+		"privacyDesc": "डेटा और गोपनीयता सेटिंग्स",
+		"about": "टिपटॉप के बारे में",
+		"version": "संस्करण"
+	},
+	"jobs": {
+		"title": "नौकरियां",
+		"filters": "फ़िल्टर",
+		"sortBy": "क्रमबद्ध करें",
+		"location": "स्थान",
+		"salary": "वेतन",
+		"jobType": "नौकरी का प्रकार",
+		"apply": "आवेदन करें",
+		"applied": "आवेदन किया गया",
+		"details": "विवरण",
+		"requirements": "आवश्यकताएं",
+		"description": "विवरण",
+		"company": "कंपनी",
+		"postedOn": "पोस्ट किया गया",
+		"noJobs": "कोई नौकरी नहीं मिली",
+		"completeProfile": "अपनी प्रोफाइल पूरी करें",
+		"unlockMoreJobs": "अधिक नौकरियां अनलॉक करें",
+		"completeNow": "अभी पूरा करें",
+		"completeProfileToApply": "आवेदन करने के लिए प्रोफाइल पूरी करें",
+		"profileCompletionRequired": "प्रोफाइल पूर्णता आवश्यक है",
+		"needMoreCompletion": "अधिक पूर्णता की आवश्यकता है",
+		"missingInformation": "कुछ जानकारी गायब है"
+	},
+	"location": {
+		"title": "आप कहाँ रहते हैं?",
+		"subtitle": "हमें आपके पास की नौकरियां दिखाने के लिए आपकी लोकेशन चाहिए",
+		"detectAuto": "मेरी लोकेशन पता लगाएं",
+		"detecting": "लोकेशन पता लगाई जा रही है...",
+		"enterManually": "मैन्युअल रूप से दर्ज करें",
+		"or": "या",
+		"detected": "आपकी लोकेशन:",
+		"confirm": "पुष्टि करें",
+		"cityLabel": "शहर",
+		"cityPlaceholder": "अपना शहर दर्ज करें",
+		"addressLine1": "पता लाइन 1",
+		"addressLine1Placeholder": "स्ट्रीट एड्रेस",
+		"addressLine2": "पता लाइन 2",
+		"addressLine2Placeholder": "अपार्टमेंट, सूट, आदि।",
+		"areaLabel": "क्षेत्र",
+		"areaPlaceholder": "क्षेत्र",
+		"pincodeLabel": "पिनकोड",
+		"pincodePlaceholder": "पिनकोड",
+		"stateLabel": "राज्य",
+		"statePlaceholder": "राज्य",
+		"enterAreaCity": "क्षेत्र या शहर दर्ज करें",
+		"continue": "जारी रखें",
+		"tryAutoAgain": "ऑटो-डिटेक्ट फिर से प्रयास करें",
+		"notSupported": "लोकेशन डिटेक्शन समर्थित नहीं है",
+		"detectionFailed": "लोकेशन पता नहीं लगा सके",
+		"permissionDenied": "लोकेशन अनुमति अस्वीकृत",
+		"enterCity": "कृपया शहर दर्ज करें",
+		"selectOnMap": "मानचित्र पर चुनें",
+		"dragPinToAdjust": "समायोजित करने के लिए पिन खींचें"
+	},
 	"distance": {
 		"title": "आप कितनी दूर तक यात्रा कर सकते हैं?",
-		"subtitle": "अपनी नौकरी खोज त्रिज्या सेट करें",
-		"radiusLabel": "अपने स्थान से खोज त्रिज्या",
+		"subtitle": "अपनी नौकरी खोज की दूरी सेट करें",
+		"radiusLabel": "अपने स्थान से खोज दूरी",
 		"infoTitle": "आप इसे कभी भी बदल सकते हैं",
-		"infoDesc": "हम आपको इस त्रिज्या के भीतर नौकरियां दिखाएंगे। आप इसे बाद में अपनी प्रोफाइल सेटिंग्स से समायोजित कर सकते हैं।",
+		"infoDesc": "हम आपको इस दूरी के भीतर नौकरियां दिखाएंगे। आप इसे बाद में अपनी प्रोफाइल सेटिंग्स से समायोजित कर सकते हैं।",
 		"browseJobs": "नौकरियां ब्राउज़ करें",
 		"step": "चरण 3 का 3",
 		"profileProgress": "प्रोफाइल प्रगति",
 		"minRange": "5 किमी",
 		"midRange": "25 किमी",
 		"maxRange": "50 किमी",
-		"updateSuccess": "प्रोफाइल सफलतापूर्वक अपडेट हो गया!",
+		"updateSuccess": "प्रोफाइल सफलतापूर्वक अपडेट हो गई!",
 		"updateError": "प्रोफाइल अपडेट करने में विफल। कृपया पुनः प्रयास करें।"
 	},
 	"introduction": {
-		"poweredBy": "AHALTS Academy के साथ",
+		"poweredBy": "AHALTS Academy द्वारा संचालित",
 		"tagline": "अपने सपनों की नौकरी पाने का सबसे आसान तरीका",
 		"whyDifferent": "हम कैसे अलग हैं",
 		"earning": {
-			"title": "इज़्ज़त से कमाओ",
-			"description": "Verified companies se guaranteed payment wali jobs",
-			"point1": "Verified employers - payment guaranteed",
-			"point2": "Multiple payment options - aapki convenience ke liye",
-			"point3": "Transparent salary - koi hidden charges nahi"
+			"title": "इज्ज़त से कमाओ",
+			"description": "सत्यापित कंपनियों से गारंटीड भुगतान के साथ पारदर्शिता",
+			"point1": "सत्यापित नियोक्ता - भुगतान गारंटीड",
+			"point2": "कई भुगतान विकल्प - आपकी सुविधा के लिए",
+			"point3": "पारदर्शी वेतन - कोई छिपा शुल्क नहीं"
 		},
 		"learning": {
 			"title": "सीखो",
-			"description": "Industry-recognized certifications ke saath apne skills ko next level par le jao",
-			"point1": "NSDC certified courses - kai free bhi hain",
-			"point2": "CSR-funded programs - companies aapke training sponsor karti hain",
-			"point3": "Experts se practical skills - Learn on the job"
+			"description": "उद्योग-मान्यता प्राप्त प्रमाणपत्रों के साथ अपने कौशल को अगले स्तर पर ले जाएं",
+			"point1": "NSDC प्रमाणित पाठ्यक्रम - कई मुफ्त हैं",
+			"point2": "CSR-वित्त पोषित कार्यक्रम - कंपनियां आपके प्रशिक्षण को प्रायोजित करती हैं",
+			"point3": "विशेषज्ञों से व्यावहारिक कौशल - काम पर सीखें"
 		},
 		"growing": {
 			"title": "आगे बढ़ो",
-			"description": "Har job se better opportunities unlock karo aur apni earning potential badhao",
-			"point1": "Skills verify karke premium jobs unlock karo",
-			"point2": "Certifications se 30-50% zyada kamao",
-			"point3": "Career roadmap aur mentorship support"
+			"description": "हर नौकरी के साथ बेहतर अवसर अनलॉक करें और अपनी कमाई की क्षमता बढ़ाएं",
+			"point1": "प्रीमियम नौकरियां अनलॉक करने के लिए कौशल सत्यापित करें",
+			"point2": "प्रमाणपत्रों के साथ 30-50% अधिक कमाएं",
+			"point3": "करियर रोडमैप और मेंटरशिप सपोर्ट"
 		},
 		"smartFeatures": {
-			"title": "Smart Technology",
-			"description": "AI-powered platform jo samajhta hai aapki zaroorat aur deta hai best opportunities",
-			"point1": "AI matching - aapke liye perfect jobs automatically",
-			"point2": "Live tracking - application status real-time mein dekho",
-			"point3": "Interview prep - video tips aur practice sessions"
+			"title": "स्मार्ट तकनीक",
+			"description": "AI-संचालित प्लेटफ़ॉर्म जो आपकी ज़रूरतों को समझता है और सर्वोत्तम अवसर प्रदान करता है",
+			"point1": "AI मैचिंग - आपके लिए स्वचालित रूप से सही नौकरियां",
+			"point2": "लाइव ट्रैकिंग - वास्तविक समय में आवेदन की स्थिति देखें",
+			"point3": "इंटरव्यू तैयारी - वीडियो टिप्स और अभ्यास सत्र"
 		},
 		"about": {
 			"title": "AHALTS Academy के बारे में",
-			"description": "AHALTS Academy ek leading skill development organization hai jo gig workers ko empower karta hai quality training aur job opportunities ke saath.",
-			"mission": "Humara mission hai har Indian gig worker ko skills, jobs aur growth opportunities provide karna taaki wo apne aur apne family ke liye better future bana sakein."
+			"description": "AHALTS Academy एक अग्रणी कौशल विकास संगठन है जो गिग वर्कर्स को गुणवत्तापूर्ण प्रशिक्षण और नौकरी के अवसरों के साथ सशक्त बनाता है।",
+			"mission": "हमारा मिशन हर भारतीय गिग वर्कर को कौशल, नौकरियां और विकास के अवसर प्रदान करना है ताकि वे अपने और अपने परिवार के लिए एक बेहतर भविष्य बना सकें।"
 		},
 		"partnerships": {
 			"nsdc": {
-				"title": "NSDC Partnership",
-				"description": "National Skill Development Corporation ke saath partnership ke through, hum government-recognized certifications provide karte hain jo aapki employability ko significantly badhate hain."
+				"title": "NSDC साझेदारी",
+				"description": "राष्ट्रीय कौशल विकास निगम के साथ हमारी साझेदारी के माध्यम से, हम सरकार द्वारा मान्यता प्राप्त प्रमाणपत्र प्रदान करते हैं जो आपकी रोजगार क्षमता को काफी बढ़ाते हैं।"
 			},
 			"csr": {
-				"title": "CSR-Funded Training",
-				"description": "Corporate Social Responsibility funds ke through, hum free training programs offer karte hain. Aapko koi paisa nahi dena padta - companies aapki training sponsor karti hain."
+				"title": "CSR-वित्त पोषित प्रशिक्षण",
+				"description": "कॉर्पोरेट सामाजिक उत्तरदायित्व फंड के माध्यम से, हम मुफ्त प्रशिक्षण कार्यक्रम प्रदान करते हैं। आपको कुछ भी भुगतान नहीं करना होगा - कंपनियां आपके प्रशिक्षण को प्रायोजित करती हैं।"
 			},
 			"verification": {
-				"title": "Skill Verification System",
-				"description": "Jobs complete karke aur good ratings leke, aap apne skills ko verify kar sakte ho. Verified skills se aapko better jobs aur higher pay milti hai."
+				"title": "कौशल सत्यापन प्रणाली",
+				"description": "नौकरियां पूरी करके और अच्छी रेटिंग प्राप्त करके, आप अपने कौशल को सत्यापित कर सकते हैं। सत्यापित कौशल आपको बेहतर नौकरियां और उच्च वेतन दिलाने में मदद करते हैं।"
 			}
 		},
 		"features": {
-			"nsdc": "NSDC certified training - bilkul free",
-			"csr": "CSR-funded courses - koi cost nahi",
-			"verified": "Verified jobs aur fair payment"
+			"nsdc": "NSDC प्रमाणित प्रशिक्षण - पूरी तरह से मुफ्त",
+			"csr": "CSR-वित्त पोषित पाठ्यक्रम - कोई लागत नहीं",
+			"verified": "सत्यापित नौकरियां और उचित भुगतान"
 		}
 	},
 	"carousel": {
@@ -299,13 +456,13 @@
 	"resume": {
 		"reviewTitle": "रिज्यूमे की समीक्षा करें",
 		"reviewSubtitle": "निकाली गई जानकारी सत्यापित करें",
-		"reviewDesc": "हमने जो विवरण पाया उसकी जाँच करें",
+		"reviewDesc": "हमने जो विवरण पाया उसकी जांच करें",
 		"firstName": "पहला नाम",
 		"lastName": "अंतिम नाम",
 		"dateOfBirth": "जन्म तिथि",
 		"email": "ईमेल",
 		"phoneNumber": "फोन नंबर",
-		"detectedSkills": "मिले हुए कौशल",
+		"detectedSkills": "मिले कौशल",
 		"experience": "अनुभव",
 		"continue": "जारी रखें",
 		"edit": "विवरण संपादित करें",
@@ -316,7 +473,7 @@
 		"uploadTitle": "रिज्यूमे अपलोड",
 		"uploadSubtitle": "अपना रिज्यूमे अपलोड करें",
 		"uploadingParsing": "अपलोड और पार्स हो रहा है...",
-		"dragDrop": "अपना रिज्यूमे यहाँ ड्रैग और ड्रॉप करें",
+		"dragDrop": "अपना रिज्यूमे यहां ड्रैग और ड्रॉप करें",
 		"or": "या",
 		"browseFiles": "फाइलें ब्राउज़ करें",
 		"supportedFormats": "PDF, DOC, DOCX समर्थित हैं",
@@ -326,11 +483,11 @@
 	"skillsWizard": {
 		"profileProgress": "प्रोफाइल प्रगति",
 		"openToAnyWorkTitle": "क्या आप किसी भी काम के लिए तैयार हैं?",
-		"openToAnyWorkSubtitle": "जो आपके लिए सबसे अच्छा है वह चुनें",
+		"openToAnyWorkSubtitle": "जो आपके लिए सबसे अच्छा हो वह चुनें",
 		"chooseSpecificSkills": "विशिष्ट कौशल चुनें",
 		"selectFromSkills": "{count} कौशलों में से चुनें",
 		"chooseCategoriesTitle": "श्रेणियां चुनें",
-		"chooseCategoriesSubtitle": "एक या एकाधिक प्रकार के काम का चयन करें",
+		"chooseCategoriesSubtitle": "एक या अधिक प्रकार के काम का चयन करें",
 		"continueToSkills": "कौशल पर जारी रखें",
 		"selectSkillsTitle": "अपने कौशल चुनें",
 		"selectSkillsSubtitle": "वे सभी कौशल चुनें जो आप पर लागू होते हैं",
@@ -339,26 +496,26 @@
 	"skillsSelection": {
 		"title": "अपने कौशल चुनें",
 		"selectedCount": "{count} चुने गए",
-		"openToAnyWork": "मैं नया हूँ और किसी भी काम के लिए तैयार हूँ",
+		"openToAnyWork": "मैं नया हूं और किसी भी काम के लिए तैयार हूं",
 		"openToAnyWorkDesc": "एंट्री-लेवल नौकरियां",
 		"autoSelected": "स्वतः चयनित",
 		"searchPlaceholder": "कौशल खोजें...",
-		"infoMessage": "वे सभी कौशल चुनें जो आप पर लागू होते हैं। आप हमेशा अपनी प्रोफाइल से और कौशल जोड़ सकते हैं।",
+		"infoMessage": "वे सभी कौशल चुनें जो आप पर लागू होते हैं। आप हमेशा अपनी प्रोफाइल से बाद में और कौशल जोड़ सकते हैं।",
 		"skillsHeading": "कौशल",
-		"noSkillsFound": "कोई कौशल नहीं मिले",
+		"noSkillsFound": "कोई कौशल नहीं मिला",
 		"continue": "जारी रखें"
 	},
 	"nameCollectionPage": {
-		"handleContinue": "जारी रखने का काम संभाल रहे हैं",
+		"handleContinue": "जारी रखने का काम हो रहा है",
 		"sendOTPFailed": "OTP भेजने में विफल। कृपया पुनः प्रयास करें।",
 		"voiceAssistantTitle": "वॉयस असिस्टेंट उपलब्ध है",
-		"voiceAssistantDesc": "मैं आपकी मदद कर सकता हूँ। सुनने के लिए टैप करें",
+		"voiceAssistantDesc": "मैं आपकी मदद कर सकता हूं। सुनने के लिए टैप करें",
 		"playing": "प्ले हो रहा है...",
 		"playAgain": "फिर से प्ले करें",
 		"previewVoiceHelp": "वॉयस हेल्प पूर्वावलोकन करें"
 	},
 	"signupOnboarding": {
-		"appName": "रोजगारी",
+		"appName": "रोज़गारी",
 		"voicePlaying": "प्ले हो रहा है...",
 		"startProfileCreation": "प्रोफाइल बनाना शुरू करें"
 	},
@@ -369,7 +526,7 @@
 		"voiceAssistantTitle": "वॉयस असिस्टेंट",
 		"voiceAssistantDesc": "अपनी प्रोफाइल पूरी करने के लिए बात करें",
 		"fillFormTitle": "फॉर्म भरें",
-		"fillFormDesc": "एक सरल फॉर्म भरें",
+		"fillFormDesc": "एक सिंपल फॉर्म भरें",
 		"uploadResumeTitle": "रिज्यूमे अपलोड करें",
 		"uploadResumeDesc": "अपना रिज्यूमे अपलोड करें"
 	}
