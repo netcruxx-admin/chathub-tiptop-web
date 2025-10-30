@@ -58,7 +58,8 @@ export default function AuthLayout({
 	const [currentImageIndex, setCurrentImageIndex] = useState(0)
 	const t = useTranslations()
 	const currentLocale = useGetLocale()
-	const currentLanguage = languages.find(lang => lang.code === currentLocale) || languages[1] // Default to English
+	const currentLanguage =
+		languages.find(lang => lang.code === currentLocale) || languages[1] // Default to English
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -87,6 +88,7 @@ export default function AuthLayout({
 											src={image.src || '/placeholder.svg'}
 											alt={image.alt}
 											fill
+											sizes='500px'
 											style={{ objectFit: 'cover' }}
 											priority={index === currentImageIndex}
 										/>
@@ -123,7 +125,9 @@ export default function AuthLayout({
 						<div className='text-center space-y-6 max-w-md'>
 							<div className='bg-primary text-primary-foreground px-4 py-2 rounded-full inline-flex items-center space-x-2 shadow-lg'>
 								<GraduationCap className='w-4 h-4' />
-								<span className='font-semibold text-sm'>{t('carousel.nsdcPartner')}</span>
+								<span className='font-semibold text-sm'>
+									{t('carousel.nsdcPartner')}
+								</span>
 							</div>
 
 							<div className='space-y-3'>
@@ -137,6 +141,7 @@ export default function AuthLayout({
 												src='/tcs-logo.jpg'
 												alt='TCS'
 												fill
+												sizes='40px'
 												style={{ objectFit: 'cover' }}
 											/>
 										</div>
@@ -147,6 +152,7 @@ export default function AuthLayout({
 												src='/swiggy-logo.jpg'
 												alt='Swiggy'
 												fill
+												sizes='40px'
 												style={{ objectFit: 'cover' }}
 											/>
 										</div>
@@ -157,6 +163,7 @@ export default function AuthLayout({
 												src='/reliance-logo.jpg'
 												alt='Reliance'
 												fill
+												sizes='40px'
 												style={{ objectFit: 'cover' }}
 											/>
 										</div>
@@ -167,12 +174,15 @@ export default function AuthLayout({
 												src='/lt-logo.jpg'
 												alt='L&T'
 												fill
+												sizes='40px'
 												style={{ objectFit: 'cover' }}
 											/>
 										</div>
 									</div>
 								</div>
-								<p className='text-sm text-muted-foreground'>{t('carousel.moreCompanies')}</p>
+								<p className='text-sm text-muted-foreground'>
+									{t('carousel.moreCompanies')}
+								</p>
 							</div>
 						</div>
 					</div>
@@ -205,7 +215,9 @@ export default function AuthLayout({
 									className='h-9 px-3 text-sm gap-1.5'
 								>
 									<Globe className='w-3.5 h-3.5' />
-									<span className='font-medium'>{currentLanguage.displayCode}</span>
+									<span className='font-medium'>
+										{currentLanguage.displayCode}
+									</span>
 								</Button>
 							</Link>
 						</div>
