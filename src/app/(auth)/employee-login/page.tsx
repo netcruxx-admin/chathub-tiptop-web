@@ -4,15 +4,15 @@ import BackBtn from '@/components/backBtn'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/cn'
-import { createEmployeeLoginValidation } from '@/lib/validation/authValidation'
+// import { createEmployeeLoginValidation } from '@/lib/validation/authValidation'
 import { Formik } from 'formik'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
-import {
-	useEmployeeLoginMutation,
-	useLazyGetUserIdentityQuery,
-	useCreateUserSessionMutation
-} from '@/redux/apis/authApi'
+// import {
+// 	useEmployeeLoginMutation,
+// 	useLazyGetUserIdentityQuery,
+// 	useCreateUserSessionMutation
+// } from '@/redux/apis/authApi'
 import { useAppDispatch } from '@/redux/hooks'
 import {
 	setEmployeeData,
@@ -25,9 +25,9 @@ export default function EmployeeLogin() {
 	const router = useRouter()
 	const t = useTranslations()
 	const dispatch = useAppDispatch()
-	const [employeeLogin, { isLoading }] = useEmployeeLoginMutation()
-	const [getUserIdentity] = useLazyGetUserIdentityQuery()
-	const [createUserSession] = useCreateUserSessionMutation()
+	// const [employeeLogin, { isLoading }] = useEmployeeLoginMutation()
+	// const [getUserIdentity] = useLazyGetUserIdentityQuery()
+	// const [createUserSession] = useCreateUserSessionMutation()
 
 	const initialValues = {
 		email: '',
@@ -37,52 +37,52 @@ export default function EmployeeLogin() {
 	const handleSubmit = async (values: typeof initialValues) => {
 		try {
 			// Step 1: Login to get access token
-			const loginResult = await employeeLogin({
-				email: values.email,
-				password: values.password,
-			}).unwrap()
+			// const loginResult = await employeeLogin({
+			// 	email: values.email,
+			// 	password: values.password,
+			// }).unwrap()
 
-			const accessToken = loginResult.access_token
+			// const accessToken = loginResult.access_token
 
 			// Store employee data in Redux
-			dispatch(setEmployeeData({
-				email: values.email,
-				accessToken: accessToken,
-				refreshToken: loginResult.refresh_token,
-				tokenType: loginResult.token_type,
-				expiresIn: loginResult.expires_in,
-			}))
+			// dispatch(setEmployeeData({
+			// 	email: values.email,
+			// 	accessToken: accessToken,
+			// 	refreshToken: loginResult.refresh_token,
+			// 	tokenType: loginResult.token_type,
+			// 	expiresIn: loginResult.expires_in,
+			// }))
 
 			// Step 2: Get user identity
-			try {
-				const identityResult = await getUserIdentity(accessToken).unwrap()
-				dispatch(setUserIdentity(identityResult))
-			} catch (identityError) {
-				console.error('Failed to fetch user identity:', identityError)
-				// Continue even if identity fetch fails
-			}
+			// try {
+			// 	const identityResult = await getUserIdentity(accessToken).unwrap()
+			// 	dispatch(setUserIdentity(identityResult))
+			// } catch (identityError) {
+			// 	console.error('Failed to fetch user identity:', identityError)
+			// 	Continue even if identity fetch fails
+			// }
 
 			// Step 3: Create user session
-			try {
-				const issueDate = new Date().toISOString()
-				const expiration = new Date(Date.now() + (loginResult.expires_in * 1000)).toISOString()
+			// try {
+			// 	const issueDate = new Date().toISOString()
+			// 	const expiration = new Date(Date.now() + (loginResult.expires_in * 1000)).toISOString()
 
-				const sessionResult = await createUserSession({
-					accessToken: accessToken,
-					issueDate: issueDate,
-					expiration: expiration,
-				}).unwrap()
+			// 	const sessionResult = await createUserSession({
+			// 		accessToken: accessToken,
+			// 		issueDate: issueDate,
+			// 		expiration: expiration,
+			// 	}).unwrap()
 
-				dispatch(setUserSession({
-					...sessionResult,
-					accessToken: accessToken,
-					issueDate: issueDate,
-					expiration: expiration,
-				}))
-			} catch (sessionError) {
-				console.error('Failed to create user session:', sessionError)
+			// 	dispatch(setUserSession({
+			// 		...sessionResult,
+			// 		accessToken: accessToken,
+			// 		issueDate: issueDate,
+			// 		expiration: expiration,
+			// 	}))
+			// } catch (sessionError) {
+			// 	console.error('Failed to create user session:', sessionError)
 				// Continue even if session creation fails
-			}
+			// }
 
 			toast.success('Login successful!')
 			router.push('/dashboard')
@@ -112,7 +112,7 @@ export default function EmployeeLogin() {
 
 					<Formik
 						initialValues={initialValues}
-						validationSchema={createEmployeeLoginValidation(t)}
+						// validationSchema={createEmployeeLoginValidation(t)}
 						validateOnMount={true}
 						onSubmit={handleSubmit}
 					>
@@ -178,9 +178,9 @@ export default function EmployeeLogin() {
 								<Button
 									className='w-full h-12'
 									type='submit'
-									disabled={isLoading || !props.isValid}
+									// disabled={isLoading || !props.isValid}
 								>
-									{isLoading ? t('common.loading') : t('employeeLogin.loginBtn')}
+									{/* {isLoading ? t('common.loading') : t('employeeLogin.loginBtn')} */}
 								</Button>
 							</form>
 						)}

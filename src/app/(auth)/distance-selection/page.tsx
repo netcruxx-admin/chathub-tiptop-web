@@ -8,7 +8,7 @@ import { ArrowLeft, ArrowRight, MapPin, Info, Loader2 } from 'lucide-react'
 import { ProgressBar } from '@/components/ui/progress-bar'
 import { useDispatch, useSelector } from 'react-redux'
 import { setJobDistance } from '@/redux/slices/authSlice'
-import { useUpdateProfileMutation } from '@/redux/apis/authApi'
+// import { useUpdateProfileMutation } from '@/redux/apis/authApi'
 import { RootState } from '@/redux/store'
 import { toast } from 'sonner'
 
@@ -18,7 +18,7 @@ export default function DistanceSelection() {
 	const dispatch = useDispatch()
 	const [jobRadius, setJobRadius] = useState(15)
 	const user = useSelector((state: RootState) => state.auth.user)
-	const [updateProfile, { isLoading }] = useUpdateProfileMutation()
+	// const [updateProfile, { isLoading }] = useUpdateProfileMutation()
 
 	const handleComplete = async () => {
 		try {
@@ -27,54 +27,54 @@ export default function DistanceSelection() {
 			localStorage.setItem('jobRadius', jobRadius.toString())
 
 			// Call updateProfile mutation
-			await updateProfile({
-				ID: user.ID,
-				FirstName: user.FirstName,
-				LastName: user.LastName,
-				Email: user.Email,
-				Phone: user.Phone,
-				MiddleName: user.MiddleName,
-				Title: user.Title,
-				AlternateEmail: user.AlternateEmail,
-				DOB: user.DOB,
-				Sex: user.Sex,
-				BirthPlace: user.BirthPlace,
-				Marital: user.Marital,
-				FatherName: user.FatherName,
-				MotherName: user.MotherName,
-				EmergencyPhone: user.EmergencyPhone,
-				Address1: user.Address1,
-				Address2: user.Address2,
-				City: user.City,
-				StateID: user.StateID,
-				CountryID: user.CountryID,
-				Zip: user.Zip,
-				PermanetAddress1: user.PermanetAddress1,
-				PermanetAddress2: user.PermanetAddress2,
-				PermanetCity: user.PermanetCity,
-				PermanetStateID: user.PermanetStateID,
-				PermanetCountryID: user.PermanetCountryID,
-				PermanetZip: user.PermanetZip,
-				PoliceStation: user.PoliceStation,
-				SecretQuestion: user.SecretQuestion,
-				SecretAnswer: user.SecretAnswer,
-				TimeZone: user.TimeZone,
-				GovtID: user.GovtID,
-				PanNumber: user.PanNumber,
-				VoterID: user.VoterID,
-				PrimaryContact: user.PrimaryContact,
-				ImagePath: user.ImagePath,
-				State: user.State,
-				Country: user.Country,
-				PublicProfile: user.PublicProfile,
-				IsPersonalInfoAvailable: user.IsPersonalInfoAvailable,
-				IsQualificationInfoAvailable: user.IsQualificationInfoAvailable,
-				IsExperienceInfoAvailable: user.IsExperienceInfoAvailable,
-				IsFamilyInfoAvailable: user.IsFamilyInfoAvailable,
-				IsAdditionalInfoAvailable: user.IsAdditionalInfoAvailable,
-				IsReferenceInfoAvailable: user.IsReferenceInfoAvailable,
-				BloodGroup: user.BloodGroup,
-			}).unwrap()
+			// await updateProfile({
+			// 	ID: user.ID,
+			// 	FirstName: user.FirstName,
+			// 	LastName: user.LastName,
+			// 	Email: user.Email,
+			// 	Phone: user.Phone,
+			// 	MiddleName: user.MiddleName,
+			// 	Title: user.Title,
+			// 	AlternateEmail: user.AlternateEmail,
+			// 	DOB: user.DOB,
+			// 	Sex: user.Sex,
+			// 	BirthPlace: user.BirthPlace,
+			// 	Marital: user.Marital,
+			// 	FatherName: user.FatherName,
+			// 	MotherName: user.MotherName,
+			// 	EmergencyPhone: user.EmergencyPhone,
+			// 	Address1: user.Address1,
+			// 	Address2: user.Address2,
+			// 	City: user.City,
+			// 	StateID: user.StateID,
+			// 	CountryID: user.CountryID,
+			// 	Zip: user.Zip,
+			// 	PermanetAddress1: user.PermanetAddress1,
+			// 	PermanetAddress2: user.PermanetAddress2,
+			// 	PermanetCity: user.PermanetCity,
+			// 	PermanetStateID: user.PermanetStateID,
+			// 	PermanetCountryID: user.PermanetCountryID,
+			// 	PermanetZip: user.PermanetZip,
+			// 	PoliceStation: user.PoliceStation,
+			// 	SecretQuestion: user.SecretQuestion,
+			// 	SecretAnswer: user.SecretAnswer,
+			// 	TimeZone: user.TimeZone,
+			// 	GovtID: user.GovtID,
+			// 	PanNumber: user.PanNumber,
+			// 	VoterID: user.VoterID,
+			// 	PrimaryContact: user.PrimaryContact,
+			// 	ImagePath: user.ImagePath,
+			// 	State: user.State,
+			// 	Country: user.Country,
+			// 	PublicProfile: user.PublicProfile,
+			// 	IsPersonalInfoAvailable: user.IsPersonalInfoAvailable,
+			// 	IsQualificationInfoAvailable: user.IsQualificationInfoAvailable,
+			// 	IsExperienceInfoAvailable: user.IsExperienceInfoAvailable,
+			// 	IsFamilyInfoAvailable: user.IsFamilyInfoAvailable,
+			// 	IsAdditionalInfoAvailable: user.IsAdditionalInfoAvailable,
+			// 	IsReferenceInfoAvailable: user.IsReferenceInfoAvailable,
+			// 	BloodGroup: user.BloodGroup,
+			// }).unwrap()
 
 			toast.success(t('distance.updateSuccess'))
 			// Navigate to job board or profile completion
@@ -174,10 +174,10 @@ export default function DistanceSelection() {
 				<div className='max-w-2xl mx-auto'>
 					<Button
 						onClick={handleComplete}
-						disabled={isLoading}
+						// disabled={isLoading}
 						className='w-full h-12 cursor-pointer'
 					>
-						{isLoading ? (
+						{/* {isLoading ? (
 							<>
 								<Loader2 className='w-4 h-4 mr-2 animate-spin' />
 								{t('common.loading')}
@@ -187,7 +187,7 @@ export default function DistanceSelection() {
 								{t('distance.browseJobs')}
 								<ArrowRight className='w-4 h-4 ml-2' />
 							</>
-						)}
+						)} */}
 					</Button>
 				</div>
 			</div>

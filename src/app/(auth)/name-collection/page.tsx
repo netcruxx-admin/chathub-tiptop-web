@@ -56,6 +56,7 @@ export default function NameCollection() {
 			aadhaarNum: '',
 		},
 		onSubmit: () => {
+			// Empty onSubmit function is required
 			// submission is handled by handleContinue
 		},
 	})
@@ -70,7 +71,6 @@ export default function NameCollection() {
 			checkUsername(generatedUsername)
 			checkEmail(generatedEmail)
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [phoneNumber])
 
 	const generateEmail = (user: string) => {
@@ -318,12 +318,13 @@ export default function NameCollection() {
 									{t('common.required')}
 								</span>
 							</div>
-							<input
+							<Input
 								type='date'
+								id="dateOfBirth"
 								name='dateOfBirth'
 								value={formik.values.dateOfBirth}
 								onChange={formik.handleChange}
-								className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary'
+								className='h-11 text-base'
 							/>
 						</div>
 

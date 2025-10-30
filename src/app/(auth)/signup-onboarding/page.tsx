@@ -124,6 +124,8 @@ export default function Onboarding() {
 								alt={currentCardData.title}
 								className='w-full h-full object-cover'
 								fill
+								priority
+								sizes='500px'
 							/>
 						</div>
 
