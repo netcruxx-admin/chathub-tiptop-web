@@ -13,37 +13,37 @@ import { languages } from '@/lib/utils/languages'
 
 const carouselImagesSrcs: CarouselImage[] = [
 	{
-		src: '/indian-delivery-worker-with-food-bag-on-bike-wearin.jpg',
+		src: '/delivery-food.jpg',
 		alt: 'Food delivery worker on bike',
 		statKey: 'activeJobSeekers',
 		descKey: 'activeJobSeekersDesc',
 	},
 	{
-		src: '/indian-construction-workers-at-building-site-weari.jpg',
+		src: '/construction.jpg',
 		alt: 'Construction workers at site',
 		statKey: 'jobsPosted',
 		descKey: 'jobsPostedDesc',
 	},
 	{
-		src: '/indian-woman-cooking-in-small-kitchen-wearing-apron.jpg',
+		src: '/woman-cooking.jpg',
 		alt: 'Woman cook preparing food',
 		statKey: 'trustedEmployers',
 		descKey: 'trustedEmployersDesc',
 	},
 	{
-		src: '/indian-warehouse-worker-moving-boxes-in-casual-work.jpg',
+		src: '/warehouse-boxes.jpg',
 		alt: 'Warehouse worker handling packages',
 		statKey: 'interviewRate',
 		descKey: 'interviewRateDesc',
 	},
 	{
-		src: '/indian-electrician-working-on-electrical-panel-wea.jpg',
+		src: '/electrician.jpg',
 		alt: 'Electrician at work',
 		statKey: 'salaryRange',
 		descKey: 'salaryRangeDesc',
 	},
 	{
-		src: '/indian-woman-housekeeping-worker-cleaning-in-unifor.jpg',
+		src: '/woman-housekeeping.jpg',
 		alt: 'Woman housekeeping worker',
 		statKey: 'support',
 		descKey: 'supportDesc',

@@ -34,7 +34,7 @@ export default function Onboarding() {
 				t('introduction.earning.point2'),
 				t('introduction.earning.point3'),
 			],
-			image: '/indian-worker-earning-money-happily.jpg',
+			image: '/earning.jpg',
 		},
 		{
 			icon: GraduationCap,
@@ -48,7 +48,7 @@ export default function Onboarding() {
 				t('introduction.learning.point2'),
 				t('introduction.learning.point3'),
 			],
-			image: '/indian-worker-learning-in-training-class.jpg',
+			image: '/training.jpg',
 		},
 		{
 			icon: TrendingUp,
@@ -62,7 +62,7 @@ export default function Onboarding() {
 				t('introduction.growing.point2'),
 				t('introduction.growing.point3'),
 			],
-			image: '/indian-worker-career-growth-success.jpg',
+			image: '/career-growth.jpg',
 		},
 		{
 			icon: Sparkles,
@@ -76,7 +76,7 @@ export default function Onboarding() {
 				t('introduction.smartFeatures.point2'),
 				t('introduction.smartFeatures.point3'),
 			],
-			image: '/indian-worker-using-smartphone-app-for-job-search.jpg',
+			image: '/job-search.jpg',
 		},
 	]
 
