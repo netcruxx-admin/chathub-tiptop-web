@@ -93,14 +93,15 @@ export default function OTPInput() {
 								// Navigate to language selection
 								// router.push('/signup-language')
 							}
-							router.push('/signup-language')
 						} catch (err: any) {
 							console.error('Failed to verify OTP:', err)
 							const errorMessage =
-								err?.data?.message || t('otp.verifyError')
+							err?.data?.message || t('otp.verifyError')
 							setError(errorMessage)
 							toast.error(errorMessage)
 						}
+						//! API bypass
+						router.push('/signup-language')
 					}}
 				>
 					<div className='w-full'>

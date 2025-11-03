@@ -9,12 +9,12 @@ export default function FlowSelection() {
 
 	const handleFlowSelection = (flow: 'voice' | 'form' | 'resume') => {
 		// Store the selected flow
-		localStorage.setItem('onboardingFlow', flow)
+		// localStorage.setItem('onboardingFlow', flow)
 
 		if (flow === 'voice') {
 			router.push('/voice-bot-intro')
 		} else if (flow === 'form') {
-			router.push('/form-based-profile')
+			router.push('/skills-wizard')
 		} else if (flow === 'resume') {
 			router.push('/resume-upload')
 		}

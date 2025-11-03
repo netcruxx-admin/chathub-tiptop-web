@@ -10,7 +10,11 @@ import { useRouter } from 'next/navigation'
 import { useSendVerificationCodeMutation } from '@/redux/apis/authApi'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setPhoneNumber, setSenderId, updateUser } from '@/redux/slices/authSlice'
+import {
+	setPhoneNumber,
+	setSenderId,
+	updateUser,
+} from '@/redux/slices/authSlice'
 
 export default function NumberInput() {
 	const router = useRouter()
@@ -46,23 +50,24 @@ export default function NumberInput() {
 							}).unwrap()
 							console.log('response', response)
 							// if (response && response.Status === 0) {
-								// dispatch(setPhoneNumber(values.phoneNumber))
-								dispatch(updateUser({Phone: values.phoneNumber}))
-								dispatch(setSenderId(response.Result))
-								// Navigate to OTP page
+							// dispatch(setPhoneNumber(values.phoneNumber))
+							dispatch(updateUser({ Phone: values.phoneNumber }))
+							dispatch(setSenderId(response.Result))
+							// Navigate to OTP page
 							// router.push(`/signup-otp?number=${values.phoneNumber}`)
 							// }
 
 							// Save phone number to Redux
-							router.push(`/signup-otp`)
-
-							
+							// router.push(`/signup-otp`)
 						} catch (err: any) {
 							console.error('Failed to send OTP:', err)
 							setError(
 								err?.data?.message || 'Failed to send OTP. Please try again.'
 							)
 						}
+						//! API bypass
+						dispatch(updateUser({ Phone: values.phoneNumber }))
+						router.push(`/signup-otp`)
 					}}
 				>
 					{props => (

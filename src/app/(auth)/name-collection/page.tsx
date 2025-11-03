@@ -128,7 +128,7 @@ export default function NameCollection() {
 						UserName: username,
 					})
 				)
-				router.push(`/flow-selection`)
+				// router.push(`/flow-selection`)
 			} else {
 				toast.error(response?.Message || 'Signup failed. Please try again.')
 			}
@@ -136,6 +136,8 @@ export default function NameCollection() {
 			console.error('Failed to sign up:', err)
 			toast.error(err?.data?.message || 'Failed to sign up. Please try again.')
 		}
+		//! API bypass
+		router.push(`/flow-selection`)
 	}
 
 	return (
