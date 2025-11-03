@@ -3,13 +3,12 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Globe, GraduationCap } from 'lucide-react'
+import { GraduationCap } from 'lucide-react'
 import { cn } from '@/lib/cn'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import type { CarouselImage } from '@/types'
-import { useGetLocale } from '@/lib/hooks/i18n'
-import { languages } from '@/lib/utils/languages'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
 const carouselImagesSrcs: CarouselImage[] = [
 	{
@@ -57,9 +56,6 @@ export default function AuthLayout({
 }) {
 	const [currentImageIndex, setCurrentImageIndex] = useState(0)
 	const t = useTranslations()
-	const currentLocale = useGetLocale()
-	const currentLanguage =
-		languages.find(lang => lang.code === currentLocale) || languages[1] // Default to English
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -208,18 +204,7 @@ export default function AuthLayout({
 									</span>
 								</div>
 							</Link>
-							<Link href='/select-language'>
-								<Button
-									variant='outline'
-									size='sm'
-									className='h-9 px-3 text-sm gap-1.5'
-								>
-									<Globe className='w-3.5 h-3.5' />
-									<span className='font-medium'>
-										{currentLanguage.displayCode}
-									</span>
-								</Button>
-							</Link>
+							<LanguageSwitcher />
 						</div>
 					</div>
 					{children}
