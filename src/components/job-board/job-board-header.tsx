@@ -2,14 +2,13 @@
 
 import { Button } from "@/components/ui/button"
 import { ProfileCompletionBadge } from "@/components/ui/profile-completion-badge"
-// import { useApp } from "@/lib/context/app-context"
-// import { getLanguageDisplay } from "@/lib/utils/language-display"
 import * as Icons from "lucide-react"
+import { useAppSelector, useAppDispatch } from "@/redux/hooks"
+import { setShowFilters } from "@/redux/slices/jobsSlice"
 
 export function JobBoardHeader() {
-  // const { setCurrentScreen, showFilters, setShowFilters, profileCompletionPercentage, language } = useApp()
-
-  // const languageDisplay = getLanguageDisplay(language)
+  const dispatch = useAppDispatch()
+  const showFilters = useAppSelector((state) => state.jobs.showFilters)
 
   return (
     <div className="sticky top-0 z-10 bg-background border-b">
@@ -49,9 +48,12 @@ export function JobBoardHeader() {
              className="h-8 w-8">
               <Icons.User className="w-4 h-4" />
             </Button>
-            <Button variant="ghost" size="icon" 
-            // onClick={() => setShowFilters(!showFilters)} 
-            className="h-8 w-8">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => dispatch(setShowFilters(!showFilters))}
+              className="h-8 w-8"
+            >
               <Icons.Filter className="w-4 h-4" />
             </Button>
           </div>

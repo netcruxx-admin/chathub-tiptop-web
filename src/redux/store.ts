@@ -5,11 +5,13 @@ import { authApi } from './apis/authApi'
 import authReducer from './slices/authSlice'
 import formReducer from './slices/formSlice'
 import languageReducer from './slices/languageSlice'
+import jobsReducer from './slices/jobsSlice'
 
 const rootReducer = combineReducers({
 	auth: authReducer,
 	form: formReducer,
 	language: languageReducer,
+	jobs: jobsReducer,
 	[authApi.reducerPath]: authApi.reducer,
 })
 

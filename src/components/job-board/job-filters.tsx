@@ -2,26 +2,35 @@
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-// import { useApp } from "@/lib/context/app-context"
 import * as Icons from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useAppSelector, useAppDispatch } from '@/redux/hooks'
+import { setFilters, setShowFilters } from '@/redux/slices/jobsSlice'
+import type { JobFilters as JobFiltersType } from '@/types'
 
 export function JobFilters() {
-	// const { filters, setFilters, setShowFilters } = useApp()
 	const t = useTranslations()
+	const dispatch = useAppDispatch()
+	const filters = useAppSelector(state => state.jobs.filters)
+
+	const updateFilters = (updates: Partial<JobFiltersType>) => {
+		dispatch(setFilters({ ...filters, ...updates }))
+	}
 
 	const resetFilters = () => {
-		// setFilters({
-		//   salaryMin: 0,
-		//   salaryMax: 100000,
-		//   location: "",
-		//   hasTraining: false,
-		//   hasCertification: false,
-		//   skillLevel: "all",
-		//   trainingType: "all",
-		//   maxDistance: 50,
-		//   paymentType: "all",
-		// })
+		dispatch(
+			setFilters({
+				salaryMin: 0,
+				salaryMax: 100000,
+				location: '',
+				hasTraining: false,
+				hasCertification: false,
+				skillLevel: 'all',
+				trainingType: 'all',
+				maxDistance: 50,
+				paymentType: 'all',
+			})
+		)
 	}
 
 	return (
@@ -46,8 +55,12 @@ export function JobFilters() {
 						Skill Level
 					</label>
 					<select
-						// value={filters.skillLevel}
-						// onChange={(e) => setFilters({ ...filters, skillLevel: e.target.value as any })}
+						value={filters.skillLevel}
+						onChange={e =>
+							updateFilters({
+								skillLevel: e.target.value as 'all' | 'gray' | 'yellow' | 'green',
+							})
+						}
 						className='w-full h-9 px-2 text-sm border rounded-md bg-background'
 					>
 						<option value='all'>All Levels</option>
@@ -61,8 +74,16 @@ export function JobFilters() {
 				<div>
 					<label className='text-xs font-medium mb-1.5 block'>Training</label>
 					<select
-						// value={filters.trainingType}
-						// onChange={(e) => setFilters({ ...filters, trainingType: e.target.value as any })}
+						value={filters.trainingType}
+						onChange={e =>
+							updateFilters({
+								trainingType: e.target.value as
+									| 'all'
+									| 'csr'
+									| 'self-paid'
+									| 'none',
+							})
+						}
 						className='w-full h-9 px-2 text-sm border rounded-md bg-background'
 					>
 						<option value='all'>All</option>
@@ -76,8 +97,17 @@ export function JobFilters() {
 				<div>
 					<label className='text-xs font-medium mb-1.5 block'>Payment</label>
 					<select
-						// value={filters.paymentType}
-						// onChange={(e) => setFilters({ ...filters, paymentType: e.target.value as any })}
+						value={filters.paymentType}
+						onChange={e =>
+							updateFilters({
+								paymentType: e.target.value as
+									| 'all'
+									| 'daily'
+									| 'weekly'
+									| 'monthly'
+									| 'per-task',
+							})
+						}
 						className='w-full h-9 px-2 text-sm border rounded-md bg-background'
 					>
 						<option value='all'>All Types</option>
@@ -91,14 +121,16 @@ export function JobFilters() {
 				{/* Distance Filter */}
 				<div>
 					<label className='text-xs font-medium mb-1.5 block'>
-						{/* Max Distance: {filters.maxDistance}km */}
+						Max Distance: {filters.maxDistance}km
 					</label>
 					<input
 						type='range'
 						min='1'
 						max='50'
-						// value={filters.maxDistance}
-						// onChange={(e) => setFilters({ ...filters, maxDistance: Number(e.target.value) })}
+						value={filters.maxDistance}
+						onChange={e =>
+							updateFilters({ maxDistance: Number(e.target.value) })
+						}
 						className='w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer'
 					/>
 				</div>
@@ -111,8 +143,10 @@ export function JobFilters() {
 						</label>
 						<Input
 							type='number'
-							// value={filters.salaryMin}
-							// onChange={(e) => setFilters({ ...filters, salaryMin: Number(e.target.value) })}
+							value={filters.salaryMin}
+							onChange={e =>
+								updateFilters({ salaryMin: Number(e.target.value) })
+							}
 							className='h-9 text-sm'
 							placeholder='0'
 						/>
@@ -123,8 +157,10 @@ export function JobFilters() {
 						</label>
 						<Input
 							type='number'
-							// value={filters.salaryMax}
-							// onChange={(e) => setFilters({ ...filters, salaryMax: Number(e.target.value) })}
+							value={filters.salaryMax}
+							onChange={e =>
+								updateFilters({ salaryMax: Number(e.target.value) })
+							}
 							className='h-9 text-sm'
 							placeholder='100000'
 						/>
@@ -137,8 +173,8 @@ export function JobFilters() {
 						{t('jobs.location')}
 					</label>
 					<Input
-						// value={filters.location}
-						// onChange={(e) => setFilters({ ...filters, location: e.target.value })}
+						value={filters.location}
+						onChange={e => updateFilters({ location: e.target.value })}
 						placeholder='Enter location...'
 						className='h-9 text-sm'
 					/>
@@ -147,14 +183,14 @@ export function JobFilters() {
 
 			<div className='mt-4 flex gap-2 lg:hidden'>
 				<Button
-					// onClick={() => setShowFilters(false)}
+					onClick={() => dispatch(setShowFilters(false))}
 					className='flex-1 h-9 text-sm'
 				>
 					{t('common.apply')}
 				</Button>
 				<Button
 					variant='outline'
-					//  onClick={() => setShowFilters(false)}
+					onClick={() => dispatch(setShowFilters(false))}
 					className='h-9 px-3'
 				>
 					<Icons.X className='w-4 h-4' />

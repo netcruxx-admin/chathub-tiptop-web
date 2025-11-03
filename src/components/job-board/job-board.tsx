@@ -7,10 +7,12 @@ import { ProfileCompletionBanner } from './profile-completion-banner'
 import type { Job } from '@/types/job'
 import { useMemo } from 'react'
 import { useTranslations } from 'next-intl'
+import { useAppSelector } from '@/redux/hooks'
 
 export default function JobBoard() {
-	// const { showFilters, userSkills, filters, language } = useApp()
 	const t = useTranslations()
+	const showFilters = useAppSelector(state => state.jobs.showFilters)
+	const filters = useAppSelector(state => state.jobs.filters)
 
 	const mockJobs: Job[] = [
 		// No cert required (25%)
@@ -408,46 +410,62 @@ export default function JobBoard() {
 		},
 	]
 
-	// const filteredAndShuffledJobs = useMemo(() => {
-	//   const filtered = mockJobs.filter((job) => {
-	//     // Skill level filter
-	//     if (filters.skillLevel !== "all" && job.requiredSkillLevel !== filters.skillLevel) {
-	//       return false
-	//     }
+	const filteredJobs = useMemo(() => {
+		const filtered = mockJobs.filter(job => {
+			// Skill level filter
+			if (
+				filters.skillLevel !== 'all' &&
+				job.requiredSkillLevel !== filters.skillLevel
+			) {
+				return false
+			}
 
-	//     // Training type filter
-	//     if (filters.trainingType !== "all") {
-	//       if (filters.trainingType === "none" && job.training) return false
-	//       if (filters.trainingType === "csr" && job.training?.type !== "csr") return false
-	//       if (filters.trainingType === "self-paid" && job.training?.type !== "self-paid") return false
-	//     }
+			// Training type filter
+			if (filters.trainingType !== 'all') {
+				if (filters.trainingType === 'none' && job.training) return false
+				if (filters.trainingType === 'csr' && job.training?.type !== 'csr')
+					return false
+				if (
+					filters.trainingType === 'self-paid' &&
+					job.training?.type !== 'self-paid'
+				)
+					return false
+			}
 
-	//     // Payment type filter
-	//     if (filters.paymentType !== "all" && job.paymentType !== filters.paymentType) {
-	//       return false
-	//     }
+			// Payment type filter
+			if (
+				filters.paymentType !== 'all' &&
+				job.paymentType !== filters.paymentType
+			) {
+				return false
+			}
 
-	//     // Distance filter
-	//     if (job.distance > filters.maxDistance) {
-	//       return false
-	//     }
+			// Distance filter
+			if (job.distance > filters.maxDistance) {
+				return false
+			}
 
-	//     // Salary filter
-	//     if (job.salaryMin < filters.salaryMin || job.salaryMax > filters.salaryMax) {
-	//       return false
-	//     }
+			// Salary filter
+			if (
+				job.salaryMin < filters.salaryMin ||
+				job.salaryMax > filters.salaryMax
+			) {
+				return false
+			}
 
-	//     // Location filter
-	//     if (filters.location && !job.location.toLowerCase().includes(filters.location.toLowerCase())) {
-	//       return false
-	//     }
+			// Location filter
+			if (
+				filters.location &&
+				!job.location.toLowerCase().includes(filters.location.toLowerCase())
+			) {
+				return false
+			}
 
-	//     return true
-	//   })
+			return true
+		})
 
-	//   // Shuffle to mix job types
-	//   return filtered
-	// }, [filters])
+		return filtered
+	}, [filters, mockJobs])
 
 	const canApplyForJob = (job: Job) => {
 		// const userSkillData = userSkills[job.requiredSkill]
@@ -480,12 +498,11 @@ export default function JobBoard() {
 		<div className='min-h-screen bg-background flex flex-col'>
 			<JobBoardHeader />
 
-			{/* {showFilters && ( */}
-			{
+			{showFilters && (
 				<div className='lg:hidden'>
 					<JobFilters />
 				</div>
-			}
+			)}
 
 			<div className='flex-1 flex overflow-hidden'>
 				{/* Desktop sidebar filters */}
@@ -503,12 +520,12 @@ export default function JobBoard() {
 						</div>
 
 						<div className='max-w-md mx-auto lg:max-w-none lg:grid lg:grid-cols-2 xl:grid-cols-3 lg:gap-4'>
-							{mockJobs.length === 0 ? (
+							{filteredJobs.length === 0 ? (
 								<div className='col-span-full text-center py-12 text-muted-foreground text-sm'>
 									{t('jobs.noJobs')}
 								</div>
 							) : (
-								mockJobs.map(job => {
+								filteredJobs.map(job => {
 									const canApply = canApplyForJob(job)
 									// const userSkillData = userSkills[job.requiredSkill]
 

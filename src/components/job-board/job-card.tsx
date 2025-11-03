@@ -1,9 +1,11 @@
 "use client"
 
 // import { SkillBadge } from "@/components/ui/skill-badge"
-// import { useApp } from "@/lib/context/app-context"
 import type { Job } from "@/types/job"
 import { MapPin, Star } from "lucide-react"
+import { useAppDispatch } from "@/redux/hooks"
+import { setSelectedJob } from "@/redux/slices/jobsSlice"
+import { useRouter } from "next/navigation"
 
 interface JobCardProps {
   job: Job
@@ -12,7 +14,13 @@ interface JobCardProps {
 }
 
 export function JobCard({ job, canApply, userSkillLevel }: JobCardProps) {
-  // const { setSelectedJob } = useApp()
+  const dispatch = useAppDispatch()
+  const router = useRouter()
+
+  const handleJobClick = () => {
+    dispatch(setSelectedJob(job))
+    router.push('/job-details')
+  }
 
   const getSkillLevelLabel = (level: "gray" | "yellow" | "green") => {
     if (level === "gray") return "Unverified"
@@ -23,7 +31,7 @@ export function JobCard({ job, canApply, userSkillLevel }: JobCardProps) {
   return (
     <div
       className="bg-card rounded-lg p-4 mb-3 shadow-sm border cursor-pointer hover:shadow-md transition-all"
-      // onClick={() => setSelectedJob(job)}
+      onClick={handleJobClick}
     >
       {/* Header */}
       <div className="flex items-start justify-between mb-2">
