@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { JobFilters, AcademyTab, Job, StageAData, StageBData, StageCData } from '@/types'
+import type { JobPosting } from '../apis/jobBoardApi'
 
 interface JobsState {
   showFilters: boolean
   filters: JobFilters
   selectedJob: Job | null
+  selectedJobPosting: JobPosting | null
   academyTab: AcademyTab
   showStageBGate: boolean
   stageAData: StageAData | null
@@ -26,6 +28,7 @@ const initialState: JobsState = {
     paymentType: 'all',
   },
   selectedJob: null,
+  selectedJobPosting: null,
   academyTab: 'courses',
   showStageBGate: false,
   stageAData: null,
@@ -45,6 +48,9 @@ const jobsSlice = createSlice({
     },
     setSelectedJob: (state, action: PayloadAction<Job | null>) => {
       state.selectedJob = action.payload
+    },
+    setSelectedJobPosting: (state, action: PayloadAction<JobPosting | null>) => {
+      state.selectedJobPosting = action.payload
     },
     setAcademyTab: (state, action: PayloadAction<AcademyTab>) => {
       state.academyTab = action.payload
@@ -69,6 +75,7 @@ export const {
   setShowFilters,
   setFilters,
   setSelectedJob,
+  setSelectedJobPosting,
   setAcademyTab,
   setShowStageBGate,
   setStageAData,

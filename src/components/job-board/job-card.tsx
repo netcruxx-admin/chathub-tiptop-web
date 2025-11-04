@@ -2,24 +2,34 @@
 
 // import { SkillBadge } from "@/components/ui/skill-badge"
 import type { Job } from "@/types/job"
+import type { JobPosting } from "@/redux/apis/jobBoardApi"
 import { MapPin, Star } from "lucide-react"
-import { useAppDispatch } from "@/redux/hooks"
-import { setSelectedJob } from "@/redux/slices/jobsSlice"
 import { useRouter } from "next/navigation"
 
-interface JobCardProps {
-  job: Job
-  canApply: boolean
-  userSkillLevel?: "gray" | "yellow" | "green"
-}
+type JobCardProps =
+  | {
+      job: Job
+      jobPosting?: never
+      canApply: boolean
+      userSkillLevel?: "gray" | "yellow" | "green"
+    }
+  | {
+      job?: never
+      jobPosting: JobPosting
+      canApply: boolean
+      userSkillLevel?: "gray" | "yellow" | "green"
+    }
 
-export function JobCard({ job, canApply, userSkillLevel }: JobCardProps) {
-  const dispatch = useAppDispatch()
+export function JobCard({ job, jobPosting, canApply, userSkillLevel }: JobCardProps) {
   const router = useRouter()
 
   const handleJobClick = () => {
-    dispatch(setSelectedJob(job))
-    router.push('/job-details')
+    if (jobPosting) {
+      router.push(`/job-details/${jobPosting.Id}`)
+    } else if (job) {
+      // For mock jobs, use their numeric ID (though we shouldn't have these anymore)
+      router.push(`/job-details/${job.id}`)
+    }
   }
 
   const getSkillLevelLabel = (level: "gray" | "yellow" | "green") => {
@@ -27,6 +37,66 @@ export function JobCard({ job, canApply, userSkillLevel }: JobCardProps) {
     if (level === "yellow") return "Verified"
     return "Certified"
   }
+
+  // If rendering JobPosting from API
+  if (jobPosting) {
+    return (
+      <div
+        className="bg-card rounded-lg p-4 mb-3 shadow-sm border cursor-pointer hover:shadow-md transition-all"
+        onClick={handleJobClick}
+      >
+        {/* Header */}
+        <div className="flex items-start justify-between mb-2">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-base font-semibold mb-0.5 truncate">{jobPosting.Title}</h3>
+            <p className="text-xs text-muted-foreground truncate">
+              {jobPosting.CompanyDetail} • {jobPosting.Location}
+            </p>
+          </div>
+          <div className="text-right ml-2 flex-shrink-0">
+            <span className="text-primary font-bold text-base">
+              ₹{jobPosting.SalaryFrom.toLocaleString()}-{jobPosting.SalaryTo.toLocaleString()}
+            </span>
+            <p className="text-[10px] text-muted-foreground">/month</p>
+          </div>
+        </div>
+
+        {/* Description */}
+        {jobPosting.Description && (
+          <p className="text-xs text-muted-foreground mb-2 line-clamp-2">
+            {jobPosting.Description}
+          </p>
+        )}
+
+        {/* Qualifications */}
+        {jobPosting.Qualification && (
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+              🎓 {jobPosting.Qualification}
+            </span>
+          </div>
+        )}
+
+        {/* Available Positions */}
+        {jobPosting.AvailablePositionCount > 0 && (
+          <div className="text-xs text-muted-foreground mb-2">
+            👥 {jobPosting.AvailablePositionCount} {jobPosting.AvailablePositionCount === 1 ? 'position' : 'positions'} available
+          </div>
+        )}
+
+        {/* Footer */}
+        <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
+          <div className="flex items-center gap-1">
+            <MapPin className="w-3 h-3" />
+            <span>{jobPosting.Location}</span>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // If rendering Job (mock data)
+  if (!job) return null
 
   return (
     <div
