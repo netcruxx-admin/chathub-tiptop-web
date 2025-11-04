@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Check } from 'lucide-react'
@@ -15,6 +15,12 @@ export default function ConfirmLanguage() {
 	const currentLocale = useGetLocale()
 	const setLocale = useSetLocale()
 	const [language, setLanguage] = useState(currentLocale || 'en')
+
+	// Prefetch the next page to reduce loading time
+	useEffect(() => {
+		router.prefetch('/signup-onboarding')
+	}, [router])
+	
 	const handleContinue = () => {
 		// Save the selected language to cookie
 		setLocale(language)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
 	Briefcase,
@@ -20,6 +20,11 @@ export default function Onboarding() {
 	const [isVoicePlaying, setIsVoicePlaying] = useState(false)
 	const t = useTranslations()
 	const router = useRouter()
+
+	// Prefetch the next page to reduce loading time
+	useEffect(() => {
+		router.prefetch('/signup-choice')
+	}, [router])
 
 	const cards = [
 		{

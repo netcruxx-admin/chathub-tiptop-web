@@ -12,6 +12,14 @@ export const createNumberValidation = (t: TranslationFunction) => yup.object().s
 		.matches(/^\d{10}$/, t('phone.phoneInvalid')),
 })
 
+export const createOTPValidation = (t: TranslationFunction) => yup.object().shape({
+	otp: yup
+		.string()
+		.required(t('otp.otpRequired'))
+		.length(6, t('otp.otpInvalid'))
+		.matches(/^\d{6}$/, t('otp.otpInvalid')),
+})
+
 export const createEmployerLoginValidation = (t: TranslationFunction) => yup.object().shape({
 	email: yup.string()
 		.trim()

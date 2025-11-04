@@ -1,6 +1,6 @@
 'use client'
 
-import BackBtn from '@/components/backBtn'
+import BackBtn from '@/components/BackBtn'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/cn'
