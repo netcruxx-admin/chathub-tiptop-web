@@ -78,10 +78,10 @@ export default function DistanceSelection() {
 
 			toast.success(t('distance.updateSuccess'))
 			// Navigate to job board or profile completion
-			router.push('/dashboard')
+			router.push('/job-board')
 		} catch (error: any) {
 			toast.error(error?.data?.message || t('distance.updateError'))
-			router.push('/dashboard')
+			router.push('/job-board')
 		}
 	}
 
