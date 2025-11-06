@@ -109,7 +109,7 @@
 		"seconds": "s"
 	},
 	"signUpChoice": {
-		"header": "Tell us your name",
+		"header": "Choose how you'd like to sign up",
 		"title": "Build your profile",
 		"subtitle": "Name, date of birth and gender needed",
 		"recommendedBadge": "RECOMMENDED",
@@ -555,6 +555,9 @@
 	},
 	"signupOnboarding": {
 		"appName": "Rozgari",
+		"listenToThis": "Listen to this",
+		"loadingAudio": "Loading...",
+		"stopAudio": "Stop audio",
 		"voicePlaying": "Playing...",
 		"startProfileCreation": "Start Profile Creation"
 	},

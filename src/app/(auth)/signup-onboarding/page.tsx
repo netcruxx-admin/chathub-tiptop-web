@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import {
 	Briefcase,
@@ -9,15 +9,21 @@ import {
 	ChevronLeft,
 	ChevronRight,
 	Volume2,
+	VolumeX,
+	Loader2,
 	Sparkles,
 } from 'lucide-react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
+import { useTextToSpeechMutation } from '@/redux/apis/voiceApi'
 
 export default function Onboarding() {
 	const [currentCard, setCurrentCard] = useState(0)
 	const [isVoicePlaying, setIsVoicePlaying] = useState(false)
+	const [isAudioLoading, setIsAudioLoading] = useState(false)
+	const audioRef = useRef<HTMLAudioElement | null>(null)
+	const [TextToSpeech] = useTextToSpeechMutation()
 	const t = useTranslations()
 	const router = useRouter()
 
@@ -25,6 +31,26 @@ export default function Onboarding() {
 	useEffect(() => {
 		router.prefetch('/signup-choice')
 	}, [router])
+
+	// Cleanup audio when component unmounts
+	useEffect(() => {
+		return () => {
+			if (audioRef.current) {
+				audioRef.current.pause()
+				audioRef.current = null
+			}
+		}
+	}, [])
+
+	// Stop audio when card changes
+	useEffect(() => {
+		if (audioRef.current) {
+			audioRef.current.pause()
+			audioRef.current = null
+			setIsVoicePlaying(false)
+			setIsAudioLoading(false)
+		}
+	}, [currentCard])
 
 	const cards = [
 		{
@@ -102,19 +128,69 @@ export default function Onboarding() {
 		}
 	}
 
-	const handleVoicePlay = () => {
-		setIsVoicePlaying(true)
-		// Simulate voice playing (in real app, this would trigger actual TTS)
-		setTimeout(() => setIsVoicePlaying(false), 3000)
+	const handleVoicePlay = async () => {
+		try {
+			// If audio is currently playing, stop it
+			if (isVoicePlaying && audioRef.current) {
+				audioRef.current.pause()
+				audioRef.current = null
+				setIsVoicePlaying(false)
+				return
+			}
+
+			setIsAudioLoading(true)
+
+			// Construct the text from current card data
+			const textToSpeak = `${currentCardData.title}. ${
+				currentCardData.description
+			}. ${currentCardData.points.join('. ')}`
+
+			// Call the TextToSpeech API with the default voice (nova)
+			const response = await TextToSpeech({
+				text: textToSpeak,
+			}).unwrap()
+
+			console.log(response)
+
+			// Create audio element and play
+			const audio = new Audio(response.audioUrl)
+			audioRef.current = audio
+
+			audio.onloadeddata = () => {
+				setIsAudioLoading(false)
+				setIsVoicePlaying(true)
+			}
+
+			audio.onended = () => {
+				setIsVoicePlaying(false)
+				audioRef.current = null
+			}
+
+			audio.onerror = () => {
+				setIsVoicePlaying(false)
+				setIsAudioLoading(false)
+				audioRef.current = null
+				console.error('Audio playback error')
+			}
+
+			await audio.play()
+		} catch (error) {
+			console.error('Text-to-speech error:', error)
+			setIsVoicePlaying(false)
+			setIsAudioLoading(false)
+			audioRef.current = null
+		}
 	}
 
 	return (
 		<div className='min-h-screen bg-gradient-to-b from-background to-muted/20 flex flex-col'>
 			{/* Header */}
 			<div className='bg-primary text-primary-foreground py-4 px-4'>
-				<div className='max-w-md mx-auto'>
-					<h1 className='text-xl font-bold'>Rozgari</h1>
-					<p className='text-xs opacity-90'>{t('introduction.poweredBy')}</p>
+				<div className='max-w-md mx-auto flex items-center justify-between'>
+					<div>
+						<h1 className='text-xl font-bold'>Rozgari</h1>
+						<p className='text-xs opacity-90'>{t('introduction.poweredBy')}</p>
+					</div>
 				</div>
 			</div>
 
@@ -160,14 +236,22 @@ export default function Onboarding() {
 							{/* Voice Assistant Button */}
 							<button
 								onClick={handleVoicePlay}
-								className='w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-muted hover:bg-muted/80 transition-colors cursor-pointer'
-								disabled={isVoicePlaying}
+								className='w-full flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-muted hover:bg-muted/80 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+								disabled={isAudioLoading}
 							>
-								<Volume2
-									className={`w-4 h-4 ${isVoicePlaying ? 'animate-pulse' : ''}`}
-								/>
+								{isAudioLoading ? (
+									<Loader2 className='w-4 h-4 animate-spin' />
+								) : isVoicePlaying ? (
+									<VolumeX className='w-4 h-4 animate-pulse' />
+								) : (
+									<Volume2 className='w-4 h-4' />
+								)}
 								<span className='text-sm'>
-									{isVoicePlaying ? 'Playing...' : 'Listen to this'}
+									{isAudioLoading
+										? t('signupOnboarding.loadingAudio')
+										: isVoicePlaying
+											? t('signupOnboarding.stopAudio')
+											: t('signupOnboarding.listenToThis')}
 								</span>
 							</button>
 						</div>
@@ -200,7 +284,10 @@ export default function Onboarding() {
 							<ChevronLeft className='w-4 h-4 mr-1 mt-[1px]' />
 							{t('common.back')}
 						</Button>
-						<Button onClick={handleNext} className='flex-1 flex items-center cursor-pointer'>
+						<Button
+							onClick={handleNext}
+							className='flex-1 flex items-center cursor-pointer'
+						>
 							{currentCard < cards.length - 1 ? (
 								<>
 									{t('common.next')}
@@ -217,7 +304,15 @@ export default function Onboarding() {
 
 					{/* Skip Option */}
 					<button
-						onClick={() => router.push('/signup-choice')}
+						onClick={() => {
+							// Stop audio before skipping
+							if (audioRef.current) {
+								audioRef.current.pause()
+								audioRef.current = null
+								setIsVoicePlaying(false)
+							}
+							router.push('/signup-choice')
+						}}
 						className='w-full text-center text-sm text-muted-foreground mt-4 hover:text-foreground transition-colors cursor-pointer'
 					>
 						{t('common.skip')}

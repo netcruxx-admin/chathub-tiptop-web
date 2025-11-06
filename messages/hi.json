@@ -109,7 +109,7 @@
 		"seconds": "से"
 	},
 	"signUpChoice": {
-		"header": "अपना नाम बताएं",
+		"header": "साइन अप कैसे करना चाहेंगे चुनें",
 		"title": "अपना प्रोफाइल बनाएं",
 		"subtitle": "नाम, जन्म तिथि और लिंग की आवश्यकता है",
 		"recommendedBadge": "अनुशंसित",
@@ -555,6 +555,9 @@
 	},
 	"signupOnboarding": {
 		"appName": "रोज़गारी",
+		"listenToThis": "इसे सुनें",
+		"loadingAudio": "लोड हो रहा है...",
+		"stopAudio": "ऑडियो बंद करें",
 		"voicePlaying": "प्ले हो रहा है...",
 		"startProfileCreation": "प्रोफाइल बनाना शुरू करें"
 	},

@@ -109,7 +109,7 @@
 		"seconds": "s"
 	},
 	"signUpChoice": {
-		"header": "Apna naam batayein",
+		"header": "Sign up kaise karna chahte hain choose karein",
 		"title": "Apna profile banayein",
 		"subtitle": "Naam, date of birth aur gender chahiye",
 		"recommendedBadge": "RECOMMENDED",
@@ -555,6 +555,9 @@
 	},
 	"signupOnboarding": {
 		"appName": "Rozgari",
+		"listenToThis": "Ise suniye",
+		"loadingAudio": "Load ho raha hai...",
+		"stopAudio": "Audio band karein",
 		"voicePlaying": "Play ho raha hai...",
 		"startProfileCreation": "Profile Creation Start Karein"
 	},
