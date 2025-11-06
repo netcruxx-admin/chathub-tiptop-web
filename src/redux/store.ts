@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage'
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { authApi } from './apis/authApi'
 import { jobBoardApi } from './apis/jobBoardApi'
+import { voiceApi } from './apis/voiceApi'
 import authReducer from './slices/authSlice'
 import formReducer from './slices/formSlice'
 import languageReducer from './slices/languageSlice'
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
 	jobs: jobsReducer,
 	[authApi.reducerPath]: authApi.reducer,
 	[jobBoardApi.reducerPath]: jobBoardApi.reducer,
+	[voiceApi.reducerPath]: voiceApi.reducer,
 })
 
 const persistConfig = {
@@ -31,7 +33,7 @@ export const store = configureStore({
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({
 			serializableCheck: false,
-		}).concat(authApi.middleware, jobBoardApi.middleware),
+		}).concat(authApi.middleware, jobBoardApi.middleware, voiceApi.middleware),
 })
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
