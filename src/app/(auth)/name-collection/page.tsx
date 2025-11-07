@@ -48,10 +48,10 @@ export default function NameCollection() {
 	// --- FIX #2: Move initialValues INSIDE the component ---
 	const initialValues = {
 		firstName:
-			ocrData?.firstName !== 'Not found' ? ocrData?.firstName || '' : '',
-		lastName: ocrData?.lastName !== 'Not found' ? ocrData?.lastName || '' : '',
-		dateOfBirth: reformatDate(ocrData?.dob),
-		gender: ocrData?.gender !== 'not found' ? ocrData?.gender || '' : '',
+			ocrData?.FirstName !== 'Not found' ? ocrData?.FirstName || '' : '',
+		lastName: ocrData?.LastName !== 'Not found' ? ocrData?.LastName || '' : '',
+		dateOfBirth: reformatDate(ocrData?.DOB),
+		gender: ocrData?.Sex !== 'not found' ? ocrData?.Sex || '' : '',
 	}
 	// --- END OF FIX #2 ---
 
@@ -66,16 +66,16 @@ export default function NameCollection() {
 			.required(t('nameCollectionPage.validationDobRequired')),
 		gender: Yup.string()
 			.oneOf(
-				['male', 'female', 'transgender', 'others'],
+				['Male', 'Female', 'Transgender', 'others'],
 				t('nameCollectionPage.validationGenderOneOf')
 			)
 			.required(t('nameCollectionPage.validationGenderRequired')),
 	})
 
 	const genderOptions = [
-		{ value: 'male', label: t('nameCollectionPage.genderMale') },
-		{ value: 'female', label: t('nameCollectionPage.genderFemale') },
-		{ value: 'transgender', label: t('nameCollectionPage.genderTransgender') },
+		{ value: 'Male', label: t('nameCollectionPage.genderMale') },
+		{ value: 'Female', label: t('nameCollectionPage.genderFemale') },
+		{ value: 'Transgender', label: t('nameCollectionPage.genderTransgender') },
 		{ value: 'others', label: t('nameCollectionPage.genderOther') },
 	]
 
@@ -313,7 +313,6 @@ export default function NameCollection() {
 														key={option.value}
 														type='button'
 														onClick={() =>
-															!aadhaarFilled &&
 															setFieldValue('gender', option.value)
 														}
 														// disabled={aadhaarFilled} // <-- Re-enabled this
@@ -324,11 +323,6 @@ export default function NameCollection() {
 																															option.value
 																																? 'border-green-600 bg-green-600 text-white shadow-lg shadow-green-600/30'
 																																: 'border-gray-300 bg-white hover:border-green-500 hover:bg-green-50 text-gray-700 shadow-sm'
-																														}
-                                                            ${
-																															aadhaarFilled
-																																? 'opacity-60 cursor-not-allowed'
-																																: 'hover:shadow-md active:scale-[0.97'
 																														}
                                                         `}
 													>

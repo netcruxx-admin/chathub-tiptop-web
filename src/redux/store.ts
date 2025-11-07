@@ -8,6 +8,7 @@ import authReducer from './slices/authSlice'
 import formReducer from './slices/formSlice'
 import languageReducer from './slices/languageSlice'
 import jobsReducer from './slices/jobsSlice'
+import { ocrApi } from './apis/ocrApi'
 
 const rootReducer = combineReducers({
 	auth: authReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
 	[authApi.reducerPath]: authApi.reducer,
 	[jobBoardApi.reducerPath]: jobBoardApi.reducer,
 	[voiceApi.reducerPath]: voiceApi.reducer,
+	[ocrApi.reducerPath]: ocrApi.reducer,
 })
 
 const persistConfig = {
@@ -33,7 +35,7 @@ export const store = configureStore({
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({
 			serializableCheck: false,
-		}).concat(authApi.middleware, jobBoardApi.middleware, voiceApi.middleware),
+		}).concat(authApi.middleware, jobBoardApi.middleware, voiceApi.middleware, ocrApi.middleware),
 })
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

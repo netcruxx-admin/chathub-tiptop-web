@@ -17,6 +17,8 @@ import { useRouter } from 'next/navigation'
 import { useDispatch } from 'react-redux'
 import Tesseract from 'tesseract.js'
 import { updateAadhaarData } from '@/redux/slices/formSlice' // <-- Import Redux action
+import { toast } from 'sonner'
+import { useGetDetailsMutation } from '@/redux/apis/ocrApi'
 
 // Helper function to extract details (This is the full logic from your AadhaarCamera.js)
 const extractAadhaarDetails = (rawText: string) => {
@@ -215,11 +217,12 @@ export default function SignUpChoice() {
 	const t = useTranslations()
 	const router = useRouter()
 	const dispatch = useDispatch() // <-- Add Redux dispatch
+	const [extractDetails] = useGetDetailsMutation()
 
 	const [isMobile, setIsMobile] = useState(false)
 	const [isCapturing, setIsCapturing] = useState(false)
 	const [isScanning, setIsScanning] = useState(false)
-	const [scanProgress, setScanProgress] = useState(0)
+	// const [scanProgress, setScanProgress] = useState(0)
 	const fileInputRef = useRef<HTMLInputElement>(null)
 	const videoRef = useRef<HTMLVideoElement>(null)
 	const [stream, setStream] = useState<MediaStream | null>(null)
@@ -297,39 +300,56 @@ export default function SignUpChoice() {
 
 	// Updated function to use Tesseract
 	const processAadhaarFile = async (file: File) => {
-		if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
-			alert('Please upload an image or PDF file')
-			return
-		}
-
 		setIsScanning(true)
-		setScanProgress(0)
+		// setScanProgress(0)
 
 		try {
-			const result = await Tesseract.recognize(file, 'eng', {
-				logger: m => {
-					if (m.status === 'recognizing text') {
-						const progress = Math.round(m.progress * 100)
-						setScanProgress(progress)
-						// console.log(`📈 OCR Progress: ${progress}%`)
-					}
-				},
-			})
-
-			// Extract data using the robust function
-			const extractedData = extractAadhaarDetails(result.data.text)
-
-			// Dispatch data to Redux
-			dispatch(updateAadhaarData(extractedData))
-
-			// Stop scanning UI and navigate
-			setIsScanning(false)
-			router.push('/name-collection') // Navigate to the form
-		} catch (error) {
-			console.error('❌ OCR Error:', error)
-			alert('Failed to process image. Please try again.')
+			const result = await extractDetails(file)
+			console.log(result.data) 
+			if(result.data) {
+				setIsScanning(false)
+				dispatch(updateAadhaarData(result.data))
+				router.push('/name-collection')
+				// const ocrData = result.data
+			}
+		} catch (e) {
+			console.log('OCR API Error', e)
+			toast.error('Failed to process Aadhar, please try again.')
 			setIsScanning(false)
 		}
+		// if (!file.type.startsWith('image/') && file.type !== 'application/pdf') {
+		// 	alert('Please upload an image or PDF file')
+		// 	return
+		// }
+
+		// setIsScanning(true)
+		// setScanProgress(0)
+
+		// try {
+		// 	const result = await Tesseract.recognize(file, 'eng', {
+		// 		logger: m => {
+		// 			if (m.status === 'recognizing text') {
+		// 				const progress = Math.round(m.progress * 100)
+		// 				setScanProgress(progress)
+		// 				// console.log(`📈 OCR Progress: ${progress}%`)
+		// 			}
+		// 		},
+		// 	})
+
+		// 	// Extract data using the robust function
+		// 	const extractedData = extractAadhaarDetails(result.data.text)
+
+		// 	// Dispatch data to Redux
+		// 	dispatch(updateAadhaarData(extractedData))
+
+		// 	// Stop scanning UI and navigate
+		// 	setIsScanning(false)
+		// 	router.push('/name-collection') // Navigate to the form
+		// } catch (error) {
+		// 	console.error('❌ OCR Error:', error)
+		// 	alert('Failed to process image. Please try again.')
+		// 	setIsScanning(false)
+		// }
 	}
 
 	return (
@@ -518,13 +538,13 @@ export default function SignUpChoice() {
 							Aadhaar scan ho raha hai...
 						</h3>
 						<p className='text-gray-600 text-sm mb-4'>Kripya wait karein</p>
-						<div className='w-full bg-gray-200 rounded-full h-2 overflow-hidden'>
+						{/* <div className='w-full bg-gray-200 rounded-full h-2 overflow-hidden'>
 							<div
 								className='bg-green-600 h-full transition-all duration-300'
 								style={{ width: `${scanProgress}%` }}
 							/>
 						</div>
-						<p className='text-xs text-gray-500 mt-2'>{scanProgress}%</p>
+						<p className='text-xs text-gray-500 mt-2'>{scanProgress}%</p> */}
 					</div>
 				</div>
 			)}

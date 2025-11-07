@@ -1,20 +1,25 @@
 'use client'
 
 import { createSlice } from '@reduxjs/toolkit'
+import { OcrExtract } from '../apis/ocrApi'
 
-// Define the shape of the OCR data
-interface OcrDataState {
-  fullName?: string
-  firstName?: string
-  lastName?: string
-  dob?: string // Will be in DD/MM/YYYY or similar
-  gender?: string
-  aadhaarNumber?: string
-  address?: string
-}
+// interface OcrData {
+// 	FirstName: string
+// 	LastName: string
+// 	FatherName: string
+// 	DOB: string
+// 	Sex: string
+// 	Address1: string
+// 	City: string
+// 	State: string
+// 	Country: string
+// 	Zip: string
+// 	GovtID: string
+// 	source: string
+// }
 
 interface FormState {
-  ocrData: OcrDataState | null
+  ocrData: OcrExtract | null
 }
 
 const initialState: FormState = {
@@ -25,11 +30,9 @@ const formSlice = createSlice({
   name: 'form',
   initialState,
   reducers: {
-    // Action to save the extracted data
-    updateAadhaarData: (state, action: { payload: OcrDataState }) => {
+    updateAadhaarData: (state, action: { payload: OcrExtract }) => {
       state.ocrData = action.payload
     },
-    // Action to clear the data after the form is populated
     clearAadhaarData: state => {
       state.ocrData = null
     },
