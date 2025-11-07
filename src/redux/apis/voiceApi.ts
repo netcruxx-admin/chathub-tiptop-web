@@ -45,6 +45,39 @@ interface AnswerResponse {
 	Message?: string
 }
 
+export interface Question {
+	id?: string
+	question: string
+	section: string
+	question_order: number
+	serial_no: number
+}
+
+export interface QuestionResponse {
+	Id: number
+	QuestionText: string
+	PromptTemplate: string
+	TargetTable: string
+	TargetColumn: string
+	Pid: number
+	QuestionOrder: number
+}
+
+interface AnswerSubmissionRequest {
+	user_id: string
+	section: string
+	question_order: number
+	answer: string
+	serial_no: number
+}
+
+interface AnswerSubmissionResponse {
+	status?: string
+	message?: string
+	next_question?: QuestionResponse
+	completed?: boolean
+}
+
 export const voiceApi = createApi({
 	reducerPath: 'voiceApi',
 	baseQuery: async ({ url, method, body, responseType }) => {
@@ -127,6 +160,19 @@ export const voiceApi = createApi({
 				body: data,
 			}),
 		}),
+		getQuestions: builder.query<QuestionResponse[], string>({
+			query: (section) => ({
+				url: `/speech-profile/speech/${section}`,
+				method: 'GET',
+			}),
+		}),
+		submitAnswerNew: builder.mutation<AnswerSubmissionResponse, AnswerSubmissionRequest>({
+			query: (data) => ({
+				url: '/speech-profile/speech/submit_answer',
+				method: 'POST',
+				body: data,
+			}),
+		}),
 	}),
 })
 
@@ -134,4 +180,7 @@ export const {
 	useTextToSpeechMutation,
 	useStartProfileMutation,
 	useSubmitAnswerMutation,
+	useGetQuestionsQuery,
+	useLazyGetQuestionsQuery,
+	useSubmitAnswerNewMutation,
 } = voiceApi

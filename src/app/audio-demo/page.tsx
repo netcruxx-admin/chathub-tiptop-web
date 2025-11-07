@@ -4,6 +4,9 @@ import {
 	useTextToSpeechMutation,
 	useStartProfileMutation,
 	useSubmitAnswerMutation,
+	useLazyGetQuestionsQuery,
+	useSubmitAnswerNewMutation,
+	type QuestionResponse,
 } from '@/redux/apis/voiceApi'
 import { Howl } from 'howler'
 import { useState, useEffect, useRef } from 'react'
@@ -16,18 +19,23 @@ interface Message {
 
 export default function AudioDemo() {
 	const [textToSpeech] = useTextToSpeechMutation()
-	const [startProfile] = useStartProfileMutation()
-	const [submitAnswer] = useSubmitAnswerMutation()
+	const [getQuestions] = useLazyGetQuestionsQuery()
+	const [submitAnswerNew] = useSubmitAnswerNewMutation()
 
 	const [userId, setUserId] = useState('')
 	const [hasStarted, setHasStarted] = useState(false)
+	const [allQuestions, setAllQuestions] = useState<QuestionResponse[]>([])
+	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 	const [currentQuestion, setCurrentQuestion] = useState<{
-		id: number
+		id: string | number
 		text: string
+		serial_no: number
+		question_order: number
 	} | null>(null)
 	const [messages, setMessages] = useState<Message[]>([])
 	const [isListening, setIsListening] = useState(false)
 	const [isPlaying, setIsPlaying] = useState(false)
+	const [isLoadingAudio, setIsLoadingAudio] = useState(false)
 	const [currentSound, setCurrentSound] = useState<Howl | null>(null)
 	const [isSessionComplete, setIsSessionComplete] = useState(false)
 	const [error, setError] = useState('')
@@ -36,7 +44,13 @@ export default function AudioDemo() {
 	const recognitionRef = useRef<SpeechRecognition | null>(null)
 	const messagesEndRef = useRef<HTMLDivElement>(null)
 	const interimTranscriptRef = useRef('')
-	const currentQuestionRef = useRef<{ id: number; text: string } | null>(null)
+	const userIdRef = useRef('')
+	const currentQuestionRef = useRef<{
+		id: string | number
+		text: string
+		serial_no: number
+		question_order: number
+	} | null>(null)
 
 	// Initialize speech recognition
 	useEffect(() => {
@@ -146,6 +160,12 @@ export default function AudioDemo() {
 		}
 	}, [])
 
+	// Sync userId with ref
+	useEffect(() => {
+		userIdRef.current = userId
+		console.log('userId updated in ref:', userId)
+	}, [userId])
+
 	// Sync currentQuestion with ref
 	useEffect(() => {
 		currentQuestionRef.current = currentQuestion
@@ -165,6 +185,7 @@ export default function AudioDemo() {
 				currentSound.unload()
 			}
 
+			setIsLoadingAudio(true)
 			console.log('Calling TTS API with:', { text, voice: 'nova' })
 			const response = await textToSpeech({
 				text,
@@ -172,6 +193,7 @@ export default function AudioDemo() {
 			}).unwrap()
 
 			console.log('TTS API Response:', response)
+			setIsLoadingAudio(false)
 
 			if (response.audioUrl) {
 				const sound = new Howl({
@@ -186,6 +208,7 @@ export default function AudioDemo() {
 						console.error('❌ Howler failed to load audio:', error)
 						setError('Failed to load audio. Please try again.')
 						setIsPlaying(false)
+						setIsLoadingAudio(false)
 					},
 					onplay: () => {
 						console.log('Audio playing')
@@ -198,7 +221,9 @@ export default function AudioDemo() {
 						// Auto-start listening after question finishes
 						startListening()
 					},
-					onstop: () => setIsPlaying(false),
+					onstop: () => {
+						setIsPlaying(false)
+					},
 				})
 
 				setCurrentSound(sound)
@@ -206,10 +231,12 @@ export default function AudioDemo() {
 			} else {
 				console.error('No audioUrl in response')
 				setError('No audio received from API.')
+				setIsLoadingAudio(false)
 			}
 		} catch (error) {
 			console.error('Failed to play audio:', error)
 			setError(`Failed to play audio: ${error}`)
+			setIsLoadingAudio(false)
 		}
 	}
 
@@ -221,28 +248,39 @@ export default function AudioDemo() {
 
 		try {
 			setError('')
-			const response = await startProfile({ UserId: userId }).unwrap()
+			// Get questions from the 'profile' section
+			const response = await getQuestions('profile').unwrap()
 
-			console.log('Start Profile Response:', response)
+			console.log('Get Questions Response:', response)
 
-			// Check if response has the expected structure
-			const question = response.next_question?.question || response.Question
-			const questionId = response.next_question?.question_id || response.QuestionId
-
-			if (!question || !questionId) {
-				console.error('Invalid response structure:', response)
-				setError('Invalid response from server. Please try again.')
+			if (!response || response.length === 0) {
+				setError('No questions found for profile section.')
 				return
 			}
 
-			setCurrentQuestion({ id: questionId, text: question })
+			// Store all questions and set the first one
+			setAllQuestions(response)
+			const firstQuestion = response[0]
+
+			// Map the API response fields to our internal structure
+			setCurrentQuestion({
+				id: firstQuestion.Id,
+				text: firstQuestion.QuestionText,
+				serial_no: firstQuestion.Pid || 0,
+				question_order: firstQuestion.QuestionOrder,
+			})
 			setMessages([
-				{ type: 'question', text: question, timestamp: new Date() },
+				{
+					type: 'question',
+					text: firstQuestion.QuestionText,
+					timestamp: new Date(),
+				},
 			])
 			setHasStarted(true)
+			setCurrentQuestionIndex(0)
 
 			// Play the first question
-			await playQuestionAudio(question)
+			await playQuestionAudio(firstQuestion.QuestionText)
 		} catch (error) {
 			console.error('Failed to start profile:', error)
 			setError('Failed to start session. Please try again.')
@@ -278,6 +316,17 @@ export default function AudioDemo() {
 		}
 	}
 
+	const handleSkipAnswer = () => {
+		// Clear interim transcript before stopping to prevent onend from submitting
+		setInterimTranscript('')
+		interimTranscriptRef.current = ''
+		stopListening()
+		// Use setTimeout to ensure recognition has fully stopped
+		setTimeout(() => {
+			handleUserAnswer('')
+		}, 100)
+	}
+
 	const handleUserAnswer = async (answer: string) => {
 		const question = currentQuestionRef.current
 		if (!question) {
@@ -288,69 +337,91 @@ export default function AudioDemo() {
 		}
 
 		console.log('handleUserAnswer called with:', answer)
+		console.log('Current userId from state:', userId)
+		console.log('Current userId from ref:', userIdRef.current)
 
 		try {
 			setError('')
 			// Add user's answer to messages
 			setMessages((prev) => {
-				const newMessages = [
+				const newMessages: Message[] = [
 					...prev,
-					{ type: 'answer', text: answer, timestamp: new Date() },
+					{ type: 'answer' as const, text: answer, timestamp: new Date() },
 				]
 				console.log('Messages updated, new messages:', newMessages)
 				return newMessages
 			})
 
-			// Submit answer to API
-			const response = await submitAnswer({
-				UserId: userId,
-				QuestionId: question.id,
-				Answer: answer,
-			}).unwrap()
+			// Submit answer to new API - Use ref to get current userId
+			const payload = {
+				user_id: userIdRef.current,
+				section: 'profile',
+				question_order: question.question_order,
+				answer: answer,
+				serial_no: question.serial_no,
+			}
+			console.log('Submitting payload:', payload)
+
+			const response = await submitAnswerNew(payload).unwrap()
 
 			console.log('Submit Answer Response:', response)
 
-			// Check for completion
-			const isCompleted = response.completed || response.Completed
-			const completionMessage = response.message || response.Message || 'Profile completed! Thank you.'
-
-			if (isCompleted) {
+			// Check for completion or get next question
+			if (response.completed) {
 				setIsSessionComplete(true)
+				const completionMessage = response.message || 'Profile completed! Thank you.'
 				setMessages((prev) => [
 					...prev,
 					{
-						type: 'question',
+						type: 'question' as const,
 						text: completionMessage,
 						timestamp: new Date(),
 					},
 				])
+			} else if (response.next_question) {
+				// The API returns the next question with capitalized fields
+				const nextQ = response.next_question
+				setCurrentQuestion({
+					id: nextQ.Id,
+					text: nextQ.QuestionText,
+					serial_no: nextQ.Pid || 0,
+					question_order: nextQ.QuestionOrder,
+				})
+				setMessages((prev) => [
+					...prev,
+					{ type: 'question' as const, text: nextQ.QuestionText, timestamp: new Date() },
+				])
+
+				// Play the next question
+				await playQuestionAudio(nextQ.QuestionText)
 			} else {
-				// Get next question from new or legacy format
-				// Handle nested structure: next_question.next_question or next_question.question
-				const nextQuestion =
-					response.next_question?.next_question ||
-					response.next_question?.question ||
-					response.Question
-				const nextQuestionId =
-					response.next_question?.question_id ||
-					response.QuestionId
-
-				console.log('Extracted next question:', nextQuestion, 'ID:', nextQuestionId)
-
-				if (nextQuestion && nextQuestionId) {
-					// Add next question to messages
-					setCurrentQuestion({ id: nextQuestionId, text: nextQuestion })
+				// Fallback: Move to next question in the list
+				const nextIndex = currentQuestionIndex + 1
+				if (nextIndex < allQuestions.length) {
+					const nextQ = allQuestions[nextIndex]
+					setCurrentQuestionIndex(nextIndex)
+					setCurrentQuestion({
+						id: nextQ.Id,
+						text: nextQ.QuestionText,
+						serial_no: nextQ.Pid || 0,
+						question_order: nextQ.QuestionOrder,
+					})
 					setMessages((prev) => [
 						...prev,
-						{ type: 'question', text: nextQuestion, timestamp: new Date() },
+						{ type: 'question', text: nextQ.QuestionText, timestamp: new Date() },
 					])
-
-					// Play the next question
-					await playQuestionAudio(nextQuestion)
+					await playQuestionAudio(nextQ.QuestionText)
 				} else {
-					console.error('No next question in response:', response)
-					console.error('response.next_question:', response.next_question)
-					setError('Failed to get next question.')
+					// No more questions
+					setIsSessionComplete(true)
+					setMessages((prev) => [
+						...prev,
+						{
+							type: 'question',
+							text: 'Profile completed! Thank you.',
+							timestamp: new Date(),
+						},
+					])
 				}
 			}
 		} catch (error) {
@@ -460,50 +531,64 @@ export default function AudioDemo() {
 							</div>
 						) : (
 							<div className='space-y-3'>
-								{/* Interim transcript display */}
-								{interimTranscript && (
-									<div className='bg-gray-100 p-3 rounded-md border-2 border-blue-300'>
-										<p className='text-sm text-gray-600 italic mb-2'>
-											Hearing: "{interimTranscript}"
-										</p>
-										<button
-											onClick={() => {
-												stopListening()
-												handleUserAnswer(interimTranscript)
-												setInterimTranscript('')
-											}}
-											className='px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm font-medium'
-										>
-											Submit Answer
-										</button>
+								{/* Loading state while fetching TTS audio */}
+								{isLoadingAudio && (
+									<div className='text-center'>
+										<div className='inline-flex items-center gap-2 text-blue-600 font-medium'>
+											<svg className='animate-spin h-5 w-5' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24'>
+												<circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4'></circle>
+												<path className='opacity-75' fill='currentColor' d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'></path>
+											</svg>
+											Loading audio...
+										</div>
 									</div>
 								)}
 
-								<div className='flex items-center justify-center gap-4'>
-									{isPlaying && (
+								{/* Playing state */}
+								{isPlaying && !isLoadingAudio && (
+									<div className='text-center'>
 										<div className='text-blue-600 font-medium'>
 											Playing question...
 										</div>
-									)}
+									</div>
+								)}
 
-									{!isPlaying && (
+								{/* Interim transcript display */}
+								{interimTranscript && isListening && (
+									<div className='bg-gray-100 p-3 rounded-md border-2 border-blue-300'>
+										<p className='text-sm text-gray-600 italic'>
+											Hearing: "{interimTranscript}"
+										</p>
+									</div>
+								)}
+
+								{/* Recording controls - only show when not loading or playing */}
+								{!isLoadingAudio && !isPlaying && (
+									<div className='flex flex-col items-center gap-3'>
 										<button
 											onClick={isListening ? stopListening : startListening}
-											disabled={isPlaying}
 											className={`px-6 py-3 rounded-full font-medium transition-colors ${
 												isListening
 													? 'bg-red-600 hover:bg-red-700 text-white animate-pulse'
 													: 'bg-blue-600 hover:bg-blue-700 text-white'
-											} disabled:bg-gray-400 disabled:cursor-not-allowed`}
+											}`}
 										>
 											{isListening ? 'Stop Recording' : 'Start Recording'}
 										</button>
-									)}
 
-									{isListening && (
-										<div className='text-red-600 font-medium'>Listening...</div>
-									)}
-								</div>
+										{isListening && (
+											<div className='flex flex-col items-center gap-2'>
+												<div className='text-red-600 font-medium'>Listening...</div>
+												<button
+													onClick={handleSkipAnswer}
+													className='px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 text-sm'
+												>
+													Skip Question
+												</button>
+											</div>
+										)}
+									</div>
+								)}
 							</div>
 						)}
 					</div>
